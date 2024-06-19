@@ -1,5 +1,11 @@
 import React from "react";
+import AppRouter from "./routes/AppRouter";
+import AppLayout from "./layout/AppLayout";
 
 export default function App() {
-    return <div>App</div>;
+    return (
+        <AppLayout>
+            <AppRouter />
+        </AppLayout>
+    );
 }
