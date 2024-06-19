@@ -1,5 +1,5 @@
 // src/components/Navbar.jsx
-import React, { useState } from "react";
+import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
     faUser,
@@ -16,9 +16,9 @@ import {
     Logo,
     UserOptions,
     SearchIcon,
+    UnderBar,
     MainMenu,
     MenuItem,
-    SubMenu,
 } from "./NavbarStyles";
 import { Link } from "react-router-dom";
 
@@ -26,12 +26,15 @@ const Navbar = ({ user, isLoggedIn, onLogout, onLogin }) => {
     return (
         <NavbarContainer>
             <TopBar>
-                <Logo>Deluxury</Logo>
+                <Link to="/">
+                    <Logo>Deluxury</Logo>
+                </Link>
                 <UserOptions>
                     {isLoggedIn ? (
                         <>
                             <Link to="/mypage">
-                                <FontAwesomeIcon icon={faUser} /> MY PAGE
+                                <FontAwesomeIcon icon={faUser} /> {user.name}
+                                님의 MY PAGE
                             </Link>
                             <Link to="/mylike">
                                 <FontAwesomeIcon icon={faHeart} /> MY LIKE
@@ -41,8 +44,7 @@ const Navbar = ({ user, isLoggedIn, onLogout, onLogin }) => {
                                 SHOPPING BAG
                             </Link>
                             <Link to="/" onClick={onLogout}>
-                                <FontAwesomeIcon icon={faSignOutAlt} />
-                                LOGOUT
+                                <FontAwesomeIcon icon={faSignOutAlt} /> LOGOUT
                             </Link>
                         </>
                     ) : (
@@ -51,27 +53,28 @@ const Navbar = ({ user, isLoggedIn, onLogout, onLogin }) => {
                                 <FontAwesomeIcon icon={faSignInAlt} /> LOGIN
                             </Link>
                             <Link to="/signup">
-                                <FontAwesomeIcon icon={faUserPlus} />
-                                SIGNUP
+                                <FontAwesomeIcon icon={faUserPlus} /> SIGNUP
                             </Link>
                         </>
                     )}
-                    <SearchIcon>
-                        <FontAwesomeIcon icon={faSearch} />
-                    </SearchIcon>
                 </UserOptions>
             </TopBar>
-            <MainMenu>
-                <MenuItem href="#">MEN</MenuItem>
-                <MenuItem href="#">WOMEN</MenuItem>
-                <MenuItem href="#">KIDS</MenuItem>
-                <MenuItem href="#">INTERIOR</MenuItem>
-                <MenuItem href="#">KITCHEN</MenuItem>
-                <MenuItem href="#">ELECTRONICS</MenuItem>
-                <MenuItem href="#">DIGITAL</MenuItem>
-                <MenuItem href="#">BEAUTY</MenuItem>
-                <MenuItem href="#">LEISURE</MenuItem>
-            </MainMenu>
+            <UnderBar>
+                <MainMenu>
+                    <MenuItem href="#">MEN</MenuItem>
+                    <MenuItem href="#">WOMEN</MenuItem>
+                    <MenuItem href="#">KIDS</MenuItem>
+                    <MenuItem href="#">INTERIOR</MenuItem>
+                    <MenuItem href="#">KITCHEN</MenuItem>
+                    <MenuItem href="#">ELECTRONICS</MenuItem>
+                    <MenuItem href="#">DIGITAL</MenuItem>
+                    <MenuItem href="#">BEAUTY</MenuItem>
+                    <MenuItem href="#">LEISURE</MenuItem>
+                </MainMenu>
+                <SearchIcon>
+                    <FontAwesomeIcon icon={faSearch} />
+                </SearchIcon>
+            </UnderBar>
         </NavbarContainer>
     );
 };

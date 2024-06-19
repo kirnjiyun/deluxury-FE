@@ -40,7 +40,7 @@ export const TopBar = styled.div`
 export const Logo = styled.div`
     font-size: 1.5em;
     font-weight: bold;
-
+    color: black;
     @media (max-width: 768px) {
         margin-bottom: 10px;
     }
@@ -61,9 +61,9 @@ export const UserOptions = styled.div`
                 content: "";
                 position: absolute;
                 left: 0;
-                bottom: 1px;
+                bottom: -2px; /* Adjust this value to move the underline further down */
                 width: 100%;
-                height: 2px;
+                height: 2px; /* Adjust this value to make the underline thicker */
                 background-color: #000;
             }
         }
@@ -79,6 +79,16 @@ export const UserOptions = styled.div`
 export const SearchIcon = styled.div`
     font-size: 1.5em;
     cursor: pointer;
+    margin-left: auto;
+`;
+
+export const UnderBar = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    position: relative;
+    padding: 10px 0;
 `;
 
 export const MainMenu = styled.div`
@@ -86,7 +96,6 @@ export const MainMenu = styled.div`
     flex-wrap: wrap;
     justify-content: center;
     gap: 20px;
-    padding: 10px 0;
     font-size: small;
 
     @media (max-width: 768px) {
