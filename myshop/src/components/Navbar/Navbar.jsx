@@ -19,9 +19,22 @@ import {
     MainMenu,
     MenuItem,
 } from "./NavbarStyles";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-
+import { openSearchModal, closeSearchModal } from "../../action/modalAction";
+import SearchModal from "../searchModal/SearchModal";
 const Navbar = ({ user, isLoggedIn, onLogout, onLogin }) => {
+    const dispatch = useDispatch();
+    const isSearchModalOpen = useSelector(
+        (state) => state.modal.isSearchModalOpen
+    );
+    const openModal = () => {
+        dispatch(openSearchModal());
+    };
+    const closeModal = () => {
+        dispatch(closeSearchModal());
+    };
+
     return (
         <NavbarContainer>
             <TopBar>
@@ -70,9 +83,10 @@ const Navbar = ({ user, isLoggedIn, onLogout, onLogin }) => {
                     <MenuItem href="#">BEAUTY</MenuItem>
                     <MenuItem href="#">LEISURE</MenuItem>
                 </MainMenu>
-                <SearchIcon>
+                <SearchIcon onClick={openModal}>
                     <FontAwesomeIcon icon={faSearch} />
                 </SearchIcon>
+                {isSearchModalOpen && <SearchModal onClose={closeModal} />}
             </UnderBar>
         </NavbarContainer>
     );
