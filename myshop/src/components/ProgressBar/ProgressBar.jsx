@@ -30,13 +30,13 @@ const ProgressBar = () => {
                 <ProgressBarFill width={calculateWidth()} />
                 <StepContainer>
                     <Step active={step >= 1}>
-                        <p>Terms</p>
+                        <p>약관동의</p>
                     </Step>
                     <Step active={step >= 2}>
-                        <p>Email</p>
+                        <p>가입절차</p>
                     </Step>
                     <Step active={step >= 3}>
-                        <p>Password</p>
+                        <p>가입완료</p>
                     </Step>
                 </StepContainer>
             </ProgressBarContainer>
