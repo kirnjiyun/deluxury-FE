@@ -6,6 +6,7 @@ export default function LoginForm() {
             <Input type="email" placeholder="Email" />
             <Input type="password" placeholder="Password" />
             <Button type="button">로그인</Button>
+            {/* <p>-sns계정으로 로그인하기-</p> */}
         </LoginFormContainer>
     );
 }
