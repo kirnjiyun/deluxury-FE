@@ -29,7 +29,7 @@ export const Input = styled.input`
     margin-bottom: 20px;
     border: 1px solid #ddd;
     font-size: 1em;
-
+    cursor: pointer;
     &:focus {
         border-color: #007bff;
         outline: none;

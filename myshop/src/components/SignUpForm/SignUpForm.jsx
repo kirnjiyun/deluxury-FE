@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { nextStep, prevStep } from "../../action/SignUpAction";
-import api from "../../utils/api";
+import { useSignUpMutation } from "../../hooks/useSignUpMutation";
 import {
     Title,
     CheckboxLabel,
@@ -14,10 +14,10 @@ import {
     StyledRadioInput,
     RadioLabel,
 } from "./SignUpFormStyles";
+
 const SignUpForm = () => {
     const step = useSelector((state) => state.step.step);
     const dispatch = useDispatch();
-    const [user, setUser] = useState(null);
     const [allChecked, setAllChecked] = useState(false);
     const [termsChecked, setTermsChecked] = useState({
         age: false,
@@ -26,7 +26,7 @@ const SignUpForm = () => {
         marketing: false,
         ads: false,
     });
-    const [role, setRole] = useState("user"); // 추가: 역할 상태 변수
+    const [role, setRole] = useState("user");
 
     useEffect(() => {
         const allChecked = Object.values(termsChecked).every(Boolean);
@@ -65,26 +65,24 @@ const SignUpForm = () => {
         return name && email && pw && rePw;
     };
 
-    const handleSubmit = async (e) => {
+    const mutation = useSignUpMutation();
+
+    const handleSubmit = (e) => {
         e.preventDefault();
-        try {
-            if (pw !== rePw) {
-                throw new Error(
-                    "패스워드가 일치하지 않습니다. 다시 입력해주세요."
-                );
-            }
-            const response = await api.post("/api/user", {
-                name,
-                email,
-                password: pw,
-                role,
-            });
-            console.log("Response:", response.data);
-            setUser(response.data);
-            dispatch(nextStep());
-        } catch (error) {
-            setError(error);
+        if (pw !== rePw) {
+            setError("패스워드가 일치하지 않습니다. 다시 입력해주세요.");
+            return;
         }
+        const newUser = { name, email, password: pw, role };
+        mutation.mutate(newUser, {
+            onSuccess: (data) => {
+                console.log("User created successfully:", data);
+                dispatch(nextStep());
+            },
+            onError: (error) => {
+                setError(error.message || "An error occurred.");
+            },
+        });
     };
 
     return (
@@ -155,7 +153,7 @@ const SignUpForm = () => {
                 </>
             )}
 
-            {step == 2 && (
+            {step === 2 && (
                 <>
                     <Button type="button" onClick={() => dispatch(prevStep())}>
                         약관으로 돌아가기
@@ -188,7 +186,7 @@ const SignUpForm = () => {
                         value={rePw}
                         onChange={(e) => setRePw(e.target.value)}
                     />
-                    <Title>구매자 또는 판매자 역할을 선택해주세요</Title>{" "}
+                    <Title>구매자 또는 판매자 역할을 선택해주세요</Title>
                     <RadioGroup>
                         <StyledRadioInput
                             type="radio"
@@ -221,9 +219,9 @@ const SignUpForm = () => {
                     </Button>
                 </>
             )}
-            {step == 3 && (
+            {step === 3 && (
                 <>
-                    <Title>{name && name}님의 가입을 축하합니다.</Title>
+                    <Title>{name}님의 가입을 축하합니다.</Title>
                     <LinkButton href="/">메인페이지로 돌아가기</LinkButton>
                 </>
             )}
