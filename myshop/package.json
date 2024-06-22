@@ -3,6 +3,10 @@
     "version": "0.1.0",
     "private": true,
     "dependencies": {
+        "@babel/preset-env": "^7.24.7",
+        "@babel/preset-react": "^7.24.7",
+        "@craco/craco": "^7.1.0",
+        "@emotion/babel-plugin": "^11.11.0",
         "@emotion/react": "^11.11.4",
         "@emotion/styled": "^11.11.5",
         "@fortawesome/free-brands-svg-icons": "^6.5.2",
@@ -25,11 +29,12 @@
         "web-vitals": "^2.1.4"
     },
     "scripts": {
-        "start": "react-scripts start",
-        "build": "react-scripts build",
-        "test": "react-scripts test",
+        "start": "craco start",
+        "build": "craco build",
+        "test": "craco test",
         "eject": "react-scripts eject"
-    },
+      }
+,      
     "eslintConfig": {
         "extends": [
             "react-app",

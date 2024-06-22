@@ -100,3 +100,58 @@ export const Error = styled.div`
     font-size: x-small;
     color: red;
 `;
+export const RadioGroup = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 16px;
+`;
+
+export const RadioInput = styled.input`
+    display: none;
+`;
+
+export const RadioLabel = styled.label`
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+    padding-left: 25px;
+    margin-right: 15px;
+    font-size: 16px;
+    user-select: none;
+
+    &:before {
+        content: "";
+        display: inline-block;
+        width: 14px;
+        height: 14px;
+        border: 1px solid #000;
+        border-radius: 50%;
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: #fff;
+    }
+
+    &:after {
+        content: "";
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background-color: #000;
+        position: absolute;
+        left: 3px;
+        top: 50%;
+        transform: translateY(-50%) scale(0);
+        transition: transform 0.2s ease-in-out;
+    }
+`;
+
+export const StyledRadioInput = styled(RadioInput)`
+    &:checked + ${RadioLabel}:after {
+        transform: translateY(-50%) scale(1);
+    }
+`;

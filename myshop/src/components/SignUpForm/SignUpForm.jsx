@@ -10,8 +10,10 @@ import {
     Button,
     LinkButton,
     Error,
+    RadioGroup,
+    StyledRadioInput,
+    RadioLabel,
 } from "./SignUpFormStyles";
-
 const SignUpForm = () => {
     const step = useSelector((state) => state.step.step);
     const dispatch = useDispatch();
@@ -24,7 +26,7 @@ const SignUpForm = () => {
         marketing: false,
         ads: false,
     });
-    const [role, setRole] = useState("buyer"); // 추가: 역할 상태 변수
+    const [role, setRole] = useState("user"); // 추가: 역할 상태 변수
 
     useEffect(() => {
         const allChecked = Object.values(termsChecked).every(Boolean);
@@ -187,9 +189,8 @@ const SignUpForm = () => {
                         onChange={(e) => setRePw(e.target.value)}
                     />
                     <Title>구매자 또는 판매자 역할을 선택해주세요</Title>{" "}
-                    {/* 추가된 섹션 */}
-                    <div>
-                        <input
+                    <RadioGroup>
+                        <StyledRadioInput
                             type="radio"
                             id="user"
                             name="role"
@@ -197,10 +198,10 @@ const SignUpForm = () => {
                             checked={role === "user"}
                             onChange={(e) => setRole(e.target.value)}
                         />
-                        <label htmlFor="admin">구매자</label>
-                    </div>
-                    <div>
-                        <input
+                        <RadioLabel htmlFor="user">구매자</RadioLabel>
+                    </RadioGroup>
+                    <RadioGroup>
+                        <StyledRadioInput
                             type="radio"
                             id="admin"
                             name="role"
@@ -208,8 +209,8 @@ const SignUpForm = () => {
                             checked={role === "admin"}
                             onChange={(e) => setRole(e.target.value)}
                         />
-                        <label htmlFor="admin">판매자</label>
-                    </div>
+                        <RadioLabel htmlFor="admin">판매자</RadioLabel>
+                    </RadioGroup>
                     {error && <Error>{error}</Error>}
                     <Button
                         type="button"
