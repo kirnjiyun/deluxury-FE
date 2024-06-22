@@ -49,17 +49,23 @@ const Navbar = () => {
                 <UserOptions>
                     {isLoggedIn ? (
                         <>
-                            <Link to="/mypage">
-                                <FontAwesomeIcon icon={faUser} /> {user.name}
-                                님의 MY PAGE
+                            <Link to={user.role === "admin" ? "/admin" : "/me"}>
+                                <FontAwesomeIcon icon={faUser} />{" "}
+                                {user.role === "admin"
+                                    ? "ADMIN PAGE"
+                                    : `${user.name}님의 MY PAGE`}
                             </Link>
-                            <Link to="/mylike">
-                                <FontAwesomeIcon icon={faHeart} /> MY LIKE
-                            </Link>
-                            <Link to="/cart">
-                                <FontAwesomeIcon icon={faShoppingBag} />{" "}
-                                SHOPPING BAG
-                            </Link>
+                            {user.role !== "admin" && (
+                                <Link to="/mylike">
+                                    <FontAwesomeIcon icon={faHeart} /> MY LIKE
+                                </Link>
+                            )}
+                            {user.role !== "admin" && (
+                                <Link to="/cart">
+                                    <FontAwesomeIcon icon={faShoppingBag} />{" "}
+                                    SHOPPING BAG
+                                </Link>
+                            )}
                             <Link to="/" onClick={handleLogout}>
                                 <FontAwesomeIcon icon={faSignOutAlt} /> LOGOUT
                             </Link>

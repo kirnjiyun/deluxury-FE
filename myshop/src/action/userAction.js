@@ -1,5 +1,3 @@
-// actions/userActions.js
-
 export const LOGIN = "LOGIN";
 export const LOGOUT = "LOGOUT";
 
@@ -8,6 +6,10 @@ export const login = (user) => ({
     payload: user,
 });
 
-export const logout = () => ({
-    type: LOGOUT,
-});
+export const logout = () => {
+    // sessionStorage에서 토큰 제거
+    sessionStorage.removeItem("token");
+    return {
+        type: LOGOUT,
+    };
+};

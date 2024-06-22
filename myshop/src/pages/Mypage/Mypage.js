@@ -1,5 +1,6 @@
 import React from "react";
 
 export default function Mypage() {
-    return <div>Mypage</div>;
+    console.log("this");
+    return <div>Mypageㅁㅇㄹㅁㄴㅇ</div>;
 }
