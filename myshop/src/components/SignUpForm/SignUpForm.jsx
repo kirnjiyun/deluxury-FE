@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { nextStep, prevStep } from "../../action/SignUpAction";
+import { prevStep, nextStep } from "../../action/SignUpAction";
+
 import { useSignUpMutation } from "../../hooks/useSignUpMutation";
 import {
     Title,
@@ -65,7 +66,7 @@ const SignUpForm = () => {
         return name && email && pw && rePw;
     };
 
-    const mutation = useSignUpMutation();
+    const { mutate, error: mutationError } = useSignUpMutation();
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -74,16 +75,14 @@ const SignUpForm = () => {
             return;
         }
         const newUser = { name, email, password: pw, role };
-        mutation.mutate(newUser, {
-            onSuccess: (data) => {
-                console.log("User created successfully:", data);
-                dispatch(nextStep());
-            },
-            onError: (error) => {
-                setError(error.message || "An error occurred.");
-            },
-        });
+        mutate(newUser);
     };
+
+    useEffect(() => {
+        if (mutationError) {
+            setError(mutationError);
+        }
+    }, [mutationError]);
 
     return (
         <form>

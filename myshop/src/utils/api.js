@@ -9,7 +9,7 @@ const BACKEND_PROXY = process.env.REACT_APP_BACKEND_PROXY;
 const baseURL = LOCAL_BACKEND;
 
 const api = axios.create({
-    baseURL: baseURL,
+    baseURL: `${baseURL}/api`,
     headers: {
         "Content-Type": "application/json",
     },

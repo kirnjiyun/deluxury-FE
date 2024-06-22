@@ -5,27 +5,17 @@ import { LoginFormContainer, Input, Button } from "./LoginFormStyles";
 export default function LoginForm() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [error, setError] = useState("");
-
-    const mutation = useLoginMutation();
+    const { mutate, error } = useLoginMutation();
 
     const handleLogin = (e) => {
         e.preventDefault();
         const user = { email, password };
-        mutation.mutate(user, {
-            onSuccess: (data) => {
-                console.log("User logged in successfully:", data);
-                // handle successful login here
-            },
-            onError: (error) => {
-                const backendError = error.error || "An error occurred.";
-                setError(backendError);
-            },
-        });
+        mutate(user);
     };
 
     return (
         <LoginFormContainer>
+            {error && <p style={{ color: "red" }}>{error}</p>}
             <Input
                 type="email"
                 placeholder="Email"
@@ -38,7 +28,6 @@ export default function LoginForm() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
             />
-            {error && <p style={{ color: "red" }}>{error}</p>}
             <Button type="button" onClick={handleLogin}>
                 로그인
             </Button>
