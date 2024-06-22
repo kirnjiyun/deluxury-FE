@@ -21,9 +21,10 @@ import {
 } from "./NavbarStyles";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { logout } from "../../action/userAction";
 import { openSearchModal, closeSearchModal } from "../../action/modalAction";
 import SearchModal from "../searchModal/SearchModal";
-const Navbar = ({ user, isLoggedIn, onLogout, onLogin }) => {
+const Navbar = () => {
     const dispatch = useDispatch();
     const isSearchModalOpen = useSelector(
         (state) => state.modal.isSearchModalOpen
@@ -33,6 +34,10 @@ const Navbar = ({ user, isLoggedIn, onLogout, onLogin }) => {
     };
     const closeModal = () => {
         dispatch(closeSearchModal());
+    };
+    const { isLoggedIn, user } = useSelector((state) => state.user);
+    const handleLogout = () => {
+        dispatch(logout());
     };
 
     return (
@@ -55,13 +60,13 @@ const Navbar = ({ user, isLoggedIn, onLogout, onLogin }) => {
                                 <FontAwesomeIcon icon={faShoppingBag} />{" "}
                                 SHOPPING BAG
                             </Link>
-                            <Link to="/" onClick={onLogout}>
+                            <Link to="/" onClick={handleLogout}>
                                 <FontAwesomeIcon icon={faSignOutAlt} /> LOGOUT
                             </Link>
                         </>
                     ) : (
                         <>
-                            <Link to="/login" onClick={onLogin}>
+                            <Link to="/login">
                                 <FontAwesomeIcon icon={faSignInAlt} /> LOGIN
                             </Link>
                             <Link to="/signup">

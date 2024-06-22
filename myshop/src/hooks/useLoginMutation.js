@@ -1,5 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { login } from "../action/userAction";
 import { useState } from "react";
 import api from "../utils/api";
 
@@ -10,6 +12,7 @@ const loginUser = async (user) => {
 
 export const useLoginMutation = () => {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const [error, setError] = useState("");
 
     const mutation = useMutation({
@@ -20,6 +23,8 @@ export const useLoginMutation = () => {
                 sessionStorage.setItem("token", data.token);
                 // header에 토큰 값 설정
                 api.defaults.headers["authorization"] = "Bearer " + data.token;
+                // Redux 상태 업데이트
+                dispatch(login(data.user));
                 navigate("/");
             } else {
                 throw new Error(data.error || "로그인 실패");
