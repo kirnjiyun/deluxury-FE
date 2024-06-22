@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { nextStep, prevStep } from "../../action/SignUpAction";
+import api from "../../utils/api";
 import {
     Title,
     CheckboxLabel,
@@ -8,7 +9,9 @@ import {
     Input,
     Button,
     LinkButton,
+    Error,
 } from "./SignUpFormStyles";
+
 const SignUpForm = () => {
     const step = useSelector((state) => state.step.step);
     const dispatch = useDispatch();
@@ -21,6 +24,7 @@ const SignUpForm = () => {
         marketing: false,
         ads: false,
     });
+    const [role, setRole] = useState("buyer"); // 추가: 역할 상태 변수
 
     useEffect(() => {
         const allChecked = Object.values(termsChecked).every(Boolean);
@@ -48,6 +52,38 @@ const SignUpForm = () => {
 
     const canProceed =
         termsChecked.age && termsChecked.terms && termsChecked.privacy;
+
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [pw, setPw] = useState("");
+    const [rePw, setRePw] = useState("");
+    const [error, setError] = useState("");
+
+    const isFormFilled = () => {
+        return name && email && pw && rePw;
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            if (pw !== rePw) {
+                throw new Error(
+                    "패스워드가 일치하지 않습니다. 다시 입력해주세요."
+                );
+            }
+            const response = await api.post("/api/user", {
+                name,
+                email,
+                password: pw,
+                role,
+            });
+            console.log("Response:", response.data);
+            setUser(response.data);
+            dispatch(nextStep());
+        } catch (error) {
+            setError(error);
+        }
+    };
 
     return (
         <form>
@@ -123,21 +159,70 @@ const SignUpForm = () => {
                         약관으로 돌아가기
                     </Button>
                     <Title>이름을 입력해주세요</Title>
-                    <Input type="text" placeholder="이름" />
+                    <Input
+                        type="text"
+                        placeholder="이름"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                    />
                     <Title>로그인에 사용할 이메일을 입력해주세요</Title>
-                    <Input type="email" placeholder="Email" />
+                    <Input
+                        type="email"
+                        placeholder="이메일"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                    />
                     <Title>비밀번호를 입력해주세요</Title>
-                    <Input type="password" placeholder="Password" />
+                    <Input
+                        type="password"
+                        placeholder="비밀번호"
+                        value={pw}
+                        onChange={(e) => setPw(e.target.value)}
+                    />
                     <Title>비밀번호를 한 번 더 입력해주세요</Title>
-                    <Input type="password" placeholder="Confirm Password" />
-                    <Button type="button" onClick={() => dispatch(nextStep())}>
+                    <Input
+                        type="password"
+                        placeholder="비밀번호 확인"
+                        value={rePw}
+                        onChange={(e) => setRePw(e.target.value)}
+                    />
+                    <Title>구매자 또는 판매자 역할을 선택해주세요</Title>{" "}
+                    {/* 추가된 섹션 */}
+                    <div>
+                        <input
+                            type="radio"
+                            id="user"
+                            name="role"
+                            value="user"
+                            checked={role === "user"}
+                            onChange={(e) => setRole(e.target.value)}
+                        />
+                        <label htmlFor="admin">구매자</label>
+                    </div>
+                    <div>
+                        <input
+                            type="radio"
+                            id="admin"
+                            name="role"
+                            value="admin"
+                            checked={role === "admin"}
+                            onChange={(e) => setRole(e.target.value)}
+                        />
+                        <label htmlFor="admin">판매자</label>
+                    </div>
+                    {error && <Error>{error}</Error>}
+                    <Button
+                        type="button"
+                        onClick={handleSubmit}
+                        disabled={!isFormFilled()}
+                    >
                         회원가입하기
                     </Button>
                 </>
             )}
             {step == 3 && (
                 <>
-                    <Title>{user && user.name}님의 가입을 축하합니다.</Title>
+                    <Title>{name && name}님의 가입을 축하합니다.</Title>
                     <LinkButton href="/">메인페이지로 돌아가기</LinkButton>
                 </>
             )}

@@ -96,3 +96,7 @@ export const LinkButton = styled.a`
         background: #333;
     }
 `;
+export const Error = styled.div`
+    font-size: x-small;
+    color: red;
+`;
