@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
     faUser,
@@ -26,6 +26,8 @@ import { Link } from "react-router-dom";
 import { logout } from "../../action/userAction";
 import { openSearchModal, closeSearchModal } from "../../action/modalAction";
 import SearchModal from "../searchModal/SearchModal";
+import { menuItems } from "./menuItems";
+
 const Navbar = () => {
     const dispatch = useDispatch();
     const isSearchModalOpen = useSelector(
@@ -41,6 +43,30 @@ const Navbar = () => {
     const handleLogout = () => {
         dispatch(logout());
     };
+
+    const [openDropdown, setOpenDropdown] = useState(null);
+    const dropdownRefs = useRef([]);
+
+    const toggleDropdown = (index) => {
+        setOpenDropdown((prevIndex) => (prevIndex === index ? null : index));
+    };
+
+    const handleClickOutside = (event) => {
+        if (
+            dropdownRefs.current.every(
+                (ref) => ref && !ref.contains(event.target)
+            )
+        ) {
+            setOpenDropdown(null);
+        }
+    };
+
+    useEffect(() => {
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, []);
 
     return (
         <NavbarContainer>
@@ -86,87 +112,21 @@ const Navbar = () => {
             </TopBar>
             <UnderBar>
                 <MainMenu>
-                    <MenuItem>
-                        <a href="#">MEN</a>
-                        <DropdownContent className="dropdown-content">
-                            <Column>
-                                <h3>의류</h3>
-                                <a href="#">ALL</a>
-                                <a href="#">NEW</a>
-                                <a href="#">EXCLUSIVE</a>
-                                <a href="#">해외브랜드</a>
-                                <a href="#">아우터</a>
-                                <a href="#">상의</a>
-                                <a href="#">하의</a>
-                                <a href="#">셋업</a>
-                                <a href="#">홈웨어</a>
-                                <a href="#">이너웨어</a>
-                            </Column>
-                            <Column>
-                                <h3>가방</h3>
-                                <a href="#">ALL</a>
-                                <a href="#">NEW</a>
-                                <a href="#">EXCLUSIVE</a>
-                                <a href="#">해외브랜드</a>
-                                <a href="#">크로스백</a>
-                                <a href="#">웨이스트백</a>
-                                <a href="#">토트백</a>
-                                <a href="#">백팩</a>
-                                <a href="#">솔더백</a>
-                                <a href="#">랩탑백</a>
-                            </Column>
-                            <Column>
-                                <h3>신발</h3>
-                                <a href="#">ALL</a>
-                                <a href="#">NEW</a>
-                                <a href="#">EXCLUSIVE</a>
-                                <a href="#">해외브랜드</a>
-                                <a href="#">스니커즈</a>
-                                <a href="#">로퍼</a>
-                                <a href="#">구두</a>
-                                <a href="#">부츠</a>
-                                <a href="#">샌들</a>
-                                <a href="#">슈즈 액세서리</a>
-                            </Column>
-                            <Column>
-                                <h3>액세서리</h3>
-                                <a href="#">ALL</a>
-                                <a href="#">NEW</a>
-                                <a href="#">EXCLUSIVE</a>
-                                <a href="#">지갑,카드케이스</a>
-                                <a href="#">해외브랜드</a>
-                                <a href="#">모자</a>
-                                <a href="#">시계</a>
-                                <a href="#">아이웨어</a>
-                                <a href="#">넥타이</a>
-                                <a href="#">벨트</a>
-                            </Column>
-                        </DropdownContent>
-                    </MenuItem>
-                    <MenuItem>
-                        <a href="#">WOMEN</a>
-                    </MenuItem>
-                    <MenuItem>
-                        <a href="#">KIDS</a>
-                    </MenuItem>
-                    <MenuItem>
-                        <a href="#">INTERIOR</a>
-                    </MenuItem>
-                    <MenuItem>
-                        <a href="#">KITCHEN</a>
-                    </MenuItem>
-                    <MenuItem>
-                        <a href="#">ELECTRONICS</a>
-                    </MenuItem>
-                    <MenuItem>
-                        <a href="#">DIGITAL</a>
-                    </MenuItem>
-                    <MenuItem>
-                        <a href="#">BEAUTY</a>
-                    </MenuItem>
-                    <MenuItem>
-                        <a href="#">LEISURE</a>
-                    </MenuItem>
+                    {menuItems.map((item, index) => (
+                        <MenuItem
+                            key={index}
+                            onClick={() => toggleDropdown(index)}
+                            isOpen={openDropdown === index}
+                            ref={(el) => (dropdownRefs.current[index] = el)}
+                        >
+                            <a href="#">{item.label}</a>
+                            {openDropdown === index && (
+                                <DropdownContent className="dropdown-content">
+                                    {item.content}
+                                </DropdownContent>
+                            )}
+                        </MenuItem>
+                    ))}
                 </MainMenu>
                 <SearchIcon onClick={openModal}>
                     <FontAwesomeIcon icon={faSearch} />

@@ -54,15 +54,16 @@ export const UserOptions = styled.div`
         color: #000;
         text-decoration: none;
         position: relative;
+        font-family: "GongGothicMedium", sans-serif;
 
         &:hover {
             &::after {
                 content: "";
                 position: absolute;
                 left: 0;
-                bottom: -2px; /* Adjust this value to move the underline further down */
+                bottom: -2px;
                 width: 100%;
-                height: 2px; /* Adjust this value to make the underline thicker */
+                height: 2px;
                 background-color: #000;
             }
         }
@@ -105,15 +106,61 @@ export const MainMenu = styled.div`
     }
 `;
 
+export const DropdownContent = styled.div`
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    min-width: 200px;
+    z-index: 1;
+    left: 0;
+    top: 45px;
+    font-family: "GongGothicMedium", sans-serif;
+`;
+
+export const Column = styled.div`
+    float: left;
+    width: 200px;
+    padding: 10px;
+
+    h3 {
+        margin-top: 0;
+    }
+
+    a {
+        font-family: sans-serif;
+        color: black;
+        padding: 8px 16px;
+        text-decoration: none;
+        display: block;
+        font-size: small;
+    }
+`;
+
 export const MenuItem = styled.div`
     position: relative;
     display: inline-block;
+
     a {
         color: #000;
         text-decoration: none;
         font-weight: bold;
         position: relative;
         padding: 10px 15px;
+        font-family: "GongGothicMedium", sans-serif;
+
+        &.active {
+            &::after {
+                content: "";
+                position: absolute;
+                left: 0;
+                bottom: -2px;
+                width: 100%;
+                height: 3px;
+                background-color: #000;
+            }
+        }
 
         &:hover {
             &::after {
@@ -131,36 +178,8 @@ export const MenuItem = styled.div`
     &:hover .dropdown-content {
         display: flex;
     }
-`;
 
-export const DropdownContent = styled.div`
-    display: none;
-    position: absolute;
-    background-color: #fff;
-
-    padding: 10px;
-    min-width: 200px;
-    z-index: 1;
-    left: 0;
-    top: 35px;
-    to ${MenuItem}:hover & {
-        display: block;
-    }
-`;
-
-export const Column = styled.div`
-    float: left;
-    width: 200px;
-    padding: 10px;
-
-    h3 {
-        margin-top: 0;
-    }
-
-    a {
-        color: black;
-        padding: 8px 16px;
-        text-decoration: none;
-        display: block;
+    .dropdown-content {
+        display: ${({ isOpen }) => (isOpen ? "flex" : "none")};
     }
 `;
