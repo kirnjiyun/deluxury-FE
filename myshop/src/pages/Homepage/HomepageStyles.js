@@ -1,4 +1,3 @@
-// src/HomepageStyles.js
 import styled from "@emotion/styled";
 
 export const Container = styled.div`
@@ -6,13 +5,28 @@ export const Container = styled.div`
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
     background-color: #f0f0f0;
+    padding: 20px;
 `;
 
 export const Title = styled.h1`
     font-size: 2em;
     color: #333;
+    margin: 20px 0;
+`;
+
+export const Row = styled.div`
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    width: 100%;
+    justify-content: center;
+`;
+
+export const Col = styled.div`
+    display: flex;
+    justify-content: center;
 `;
 
 export const Button = styled.button`
