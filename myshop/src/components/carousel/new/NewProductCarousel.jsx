@@ -10,7 +10,7 @@ export default function NewProductCarousel({ items = hardcodedItems }) {
         if (items.length > 0) {
             const interval = setInterval(() => {
                 setCurrentSlide((prevSlide) => (prevSlide + 1) % items.length);
-            }, 3000);
+            }, 8000);
             return () => clearInterval(interval);
         }
     }, [items]);

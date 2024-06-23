@@ -7,7 +7,7 @@ const Homepage = () => {
         <Container>
             <NewProductCarousel />
             <Title>Welcome to the Homepage</Title>
-            <HotProductCarousel />
+            {/* <HotProductCarousel /> */}
         </Container>
     );
 };
