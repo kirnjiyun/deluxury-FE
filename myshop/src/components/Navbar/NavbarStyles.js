@@ -103,42 +103,64 @@ export const MainMenu = styled.div`
         gap: 10px;
         padding: 5px 0;
     }
+`;
 
+export const MenuItem = styled.div`
+    position: relative;
+    display: inline-block;
     a {
         color: #000;
         text-decoration: none;
         font-weight: bold;
         position: relative;
+        padding: 10px 15px;
 
         &:hover {
             &::after {
                 content: "";
                 position: absolute;
                 left: 0;
-                bottom: -5px;
+                bottom: -2px;
                 width: 100%;
                 height: 3px;
                 background-color: #000;
             }
         }
     }
+
+    &:hover .dropdown-content {
+        display: flex;
+    }
 `;
 
-export const MenuItem = styled.a`
-    color: #000;
-    text-decoration: none;
-    font-weight: bold;
-    position: relative;
+export const DropdownContent = styled.div`
+    display: none;
+    position: absolute;
+    background-color: #fff;
 
-    &:hover {
-        &::after {
-            content: "";
-            position: absolute;
-            left: 0;
-            bottom: -2px;
-            width: 100%;
-            height: 3px;
-            background-color: #000;
-        }
+    padding: 10px;
+    min-width: 200px;
+    z-index: 1;
+    left: 0;
+    top: 35px;
+    to ${MenuItem}:hover & {
+        display: block;
+    }
+`;
+
+export const Column = styled.div`
+    float: left;
+    width: 200px;
+    padding: 10px;
+
+    h3 {
+        margin-top: 0;
+    }
+
+    a {
+        color: black;
+        padding: 8px 16px;
+        text-decoration: none;
+        display: block;
     }
 `;
