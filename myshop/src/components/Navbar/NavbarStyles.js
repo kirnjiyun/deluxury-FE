@@ -143,7 +143,7 @@ export const MenuItem = styled.div`
     display: inline-block;
 
     a {
-        color: #000;
+        color: ${({ index }) => (index > 1 ? "#ccc" : "#000")};
         text-decoration: none;
         font-weight: bold;
         position: relative;

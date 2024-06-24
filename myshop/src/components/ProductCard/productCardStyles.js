@@ -41,7 +41,6 @@ export const Card = styled.div`
 export const ProductImage = styled.img`
     width: 100%;
     height: 100%;
-    border-radius: 2px;
     transition: opacity 0.2s;
 `;
 

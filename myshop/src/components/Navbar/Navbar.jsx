@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Toast, { notify } from "../Toast/Toast";
 import {
     faUser,
     faHeart,
@@ -48,7 +49,13 @@ const Navbar = () => {
     const dropdownRefs = useRef([]);
 
     const toggleDropdown = (index) => {
-        setOpenDropdown((prevIndex) => (prevIndex === index ? null : index));
+        if (index > 1) {
+            notify("오픈 예정입니다");
+        } else {
+            setOpenDropdown((prevIndex) =>
+                prevIndex === index ? null : index
+            );
+        }
     };
 
     const handleClickOutside = (event) => {
@@ -117,6 +124,7 @@ const Navbar = () => {
                             key={index}
                             onClick={() => toggleDropdown(index)}
                             isOpen={openDropdown === index}
+                            index={index}
                             ref={(el) => (dropdownRefs.current[index] = el)}
                         >
                             <a href="#">{item.label}</a>
@@ -128,6 +136,7 @@ const Navbar = () => {
                         </MenuItem>
                     ))}
                 </MainMenu>
+                <Toast />
                 <SearchIcon onClick={openModal}>
                     <FontAwesomeIcon icon={faSearch} />
                 </SearchIcon>
