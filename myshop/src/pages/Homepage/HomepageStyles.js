@@ -1,11 +1,24 @@
 import styled from "@emotion/styled";
 
-export const Container = styled.div`
+export const MainContainer = styled.div`
     width: 100%;
     height: 100vh;
-    overflow-y: scroll;
+    overflow: auto; /* 중복 스크롤 제거 */
+`;
+
+export const SnapContainer = styled.div`
+    width: 100%;
+    height: 100vh;
+    overflow-y: auto;
     scroll-snap-type: y mandatory;
-    -webkit-overflow-scrolling: touch; /* iOS에서 부드러운 스크롤 */
+    -webkit-overflow-scrolling: touch;
+
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
 `;
 
 export const FullscreenSection = styled.div`
@@ -22,6 +35,7 @@ export const ContentSection = styled.div`
     width: 100%;
     padding: 20px;
     background: #fff;
+    flex-shrink: 0;
 `;
 
 export const Title = styled.h1`

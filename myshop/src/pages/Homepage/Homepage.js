@@ -3,8 +3,8 @@ import NewProductCarousel from "../../components/carousel/new/NewProductCarousel
 import HotProductCarousel from "../../components/carousel/hot/HotProductCarousel";
 import ProductCard from "../../components/ProductCard/ProductCard";
 import {
-    Container,
-    Title,
+    MainContainer,
+    SnapContainer,
     Row,
     Col,
     FullscreenSection,
@@ -17,7 +17,7 @@ import { useInView } from "react-intersection-observer";
 const Homepage = () => {
     const { data, isLoading, error, isError } = useGetProduct();
     const { ref, inView } = useInView({
-        threshold: 0.5,
+        threshold: 0.3,
     });
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
@@ -41,17 +41,18 @@ const Homepage = () => {
     if (isError) return <div>Error fetching data: {error.message}</div>;
 
     return (
-        <Container>
-            {imageSources.map((src, index) => (
-                <FullscreenSection
-                    key={index}
-                    ref={index === currentImageIndex ? ref : null}
-                >
-                    <LazyImage src={src} alt={`Lazy Image ${index + 1}`} />
-                </FullscreenSection>
-            ))}
+        <MainContainer>
+            <SnapContainer>
+                {imageSources.map((src, index) => (
+                    <FullscreenSection
+                        key={index}
+                        ref={index === currentImageIndex ? ref : null}
+                    >
+                        <LazyImage src={src} alt={`Lazy Image ${index + 1}`} />
+                    </FullscreenSection>
+                ))}
+            </SnapContainer>
             <ContentSection>
-                <Title>Welcome to the Homepage</Title>
                 <NewProductCarousel />
                 <Row>
                     {data?.map((product) => (
@@ -61,7 +62,7 @@ const Homepage = () => {
                     ))}
                 </Row>
             </ContentSection>
-        </Container>
+        </MainContainer>
     );
 };
 
