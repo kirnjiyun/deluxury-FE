@@ -6,7 +6,7 @@ import { useState } from "react";
 import api from "../utils/api";
 
 const loginUser = async (user) => {
-    const response = await api.post("/user/login", user);
+    const response = await api.post("/auth/login", user);
     return response.data;
 };
 
