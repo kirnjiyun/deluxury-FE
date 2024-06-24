@@ -7,6 +7,8 @@ export const Container = styled.div`
     align-items: center;
     min-height: 100vh;
     background-color: #f0f0f0;
+    flex-wrap: wrap;
+    margin: 0 auto;
     padding: 20px;
 `;
 
@@ -18,7 +20,7 @@ export const Title = styled.h1`
 
 export const Row = styled.div`
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 20px;
     width: 100%;
     justify-content: center;
