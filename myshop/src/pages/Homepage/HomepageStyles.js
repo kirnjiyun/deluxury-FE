@@ -1,46 +1,42 @@
 import styled from "@emotion/styled";
 
 export const Container = styled.div`
+    width: 100%;
+    height: 100vh;
+    overflow-y: scroll;
+    scroll-snap-type: y mandatory;
+    -webkit-overflow-scrolling: touch; /* iOS에서 부드러운 스크롤 */
+`;
+
+export const FullscreenSection = styled.div`
+    width: 100%;
+    height: 100vh;
     display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
     align-items: center;
-    min-height: 100vh;
-    background-color: #f0f0f0;
-    flex-wrap: wrap;
-    margin: 0 auto;
+    justify-content: center;
+    scroll-snap-align: start;
+    overflow: hidden;
+`;
+
+export const ContentSection = styled.div`
+    width: 100%;
     padding: 20px;
+    background: #fff;
 `;
 
 export const Title = styled.h1`
-    font-size: 2em;
-    color: #333;
-    margin: 20px 0;
+    text-align: center;
+    margin-top: 20px;
 `;
 
 export const Row = styled.div`
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
-    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
     justify-content: center;
 `;
 
 export const Col = styled.div`
-    display: flex;
-    justify-content: center;
-`;
-
-export const Button = styled.button`
-    padding: 10px 20px;
-    font-size: 1em;
-    color: white;
-    background-color: #007bff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-
-    &:hover {
-        background-color: #0056b3;
-    }
+    flex: 1 1 300px;
+    max-width: 300px;
+    margin: 10px;
 `;

@@ -9,7 +9,7 @@ export const notify = (message) => {
 const Toast = () => (
     <ToastContainer
         position="top-right"
-        autoClose={3000}
+        autoClose={2500}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick
@@ -17,6 +17,10 @@ const Toast = () => (
         pauseOnFocusLoss
         draggable
         pauseOnHover
+        style={{
+            top: "100px",
+            right: "10px",
+        }}
     />
 );
 
