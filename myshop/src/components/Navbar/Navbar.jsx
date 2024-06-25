@@ -28,6 +28,7 @@ import { logout } from "../../action/userAction";
 import { openSearchModal, closeSearchModal } from "../../action/modalAction";
 import SearchModal from "../searchModal/SearchModal";
 import { menuItems } from "./menuItems";
+import { setCategory } from "../../action/categoryAction";
 
 const Navbar = () => {
     const dispatch = useDispatch();
@@ -50,11 +51,15 @@ const Navbar = () => {
 
     const toggleDropdown = (index) => {
         if (index > 1) {
-            notify("오픈 예정입니다");
+            notify("Coming soon");
         } else {
             setOpenDropdown((prevIndex) =>
                 prevIndex === index ? null : index
             );
+        }
+        const category = menuItems[index]?.label;
+        if (category) {
+            dispatch(setCategory(category));
         }
     };
 
@@ -88,7 +93,7 @@ const Navbar = () => {
                                 <FontAwesomeIcon icon={faUser} />{" "}
                                 {user.role === "admin"
                                     ? "ADMIN PAGE"
-                                    : `${user.name}님의 MY PAGE`}
+                                    : `${user.name}'s MY PAGE`}
                             </Link>
                             {user.role !== "admin" && (
                                 <Link to="/mylike">

@@ -9,12 +9,23 @@ import Loginpage from "../pages/Loginpage/Loginpage";
 import Mypage from "../pages/Mypage/Mypage";
 import Mylikepage from "../pages/Mylikepage/Mylikepage";
 import PrivateRoute from "./PrivateRoute";
+import Productpage from "../pages/Prouductpage/Productpage";
+
 const AppRouter = () => {
     return (
         <Routes>
             <Route path="/" element={<Homepage />} />
             <Route path="/products" element={<Homepage />} />
             <Route path="/products/:id" element={<ProductDetailpage />} />
+            <Route path="/:bigCategory" element={<Productpage />} />
+            <Route
+                path="/:bigCategory/:subCategory"
+                element={<Productpage />}
+            />
+            <Route
+                path="/:bigCategory/:subCategory/:id"
+                element={<ProductDetailpage />}
+            />
             <Route
                 path="/cart"
                 element={

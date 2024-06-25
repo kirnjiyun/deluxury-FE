@@ -1,6 +1,6 @@
-// hardCodeItems.js
 import React from "react";
 import { Column } from "./NavbarStyles";
+import { Link } from "react-router-dom";
 
 export const menuItems = [
     {
@@ -8,47 +8,49 @@ export const menuItems = [
         content: (
             <>
                 <Column>
-                    <h3>의류</h3>
-                    <a href="#">ALL</a>
-                    <a href="#">NEW</a>
-                    <a href="#">아우터</a>
-                    <a href="#">상의</a>
-                    <a href="#">하의</a>
-                    <a href="#">홈웨어</a>
-                    <a href="#">이너웨어</a>
+                    <h3>Clothes</h3>
+                    <Link to="/men/clothes">ALL</Link>
+                    <Link to="/men/clothes/new">NEW</Link>
+                    <Link to="/men/clothes/outer">Outer</Link>
+                    <Link to="/men/clothes/top">Top</Link>
+                    <Link to="/men/clothes/bottom">Bottom</Link>
+                    <Link to="/men/clothes/homewear">Homewear</Link>
+                    <Link to="/men/clothes/innerwear">Innerwear</Link>
                 </Column>
                 <Column>
-                    <h3>가방</h3>
-                    <a href="#">ALL</a>
-                    <a href="#">NEW</a>
-                    <a href="#">크로스백</a>
-                    <a href="#">웨이스트백</a>
-                    <a href="#">토트백</a>
-                    <a href="#">백팩</a>
-                    <a href="#">솔더백</a>
-                    <a href="#">랩탑백</a>
+                    <h3>Bags</h3>
+                    <Link to="/men/bags">ALL</Link>
+                    <Link to="/men/bags/new">NEW</Link>
+                    <Link to="/men/bags/crossbag">Crossbag</Link>
+                    <Link to="/men/bags/waistbag">Waistbag</Link>
+                    <Link to="/men/bags/totebag">Totebag</Link>
+                    <Link to="/men/bags/backpack">Backpack</Link>
+                    <Link to="/men/bags/shoulderbag">Shoulderbag</Link>
+                    <Link to="/men/bags/laptopbag">Laptopbag</Link>
                 </Column>
                 <Column>
-                    <h3>신발</h3>
-                    <a href="#">ALL</a>
-                    <a href="#">NEW</a>
-                    <a href="#">스니커즈</a>
-                    <a href="#">로퍼</a>
-                    <a href="#">구두</a>
-                    <a href="#">부츠</a>
-                    <a href="#">샌들</a>
-                    <a href="#">슈즈 액세서리</a>
+                    <h3>Shoes</h3>
+                    <Link to="/men/shoes">ALL</Link>
+                    <Link to="/men/shoes/new">NEW</Link>
+                    <Link to="/men/shoes/sneakers">Sneakers</Link>
+                    <Link to="/men/shoes/loafers">Loafers</Link>
+                    <Link to="/men/shoes/formal">Formal</Link>
+                    <Link to="/men/shoes/boots">Boots</Link>
+                    <Link to="/men/shoes/sandals">Sandals</Link>
+                    <Link to="/men/shoes/accessories">Accessories</Link>
                 </Column>
                 <Column>
-                    <h3>액세서리</h3>
-                    <a href="#">ALL</a>
-                    <a href="#">NEW</a>
-                    <a href="#">지갑,카드케이스</a>
-                    <a href="#">모자</a>
-                    <a href="#">시계</a>
-                    <a href="#">아이웨어</a>
-                    <a href="#">넥타이</a>
-                    <a href="#">벨트</a>
+                    <h3>Accessories</h3>
+                    <Link to="/men/accessories">ALL</Link>
+                    <Link to="/men/accessories/new">NEW</Link>
+                    <Link to="/men/accessories/wallets">
+                        Wallets & Card Cases
+                    </Link>
+                    <Link to="/men/accessories/hats">Hats</Link>
+                    <Link to="/men/accessories/watches">Watches</Link>
+                    <Link to="/men/accessories/eyewear">Eyewear</Link>
+                    <Link to="/men/accessories/ties">Ties</Link>
+                    <Link to="/men/accessories/belts">Belts</Link>
                 </Column>
             </>
         ),
@@ -58,50 +60,52 @@ export const menuItems = [
         content: (
             <>
                 <Column>
-                    <h3>의류</h3>
-                    <a href="#">ALL</a>
-                    <a href="#">NEW</a>
-                    <a href="#">상의</a>
-                    <a href="#">바지</a>
-                    <a href="#">원피스</a>
-                    <a href="#">스커트</a>
-                    <a href="#">점프수트</a>
-                    <a href="#">아우터</a>
-                    <a href="#">이너웨어</a>
+                    <h3>Clothes</h3>
+                    <Link to="/women/clothes">ALL</Link>
+                    <Link to="/women/clothes/new">NEW</Link>
+                    <Link to="/women/clothes/top">Top</Link>
+                    <Link to="/women/clothes/pants">Pants</Link>
+                    <Link to="/women/clothes/dresses">Dresses</Link>
+                    <Link to="/women/clothes/skirts">Skirts</Link>
+                    <Link to="/women/clothes/jumpsuits">Jumpsuits</Link>
+                    <Link to="/women/clothes/outer">Outer</Link>
+                    <Link to="/women/clothes/innerwear">Innerwear</Link>
                 </Column>
                 <Column>
-                    <h3>가방</h3>
-                    <a href="#">ALL</a>
-                    <a href="#">NEW</a>
-                    <a href="#">솔더백</a>
-                    <a href="#">크로스백</a>
-                    <a href="#">토트백</a>
-                    <a href="#">에코,캔버스백</a>
-                    <a href="#">백팩</a>
-                    <a href="#">클러치</a>
-                    <a href="#">파우치</a>
+                    <h3>Bags</h3>
+                    <Link to="/women/bags">ALL</Link>
+                    <Link to="/women/bags/new">NEW</Link>
+                    <Link to="/women/bags/shoulderbag">Shoulderbag</Link>
+                    <Link to="/women/bags/crossbag">Crossbag</Link>
+                    <Link to="/women/bags/totebag">Totebag</Link>
+                    <Link to="/women/bags/ecobag">Eco & Canvas Bags</Link>
+                    <Link to="/women/bags/backpack">Backpack</Link>
+                    <Link to="/women/bags/clutch">Clutch</Link>
+                    <Link to="/women/bags/pouch">Pouch</Link>
                 </Column>
                 <Column>
-                    <h3>신발</h3>
-                    <a href="#">ALL</a>
-                    <a href="#">NEW</a>
-                    <a href="#">플랫,로퍼</a>
-                    <a href="#">부츠</a>
-                    <a href="#">펌프스</a>
-                    <a href="#">샌들</a>
-                    <a href="#">슬리퍼,뮬</a>
-                    <a href="#">스니커즈</a>
+                    <h3>Shoes</h3>
+                    <Link to="/women/shoes">ALL</Link>
+                    <Link to="/women/shoes/new">NEW</Link>
+                    <Link to="/women/shoes/flats">Flats & Loafers</Link>
+                    <Link to="/women/shoes/boots">Boots</Link>
+                    <Link to="/women/shoes/pumps">Pumps</Link>
+                    <Link to="/women/shoes/sandals">Sandals</Link>
+                    <Link to="/women/shoes/slippers">Slippers & Mules</Link>
+                    <Link to="/women/shoes/sneakers">Sneakers</Link>
                 </Column>
                 <Column>
-                    <h3>액세서리</h3>
-                    <a href="#">ALL</a>
-                    <a href="#">NEW</a>
-                    <a href="#">주얼리</a>
-                    <a href="#">모자</a>
-                    <a href="#">시계</a>
-                    <a href="#">지갑,카드케이스</a>
-                    <a href="#">아이웨어</a>
-                    <a href="#">벨트</a>
+                    <h3>Accessories</h3>
+                    <Link to="/women/accessories">ALL</Link>
+                    <Link to="/women/accessories/new">NEW</Link>
+                    <Link to="/women/accessories/jewelry">Jewelry</Link>
+                    <Link to="/women/accessories/hats">Hats</Link>
+                    <Link to="/women/accessories/watches">Watches</Link>
+                    <Link to="/women/accessories/wallets">
+                        Wallets & Card Cases
+                    </Link>
+                    <Link to="/women/accessories/eyewear">Eyewear</Link>
+                    <Link to="/women/accessories/belts">Belts</Link>
                 </Column>
             </>
         ),
