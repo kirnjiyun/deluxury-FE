@@ -109,7 +109,7 @@ export const MainMenu = styled.div`
 export const DropdownContent = styled.div`
     display: none;
     position: absolute;
-    background-color: #fff;
+    background-color: white;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     padding: 20px;
     min-width: 200px;

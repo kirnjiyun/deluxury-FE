@@ -12,18 +12,25 @@ export default function Productpage() {
     const category = useSelector((state) => state.category.category);
 
     function filterProducts(products, bigCategory, mainCategory, subCategory) {
-        return products.filter(
-            (product) =>
-                product.bigCategory.toLowerCase() ===
-                    bigCategory.toLowerCase() &&
+        return products.filter((product) => {
+            const matchesBigCategory =
+                product.bigCategory.toLowerCase() === bigCategory.toLowerCase();
+            const matchesMainCategory =
                 product.category.main.toLowerCase() ===
-                    mainCategory.toLowerCase() &&
-                product.category.sub.toLowerCase() === subCategory.toLowerCase()
-        );
+                mainCategory.toLowerCase();
+            const matchesSubCategory = subCategory
+                ? product.category.sub.toLowerCase() ===
+                  subCategory.toLowerCase()
+                : true;
+
+            return (
+                matchesBigCategory && matchesMainCategory && matchesSubCategory
+            );
+        });
     }
 
     if (isLoading) return <div>Loading...</div>;
-    if (error) return <div>Error loading products</div>;
+    if (error) return <div>Error loading products {error}</div>;
 
     const filteredProducts = filterProducts(
         products,
@@ -41,11 +48,15 @@ export default function Productpage() {
         <Container>
             <NewProductCarousel />
             <Row>
-                {filteredProducts.map((product) => (
-                    <Col key={product.sku}>
-                        <ProductCard product={product} />
-                    </Col>
-                ))}
+                {filteredProducts.length > 0 ? (
+                    filteredProducts?.map((product) => (
+                        <Col key={product.sku}>
+                            <ProductCard product={product} />
+                        </Col>
+                    ))
+                ) : (
+                    <div>해당 제품은 준비중입니다.</div>
+                )}
             </Row>
         </Container>
     );
