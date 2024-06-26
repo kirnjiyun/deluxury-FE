@@ -1,10 +1,9 @@
-// src/components/Footer.jsx
 import React from "react";
 import { FooterContainer, FooterContent } from "./FooterStyles";
 
-export default function Footer() {
+export default function Footer({ show }) {
     return (
-        <FooterContainer>
+        <FooterContainer show={show}>
             <FooterContent>
                 <p>개인정보 처리방침</p>
                 <p>본 사이트는 개인정보 보호법에 따라 개인정보를 보호합니다.</p>

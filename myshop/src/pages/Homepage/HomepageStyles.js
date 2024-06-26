@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 export const MainContainer = styled.div`
     width: 100%;
     height: 100vh;
-    overflow: auto; /* 중복 스크롤 제거 */
+    overflow: auto;
 `;
 
 export const SnapContainer = styled.div`
@@ -12,7 +12,6 @@ export const SnapContainer = styled.div`
     overflow-y: auto;
     scroll-snap-type: y mandatory;
     -webkit-overflow-scrolling: touch;
-
     scrollbar-width: none;
     -ms-overflow-style: none;
 
@@ -28,7 +27,7 @@ export const FullscreenSection = styled.div`
     align-items: center;
     justify-content: center;
     scroll-snap-align: start;
-    overflow: hidden;
+    /* overflow: hidden; */
 `;
 
 export const ContentSection = styled.div`

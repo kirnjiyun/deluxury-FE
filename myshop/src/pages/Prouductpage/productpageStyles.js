@@ -2,16 +2,17 @@ import styled from "@emotion/styled";
 
 export const Container = styled.div`
     width: 100%;
-    height: 100vh;
-    overflow-y: scroll;
-    scroll-snap-type: y mandatory;
-    -webkit-overflow-scrolling: touch; /* iOS에서 부드러운 스크롤 */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 300px;
 `;
 
 export const Row = styled.div`
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    flex-grow: 1;
 `;
 
 export const Col = styled.div`

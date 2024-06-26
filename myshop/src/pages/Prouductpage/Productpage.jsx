@@ -7,21 +7,35 @@ import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 export default function Productpage() {
-    const { bigCategory, subCategory } = useParams(); // URL에서 파라미터를 가져옴
+    const { bigCategory, mainCategory, subCategory } = useParams();
     const { data: products, isLoading, error } = useGetProduct();
-    const category = useSelector((state) => state.category.category); // Redux 상태 사용
+    const category = useSelector((state) => state.category.category);
+
+    function filterProducts(products, bigCategory, mainCategory, subCategory) {
+        return products.filter(
+            (product) =>
+                product.bigCategory.toLowerCase() ===
+                    bigCategory.toLowerCase() &&
+                product.category.main.toLowerCase() ===
+                    mainCategory.toLowerCase() &&
+                product.category.sub.toLowerCase() === subCategory.toLowerCase()
+        );
+    }
 
     if (isLoading) return <div>Loading...</div>;
     if (error) return <div>Error loading products</div>;
 
-    const filteredProducts = products.filter((product) => {
-        return (
-            product.bigCategory.toLowerCase() === bigCategory.toLowerCase() &&
-            (!subCategory ||
-                product.category.sub.toLowerCase() ===
-                    subCategory.toLowerCase())
-        );
-    });
+    const filteredProducts = filterProducts(
+        products,
+        bigCategory,
+        mainCategory,
+        subCategory
+    );
+
+    console.log("URL Parameters:", { bigCategory, mainCategory, subCategory });
+    console.log("Products Data:", products);
+    console.log("Redux Category:", category);
+    console.log("Filtered Products:", filteredProducts);
 
     return (
         <Container>

@@ -16,14 +16,17 @@ const AppRouter = () => {
         <Routes>
             <Route path="/" element={<Homepage />} />
             <Route path="/products" element={<Homepage />} />
-            <Route path="/products/:id" element={<ProductDetailpage />} />
             <Route path="/:bigCategory" element={<Productpage />} />
             <Route
-                path="/:bigCategory/:subCategory"
+                path="/:bigCategory/:mainCategory"
                 element={<Productpage />}
             />
             <Route
-                path="/:bigCategory/:subCategory/:id"
+                path="/:bigCategory/:mainCategory/:subCategory"
+                element={<Productpage />}
+            />
+            <Route
+                path="/:bigCategory/:mainCategory/:subCategory/:id"
                 element={<ProductDetailpage />}
             />
             <Route

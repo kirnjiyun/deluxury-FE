@@ -13,7 +13,7 @@ export const menuItems = [
                     <Link to="/men/clothes/new">NEW</Link>
                     <Link to="/men/clothes/outer">Outer</Link>
                     <Link to="/men/clothes/top">Top</Link>
-                    <Link to="/men/clothes/bottom">Bottom</Link>
+                    <Link to="/men/clothes/pants">Bottom</Link>
                     <Link to="/men/clothes/homewear">Homewear</Link>
                     <Link to="/men/clothes/innerwear">Innerwear</Link>
                 </Column>
