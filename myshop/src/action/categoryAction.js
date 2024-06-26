@@ -1,6 +1,6 @@
-export const SET_CATEGORY = "SET_CATEGORY";
+export const SET_CATEGORIES = "SET_CATEGORIES";
 
-export const setCategory = (category) => ({
-    type: SET_CATEGORY,
-    payload: category,
+export const setCategories = (categories) => ({
+    type: SET_CATEGORIES,
+    payload: categories,
 });

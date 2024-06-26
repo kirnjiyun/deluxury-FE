@@ -1,25 +1,34 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 import ProductCard from "../../components/ProductCard/ProductCard";
 import { Container, Row, Col } from "./productpageStyles";
 import NewProductCarousel from "../../components/carousel/new/NewProductCarousel";
 import { useGetProduct } from "../../hooks/useGetProduct";
-import { useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { setCategories } from "../../action/categoryAction";
 
 export default function Productpage() {
     const { bigCategory, mainCategory, subCategory } = useParams();
     const { data: products, isLoading, error } = useGetProduct();
-    const category = useSelector((state) => state.category.category);
+    const dispatch = useDispatch();
+    const categories = useSelector((state) => state.category);
+
+    useEffect(() => {
+        dispatch(setCategories({ bigCategory, mainCategory, subCategory }));
+    }, [bigCategory, mainCategory, subCategory, dispatch]);
 
     function filterProducts(products, bigCategory, mainCategory, subCategory) {
+        if (!products) return [];
+
         return products.filter((product) => {
             const matchesBigCategory =
-                product.bigCategory.toLowerCase() === bigCategory.toLowerCase();
+                product?.bigCategory.toLowerCase() ===
+                bigCategory.toLowerCase();
             const matchesMainCategory =
-                product.category.main.toLowerCase() ===
+                product?.category.main.toLowerCase() ===
                 mainCategory.toLowerCase();
             const matchesSubCategory = subCategory
-                ? product.category.sub.toLowerCase() ===
+                ? product?.category.sub.toLowerCase() ===
                   subCategory.toLowerCase()
                 : true;
 
@@ -30,7 +39,7 @@ export default function Productpage() {
     }
 
     if (isLoading) return <div>Loading...</div>;
-    if (error) return <div>Error loading products {error}</div>;
+    if (error) return <div>Error loading products: {error}</div>;
 
     const filteredProducts = filterProducts(
         products,
@@ -41,7 +50,7 @@ export default function Productpage() {
 
     console.log("URL Parameters:", { bigCategory, mainCategory, subCategory });
     console.log("Products Data:", products);
-    console.log("Redux Category:", category);
+    console.log("Redux Categories:", categories);
     console.log("Filtered Products:", filteredProducts);
 
     return (
@@ -49,7 +58,7 @@ export default function Productpage() {
             <NewProductCarousel />
             <Row>
                 {filteredProducts.length > 0 ? (
-                    filteredProducts?.map((product) => (
+                    filteredProducts.map((product) => (
                         <Col key={product.sku}>
                             <ProductCard product={product} />
                         </Col>

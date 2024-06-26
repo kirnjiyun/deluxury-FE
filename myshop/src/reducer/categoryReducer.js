@@ -1,15 +1,17 @@
-import { SET_CATEGORY } from "../action/categoryAction";
+import { SET_CATEGORIES } from "../action/categoryAction";
 
 const initialState = {
-    category: "",
+    bigCategory: "",
+    mainCategory: "",
+    subCategory: "",
 };
 
 const categoryReducer = (state = initialState, action) => {
     switch (action.type) {
-        case SET_CATEGORY:
+        case SET_CATEGORIES:
             return {
                 ...state,
-                category: action.payload,
+                ...action.payload,
             };
         default:
             return state;

@@ -28,7 +28,7 @@ import { logout } from "../../action/userAction";
 import { openSearchModal, closeSearchModal } from "../../action/modalAction";
 import SearchModal from "../searchModal/SearchModal";
 import { menuItems } from "./menuItems";
-import { setCategory } from "../../action/categoryAction";
+import { setCategories } from "../../action/categoryAction";
 
 const Navbar = () => {
     const dispatch = useDispatch();
@@ -59,7 +59,7 @@ const Navbar = () => {
         }
         const category = menuItems[index]?.label;
         if (category) {
-            dispatch(setCategory(category));
+            dispatch(setCategories(category));
         }
     };
 

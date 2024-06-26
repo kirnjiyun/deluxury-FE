@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router";
+import { useSelector } from "react-redux";
 import {
     Card,
     ProductImage,
@@ -11,11 +12,14 @@ import {
 
 const ProductCard = ({ product }) => {
     const navigate = useNavigate();
+    const { bigCategory, mainCategory, subCategory } = useSelector(
+        (state) => state.category
+    );
+
     const showProduct = (id) => {
-        navigate(`/product/${id}`);
+        navigate(`/${bigCategory}/${mainCategory}/${subCategory}/${id}`);
         console.log("Product ID:", id);
     };
-
     return (
         <Card onClick={() => showProduct(product._id)}>
             <ProductImage src={product.image} alt={product.name} />
