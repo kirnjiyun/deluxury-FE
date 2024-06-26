@@ -42,6 +42,7 @@ const Navbar = () => {
         dispatch(closeSearchModal());
     };
     const { isLoggedIn, user } = useSelector((state) => state.user);
+
     const handleLogout = () => {
         dispatch(logout());
     };
@@ -89,18 +90,24 @@ const Navbar = () => {
                 <UserOptions>
                     {isLoggedIn ? (
                         <>
-                            <Link to={user.role === "admin" ? "/admin" : "/me"}>
+                            <Link
+                                to={
+                                    user.user.role === "admin"
+                                        ? "/admin"
+                                        : "/me"
+                                }
+                            >
                                 <FontAwesomeIcon icon={faUser} />{" "}
-                                {user.role === "admin"
+                                {user.user.role === "admin"
                                     ? "ADMIN PAGE"
-                                    : `${user.name}'s MY PAGE`}
+                                    : `${user.user.name}'s MY PAGE`}
                             </Link>
-                            {user.role !== "admin" && (
+                            {user.user.role !== "admin" && (
                                 <Link to="/mylike">
                                     <FontAwesomeIcon icon={faHeart} /> MY LIKE
                                 </Link>
                             )}
-                            {user.role !== "admin" && (
+                            {user.user.role !== "admin" && (
                                 <Link to="/cart">
                                     <FontAwesomeIcon icon={faShoppingBag} />{" "}
                                     SHOPPING BAG

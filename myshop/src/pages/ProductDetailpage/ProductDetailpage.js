@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { useGetOneProduct } from "../../hooks/useGetProduct";
 import {
     Container,
@@ -29,9 +30,12 @@ import {
 import Toast, { notify } from "../../components/Toast/Toast";
 export default function ProductDetailPage() {
     const { id } = useParams();
+    const navigate = useNavigate(); // useNavigate로 변경
+    const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
     const { data, error, isLoading } = useGetOneProduct(id);
     const [selectedSize, setSelectedSize] = useState("");
     const [isLiked, setIsLiked] = useState(false);
+
     if (isLoading) {
         return <div>Loading...</div>;
     }
@@ -49,12 +53,26 @@ export default function ProductDetailPage() {
     };
 
     const handleAddToCart = () => {
-        notify(` ${data.name} (Size: ${selectedSize}) 카트에 추가됐습니다.`);
+        if (!isLoggedIn) {
+            navigate("/login");
+            return;
+        }
+        notify(`${data.name} (Size: ${selectedSize}) 카트에 추가됐습니다.`);
     };
+
     const handleBuyNow = () => {
+        if (!isLoggedIn) {
+            navigate("/login");
+            return;
+        }
         notify(`Proceeding to buy ${data.name} (Size: ${selectedSize})!`);
     };
+
     const handleLikeClick = () => {
+        if (!isLoggedIn) {
+            navigate("/login");
+            return;
+        }
         setIsLiked(!isLiked);
     };
 
@@ -62,6 +80,7 @@ export default function ProductDetailPage() {
         <Container>
             <div style={{ display: "flex" }}>
                 {" "}
+                <Toast />
                 <ImageContainer>
                     {" "}
                     <Category>

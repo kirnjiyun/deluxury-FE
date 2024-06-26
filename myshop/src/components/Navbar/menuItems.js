@@ -10,7 +10,6 @@ export const menuItems = [
                 <Column>
                     <h3>Clothes</h3>
                     <Link to="/men/clothes">ALL</Link>
-                    <Link to="/men/clothes/new">NEW</Link>
                     <Link to="/men/clothes/outer">Outer</Link>
                     <Link to="/men/clothes/top">Top</Link>
                     <Link to="/men/clothes/pants">Bottom</Link>
@@ -20,7 +19,6 @@ export const menuItems = [
                 <Column>
                     <h3>Bags</h3>
                     <Link to="/men/bags">ALL</Link>
-                    <Link to="/men/bags/new">NEW</Link>
                     <Link to="/men/bags/crossbag">Crossbag</Link>
                     <Link to="/men/bags/waistbag">Waistbag</Link>
                     <Link to="/men/bags/totebag">Totebag</Link>
@@ -31,7 +29,6 @@ export const menuItems = [
                 <Column>
                     <h3>Shoes</h3>
                     <Link to="/men/shoes">ALL</Link>
-                    <Link to="/men/shoes/new">NEW</Link>
                     <Link to="/men/shoes/sneakers">Sneakers</Link>
                     <Link to="/men/shoes/loafers">Loafers</Link>
                     <Link to="/men/shoes/formal">Formal</Link>
@@ -42,7 +39,6 @@ export const menuItems = [
                 <Column>
                     <h3>Accessories</h3>
                     <Link to="/men/accessories">ALL</Link>
-                    <Link to="/men/accessories/new">NEW</Link>
                     <Link to="/men/accessories/wallets">
                         Wallets & Card Cases
                     </Link>
@@ -62,7 +58,6 @@ export const menuItems = [
                 <Column>
                     <h3>Clothes</h3>
                     <Link to="/women/clothes">ALL</Link>
-                    <Link to="/women/clothes/new">NEW</Link>
                     <Link to="/women/clothes/top">Top</Link>
                     <Link to="/women/clothes/pants">Pants</Link>
                     <Link to="/women/clothes/dresses">Dresses</Link>
@@ -74,7 +69,6 @@ export const menuItems = [
                 <Column>
                     <h3>Bags</h3>
                     <Link to="/women/bags">ALL</Link>
-                    <Link to="/women/bags/new">NEW</Link>
                     <Link to="/women/bags/shoulderbag">Shoulderbag</Link>
                     <Link to="/women/bags/crossbag">Crossbag</Link>
                     <Link to="/women/bags/totebag">Totebag</Link>
@@ -86,7 +80,6 @@ export const menuItems = [
                 <Column>
                     <h3>Shoes</h3>
                     <Link to="/women/shoes">ALL</Link>
-                    <Link to="/women/shoes/new">NEW</Link>
                     <Link to="/women/shoes/flats">Flats & Loafers</Link>
                     <Link to="/women/shoes/boots">Boots</Link>
                     <Link to="/women/shoes/pumps">Pumps</Link>
@@ -97,7 +90,6 @@ export const menuItems = [
                 <Column>
                     <h3>Accessories</h3>
                     <Link to="/women/accessories">ALL</Link>
-                    <Link to="/women/accessories/new">NEW</Link>
                     <Link to="/women/accessories/jewelry">Jewelry</Link>
                     <Link to="/women/accessories/hats">Hats</Link>
                     <Link to="/women/accessories/watches">Watches</Link>

@@ -24,7 +24,7 @@ export const useLoginMutation = () => {
                 // header에 토큰 값 설정
                 api.defaults.headers["authorization"] = "Bearer " + data.token;
                 // Redux 상태 업데이트
-                dispatch(login(data.user));
+                dispatch(login({ user: data.user, token: data.token }));
                 navigate("/");
             } else {
                 throw new Error(data.error || "로그인 실패");
