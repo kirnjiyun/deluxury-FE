@@ -4,25 +4,41 @@ import {
     ItemDetails,
     ItemInfo,
     ItemName,
+    ItemBrand,
     ItemPrice,
+    ItemSize,
+    ItemImage,
     QuantityControls,
     QuantityButton,
     QuantityDisplay,
+    RemoveButton,
 } from "./CartCardStyles";
-
+const handleRemove = () => {
+    console.log("dkdkdk");
+};
 const CartCard = ({ item }) => {
+    console.log("Cart item:", item);
     return (
         <Card>
+            {" "}
+            <RemoveButton onClick={handleRemove}>×</RemoveButton>
             <ItemDetails>
+                <ItemImage
+                    src={item.productId.image}
+                    alt={item.productId.name}
+                />
                 <ItemInfo>
-                    <ItemName>{item.name}</ItemName>
-                    <ItemPrice>{item.price}원</ItemPrice>
+                    <ItemName>{item.productId.name}</ItemName>
+                    <ItemBrand>{item.productId.brand}</ItemBrand>
+                    <ItemSize>Size: {item.size}</ItemSize>
+
+                    <QuantityControls>
+                        <QuantityButton>-</QuantityButton>
+                        <QuantityDisplay>{item.qty}</QuantityDisplay>
+                        <QuantityButton>+</QuantityButton>
+                    </QuantityControls>
                 </ItemInfo>
-                <QuantityControls>
-                    <QuantityButton>-</QuantityButton>
-                    <QuantityDisplay>{item.quantity}</QuantityDisplay>
-                    <QuantityButton>+</QuantityButton>
-                </QuantityControls>
+                <ItemPrice>{item.productId.price}원</ItemPrice>
             </ItemDetails>
         </Card>
     );

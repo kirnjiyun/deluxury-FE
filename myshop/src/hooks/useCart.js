@@ -37,6 +37,7 @@ export const useAddToCart = () => {
 };
 const fetchCart = async () => {
     const response = await api.get("/cart");
+    console.log("Fetch cart response:", response.data);
     return response.data.data;
 };
 
