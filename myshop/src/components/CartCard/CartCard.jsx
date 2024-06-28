@@ -10,20 +10,22 @@ import {
     QuantityDisplay,
 } from "./CartCardStyles";
 
-export default function CartCard() {
+const CartCard = ({ item }) => {
     return (
         <Card>
             <ItemDetails>
                 <ItemInfo>
-                    <ItemName>[OAT] Bottle Linen Slit Blouse - Ivory</ItemName>
-                    <ItemPrice>52,000원</ItemPrice>
+                    <ItemName>{item.name}</ItemName>
+                    <ItemPrice>{item.price}원</ItemPrice>
                 </ItemInfo>
                 <QuantityControls>
                     <QuantityButton>-</QuantityButton>
-                    <QuantityDisplay>1</QuantityDisplay>
+                    <QuantityDisplay>{item.quantity}</QuantityDisplay>
                     <QuantityButton>+</QuantityButton>
                 </QuantityControls>
             </ItemDetails>
         </Card>
     );
-}
+};
+
+export default CartCard;

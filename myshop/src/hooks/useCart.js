@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import api from "../utils/api";
 import { notify } from "../components/Toast/Toast";
 import { addToCart } from "../action/cartAction";
+import { useQuery } from "@tanstack/react-query";
 
 const addToCartApi = async (item) => {
     const response = await api.post("/cart", item);
@@ -18,17 +19,30 @@ export const useAddToCart = () => {
         mutationFn: addToCartApi,
         onSuccess: (data, variables, context) => {
             queryClient.invalidateQueries({ queryKey: ["cart"] });
-            dispatch(addToCart(data.item));
-            if (data && data.item) {
-                notify(`${data.item.name} 가(이) 카트에 추가됐습니다.`);
+            const addedItem = data.item;
+            if (addedItem) {
+                dispatch(addToCart(addedItem));
+                notify(
+                    `${addedItem.productId.name}, 사이즈${addedItem.size} 이(가) 카트에 추가됐습니다.`
+                );
             } else {
-                console.error("Unexpected success response structure:", data); // 데
                 notify(`Item added to cart.`);
             }
         },
         onError: (error) => {
-            const backendError = error || "An error occurred.";
-            notify(`Error: ${backendError}`);
+            const backendError = error.error || "An error occurred.";
+            notify(` ${backendError}`);
         },
+    });
+};
+const fetchCart = async () => {
+    const response = await api.get("/cart");
+    return response.data.data;
+};
+
+export const useGetCart = () => {
+    return useQuery({
+        queryKey: ["cart"],
+        queryFn: fetchCart,
     });
 };
