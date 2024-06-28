@@ -38,7 +38,7 @@ const CartCard = ({ item }) => {
                         <QuantityButton>+</QuantityButton>
                     </QuantityControls>
                 </ItemInfo>
-                <ItemPrice>{item.productId.price}원</ItemPrice>
+                <ItemPrice>${item.productId.price}</ItemPrice>
             </ItemDetails>
         </Card>
     );
