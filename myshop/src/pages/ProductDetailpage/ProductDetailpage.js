@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useGetOneProduct } from "../../hooks/useGetProduct";
+import { useAddToCart } from "../../hooks/useCart";
 import {
     Container,
     ImageContainer,
@@ -28,13 +29,15 @@ import {
     InfoText,
 } from "./protudctDetailpageStyles";
 import Toast, { notify } from "../../components/Toast/Toast";
+
 export default function ProductDetailPage() {
     const { id } = useParams();
-    const navigate = useNavigate(); // useNavigate로 변경
+    const navigate = useNavigate();
     const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
     const { data, error, isLoading } = useGetOneProduct(id);
     const [selectedSize, setSelectedSize] = useState("");
     const [isLiked, setIsLiked] = useState(false);
+    const addToCartMutation = useAddToCart();
 
     if (isLoading) {
         return <div>Loading...</div>;
@@ -43,6 +46,7 @@ export default function ProductDetailPage() {
     if (error) {
         return <div>Error loading product details</div>;
     }
+
     const stockArray = Object.keys(data.stock).map((size) => ({
         size: size,
         quantity: data.stock[size],
@@ -57,7 +61,15 @@ export default function ProductDetailPage() {
             navigate("/login");
             return;
         }
-        notify(`${data.name} (Size: ${selectedSize}) 카트에 추가됐습니다.`);
+        const cartItem = {
+            productId: data._id,
+            name: data.name,
+            size: selectedSize,
+            price: data.price,
+            quantity: 1,
+        };
+
+        addToCartMutation.mutate(cartItem);
     };
 
     const handleBuyNow = () => {
@@ -79,10 +91,8 @@ export default function ProductDetailPage() {
     return (
         <Container>
             <div style={{ display: "flex" }}>
-                {" "}
                 <Toast />
                 <ImageContainer>
-                    {" "}
                     <Category>
                         <BrandName>{data.brand}</BrandName>
                         <CategoryPath>
@@ -135,9 +145,9 @@ export default function ProductDetailPage() {
                     </ButtonContainer>
                     <ProductInfo>
                         <InfoTitle>상품정보</InfoTitle>
-                        <InfoText>상품번호: {data.sku}</InfoText>{" "}
+                        <InfoText>상품번호: {data.sku}</InfoText>
                         <Description>{data.description}</Description>
-                    </ProductInfo>{" "}
+                    </ProductInfo>
                 </DetailsContainer>
             </div>
             <div>
