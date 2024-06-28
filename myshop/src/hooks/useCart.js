@@ -47,3 +47,17 @@ export const useGetCart = () => {
         queryFn: fetchCart,
     });
 };
+const deleteFromCartApi = async (id) => {
+    const response = await api.delete(`/cart/${id}`);
+    return response.data;
+};
+
+export const useDeleteFromCart = () => {
+    const queryClient = useQueryClient();
+    return useMutation({
+        mutationFn: deleteFromCartApi,
+        onSuccess: () => {
+            queryClient.invalidateQueries("cart");
+        },
+    });
+};

@@ -13,11 +13,14 @@ import {
     QuantityDisplay,
     RemoveButton,
 } from "./CartCardStyles";
-const handleRemove = () => {
-    console.log("dkdkdk");
-};
+import { useDeleteFromCart } from "../../hooks/useCart";
+
 const CartCard = ({ item }) => {
-    console.log("Cart item:", item);
+    const mutation = useDeleteFromCart();
+
+    const handleRemove = () => {
+        mutation.mutate(item._id);
+    };
     return (
         <Card>
             {" "}
