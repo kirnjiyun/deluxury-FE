@@ -106,7 +106,7 @@ export const ButtonContainer = styled.div`
 
 export const AddToCartButton = styled.button`
     padding: 10px 20px;
-    background-color: #007bff;
+    background-color: black;
     color: white;
     border: none;
     cursor: pointer;
