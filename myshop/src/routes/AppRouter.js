@@ -1,5 +1,6 @@
-import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 import Homepage from "../pages/Homepage/Homepage";
 import ProductDetailpage from "../pages/ProductDetailpage/ProductDetailpage";
 import Cartpage from "../pages/Cartpage/Cartpage";
@@ -10,8 +11,32 @@ import Mypage from "../pages/Mypage/Mypage";
 import Mylikepage from "../pages/Mylikepage/Mylikepage";
 import PrivateRoute from "./PrivateRoute";
 import Productpage from "../pages/Prouductpage/Productpage";
+import api from "../utils/api";
 
 const AppRouter = () => {
+    const { isLoggedIn } = useSelector((state) => state.user);
+    const [user, setUser] = useState(null);
+
+    const getUser = async () => {
+        try {
+            const token = sessionStorage.getItem("token");
+            if (token) {
+                const response = await api.get("/user/me", {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+                setUser(response.data.user);
+            }
+        } catch (error) {
+            setUser(null);
+        }
+    };
+
+    useEffect(() => {
+        getUser();
+    }, []);
+
     return (
         <Routes>
             <Route path="/" element={<Homepage />} />
@@ -53,8 +78,20 @@ const AppRouter = () => {
                     </PrivateRoute>
                 }
             />
-            <Route path="/login" element={<Loginpage />} />
-            <Route path="/signup" element={<SignUppage />} />
+            <Route
+                path="/login"
+                element={
+                    isLoggedIn ? (
+                        <Navigate to="/" />
+                    ) : (
+                        <Loginpage setUser={setUser} />
+                    )
+                }
+            />
+            <Route
+                path="/signup"
+                element={isLoggedIn ? <Navigate to="/" /> : <SignUppage />}
+            />
             <Route
                 path="/me"
                 element={

@@ -12,6 +12,7 @@ const api = axios.create({
     baseURL: `${baseURL}/api`,
     headers: {
         "Content-Type": "application/json",
+        authorization: "Bearer" + sessionStorage.getItem("token"),
     },
 });
 
