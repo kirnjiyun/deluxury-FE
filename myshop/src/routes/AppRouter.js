@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Homepage from "../pages/Homepage/Homepage";
 import ProductDetailpage from "../pages/ProductDetailpage/ProductDetailpage";
 import Cartpage from "../pages/Cartpage/Cartpage";
@@ -12,10 +12,11 @@ import Mylikepage from "../pages/Mylikepage/Mylikepage";
 import PrivateRoute from "./PrivateRoute";
 import Productpage from "../pages/Prouductpage/Productpage";
 import api from "../utils/api";
+import { setUser } from "../action/userAction";
 
 const AppRouter = () => {
-    const { isLoggedIn } = useSelector((state) => state.user);
-    const [user, setUser] = useState(null);
+    const { isLoggedIn, token } = useSelector((state) => state.user);
+    const dispatch = useDispatch();
 
     const getUser = async () => {
         try {
@@ -26,16 +27,18 @@ const AppRouter = () => {
                         Authorization: `Bearer ${token}`,
                     },
                 });
-                setUser(response.data.user);
+                dispatch(setUser(response.data.user));
             }
         } catch (error) {
-            setUser(null);
+            dispatch(setUser(null));
         }
     };
 
     useEffect(() => {
-        getUser();
-    }, []);
+        if (token) {
+            getUser();
+        }
+    }, [token]);
 
     return (
         <Routes>
@@ -80,13 +83,7 @@ const AppRouter = () => {
             />
             <Route
                 path="/login"
-                element={
-                    isLoggedIn ? (
-                        <Navigate to="/" />
-                    ) : (
-                        <Loginpage setUser={setUser} />
-                    )
-                }
+                element={isLoggedIn ? <Navigate to="/" /> : <Loginpage />}
             />
             <Route
                 path="/signup"
