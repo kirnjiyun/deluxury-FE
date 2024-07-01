@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useGetOneProduct } from "../../hooks/useGetProduct";
 import { useAddToCart } from "../../hooks/useCart";
+import { useAddToLike } from "../../hooks/useLike";
 import {
     Container,
     ImageContainer,
@@ -38,6 +39,7 @@ export default function ProductDetailPage() {
     const [selectedSize, setSelectedSize] = useState("");
     const [isLiked, setIsLiked] = useState(false);
     const addToCartMutation = useAddToCart();
+    const addToLikeMutation = useAddToLike();
 
     if (isLoading) {
         return <div>Loading...</div>;
@@ -85,7 +87,14 @@ export default function ProductDetailPage() {
             navigate("/login");
             return;
         }
-        setIsLiked(!isLiked);
+        const likeItem = {
+            productId: data._id,
+            name: data.name,
+            price: data.price,
+        };
+
+        addToLikeMutation.mutate(likeItem);
+        setIsLiked(true);
     };
 
     return (
