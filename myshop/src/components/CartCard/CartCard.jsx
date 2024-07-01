@@ -15,14 +15,19 @@ import {
 } from "./CartCardStyles";
 import { useDeleteFromCart, useUpdateCartItemQty } from "../../hooks/useCart";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import Toast from "../Toast/Toast";
 
 const CartCard = ({ item }) => {
-    const mutation = useDeleteFromCart();
+    const deleteMutation = useDeleteFromCart();
     const updateQuantityMutation = useUpdateCartItemQty();
-
+    const navigate = useNavigate();
     const handleRemove = () => {
-        mutation.mutate(item._id);
+        deleteMutation.mutate(item._id, {
+            context: { deletedItem: item },
+        });
     };
+
     const handleQuantityChange = (change) => {
         const newQuantity = item.qty + change;
         if (newQuantity > 0) {
@@ -36,17 +41,27 @@ const CartCard = ({ item }) => {
             );
         }
     };
+
+    const handleClick = () => {
+        const { bigCategory, category, _id } = item.productId;
+        navigate(
+            `/${bigCategory.toLowerCase()}/${category.main.toLowerCase()}/${category.sub.toLowerCase()}/${_id}`
+        );
+    };
     return (
         <Card>
-            {" "}
+            <Toast />
             <RemoveButton onClick={handleRemove}>×</RemoveButton>
             <ItemDetails>
                 <ItemImage
+                    onClick={handleClick}
                     src={item.productId.image}
                     alt={item.productId.name}
                 />
                 <ItemInfo>
-                    <ItemName>{item.productId.name}</ItemName>
+                    <ItemName onClick={handleClick}>
+                        {item.productId.name}{" "}
+                    </ItemName>
                     <ItemBrand>{item.productId.brand}</ItemBrand>
                     <ItemSize>Size: {item.size}</ItemSize>
 

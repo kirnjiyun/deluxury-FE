@@ -25,11 +25,11 @@ export const ItemInfo = styled.div`
 export const ItemName = styled.p`
     font-size: 16px;
     font-weight: bold;
+    cursor: pointer;
 `;
 
 export const ItemBrand = styled.p`
     font-size: 14px;
-    color: #555;
 `;
 
 export const ItemPrice = styled.p`
@@ -48,6 +48,8 @@ export const ItemImage = styled.img`
     width: 100px;
     height: 100px;
     object-fit: cover;
+    color: #555;
+    cursor: pointer;
     margin-right: 20px;
 `;
 

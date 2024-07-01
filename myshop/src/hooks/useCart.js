@@ -48,7 +48,6 @@ export const useGetCart = () => {
         queryFn: fetchCart,
     });
 };
-
 const deleteFromCartApi = async (id) => {
     const response = await api.delete(`/cart/${id}`);
     return response.data;
@@ -58,11 +57,20 @@ export const useDeleteFromCart = () => {
     const queryClient = useQueryClient();
     return useMutation({
         mutationFn: deleteFromCartApi,
-        onSuccess: () => {
+        onSuccess: (data, variables, context) => {
             queryClient.invalidateQueries("cart");
+            const deletedItem = context.deletedItem;
+            if (deletedItem) {
+                notify(
+                    `${deletedItem.productId.name}, 사이즈 ${deletedItem.size} 이(가) 카트에서 삭제됐습니다.`
+                );
+            } else {
+                notify(`Item removed from cart.`);
+            }
         },
     });
 };
+
 const updateFromCartApi = async ({ id, qty }) => {
     const response = await api.put(`/cart/${id}`, { qty });
     return response.data;
@@ -75,7 +83,8 @@ export const useUpdateCartItemQty = () => {
             queryClient.invalidateQueries("cart");
         },
         onError: (error) => {
-            notify(error || "An error occurred");
+            const backendError = error.error || "An error occurred.";
+            notify(` ${backendError}`);
         },
     });
 };
