@@ -13,13 +13,28 @@ import {
     QuantityDisplay,
     RemoveButton,
 } from "./CartCardStyles";
-import { useDeleteFromCart } from "../../hooks/useCart";
+import { useDeleteFromCart, useUpdateCartItemQty } from "../../hooks/useCart";
+import { toast } from "react-toastify";
 
 const CartCard = ({ item }) => {
     const mutation = useDeleteFromCart();
+    const updateQuantityMutation = useUpdateCartItemQty();
 
     const handleRemove = () => {
         mutation.mutate(item._id);
+    };
+    const handleQuantityChange = (change) => {
+        const newQuantity = item.qty + change;
+        if (newQuantity > 0) {
+            updateQuantityMutation.mutate(
+                { id: item._id, qty: newQuantity },
+                {
+                    onError: (error) => {
+                        alert(error.response.data.error);
+                    },
+                }
+            );
+        }
     };
     return (
         <Card>
@@ -36,9 +51,15 @@ const CartCard = ({ item }) => {
                     <ItemSize>Size: {item.size}</ItemSize>
 
                     <QuantityControls>
-                        <QuantityButton>-</QuantityButton>
+                        <QuantityButton
+                            onClick={() => handleQuantityChange(-1)}
+                        >
+                            -
+                        </QuantityButton>
                         <QuantityDisplay>{item.qty}</QuantityDisplay>
-                        <QuantityButton>+</QuantityButton>
+                        <QuantityButton onClick={() => handleQuantityChange(1)}>
+                            +
+                        </QuantityButton>
                     </QuantityControls>
                 </ItemInfo>
                 <ItemPrice>${item.productId.price}</ItemPrice>

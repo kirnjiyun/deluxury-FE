@@ -5,6 +5,7 @@ import api from "../utils/api";
 import { notify } from "../components/Toast/Toast";
 import { addToCart } from "../action/cartAction";
 import { useQuery } from "@tanstack/react-query";
+import Toast from "../components/Toast/Toast";
 
 const addToCartApi = async (item) => {
     const response = await api.post("/cart", item);
@@ -47,6 +48,7 @@ export const useGetCart = () => {
         queryFn: fetchCart,
     });
 };
+
 const deleteFromCartApi = async (id) => {
     const response = await api.delete(`/cart/${id}`);
     return response.data;
@@ -58,6 +60,22 @@ export const useDeleteFromCart = () => {
         mutationFn: deleteFromCartApi,
         onSuccess: () => {
             queryClient.invalidateQueries("cart");
+        },
+    });
+};
+const updateFromCartApi = async ({ id, qty }) => {
+    const response = await api.put(`/cart/${id}`, { qty });
+    return response.data;
+};
+export const useUpdateCartItemQty = () => {
+    const queryClient = useQueryClient();
+    return useMutation({
+        mutationFn: updateFromCartApi,
+        onSuccess: () => {
+            queryClient.invalidateQueries("cart");
+        },
+        onError: (error) => {
+            notify(error || "An error occurred");
         },
     });
 };
