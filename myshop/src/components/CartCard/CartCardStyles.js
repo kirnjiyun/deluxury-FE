@@ -33,7 +33,7 @@ export const ItemBrand = styled.p`
 `;
 
 export const ItemPrice = styled.p`
-    font-size: 1.2em;
+    font-size: 1em;
     font-weight: bold;
     color: #000;
     margin-right: 30px;

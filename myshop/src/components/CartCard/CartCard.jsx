@@ -14,14 +14,15 @@ import {
     RemoveButton,
 } from "./CartCardStyles";
 import { useDeleteFromCart, useUpdateCartItemQty } from "../../hooks/useCart";
-import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import Toast from "../Toast/Toast";
+import { notify } from "../Toast/Toast";
 
-const CartCard = ({ item }) => {
+const CartCard = ({ item, onQuantityChange }) => {
     const deleteMutation = useDeleteFromCart();
     const updateQuantityMutation = useUpdateCartItemQty();
     const navigate = useNavigate();
+
     const handleRemove = () => {
         deleteMutation.mutate(item._id, {
             context: { deletedItem: item },
@@ -31,11 +32,22 @@ const CartCard = ({ item }) => {
     const handleQuantityChange = (change) => {
         const newQuantity = item.qty + change;
         if (newQuantity > 0) {
+            if (newQuantity > item.productId.stock) {
+                notify(
+                    `재고가 부족합니다. 최대 재고: ${item.productId.stock}개`
+                );
+                return;
+            }
             updateQuantityMutation.mutate(
                 { id: item._id, qty: newQuantity },
                 {
                     onError: (error) => {
-                        alert(error.response.data.error);
+                        notify(
+                            `수량 업데이트 실패: ${error.response.data.error}`
+                        );
+                    },
+                    onSuccess: () => {
+                        onQuantityChange(item.productId._id, newQuantity);
                     },
                 }
             );
@@ -48,6 +60,9 @@ const CartCard = ({ item }) => {
             `/${bigCategory.toLowerCase()}/${category.main.toLowerCase()}/${category.sub.toLowerCase()}/${_id}`
         );
     };
+
+    const totalItemPrice = (item.qty * item.productId.price).toFixed(2);
+
     return (
         <Card>
             <Toast />
@@ -77,7 +92,7 @@ const CartCard = ({ item }) => {
                         </QuantityButton>
                     </QuantityControls>
                 </ItemInfo>
-                <ItemPrice>${item.productId.price}</ItemPrice>
+                <ItemPrice>${totalItemPrice}</ItemPrice>
             </ItemDetails>
         </Card>
     );
