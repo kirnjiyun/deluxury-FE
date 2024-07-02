@@ -1,4 +1,4 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import api from "../utils/api";
 import { notify } from "../components/Toast/Toast";
 
@@ -20,5 +20,18 @@ export const useAddToLike = () => {
             notify(backendError);
             console.log(error);
         },
+    });
+};
+
+const fetchLike = async () => {
+    const response = await api.get("/like");
+    console.log("Fetch like response:", response.data.data);
+    return response.data.data;
+};
+
+export const useGetLike = () => {
+    return useQuery({
+        queryKey: ["like"],
+        queryFn: fetchLike,
     });
 };

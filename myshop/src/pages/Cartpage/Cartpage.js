@@ -7,7 +7,6 @@ import { useGetCart } from "../../hooks/useCart";
 export default function Cartpage() {
     const user = useSelector((state) => state.user.user);
     const { data, error, isLoading } = useGetCart();
-    console.log("카트", data);
 
     if (isLoading) {
         return <div>Loading...</div>;

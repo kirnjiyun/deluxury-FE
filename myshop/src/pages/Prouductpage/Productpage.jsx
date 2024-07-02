@@ -48,11 +48,6 @@ export default function Productpage() {
         subCategory
     );
 
-    console.log("URL Parameters:", { bigCategory, mainCategory, subCategory });
-    console.log("Products Data:", products);
-    console.log("Redux Categories:", categories);
-    console.log("Filtered Products:", filteredProducts);
-
     return (
         <Container>
             <NewProductCarousel />
