@@ -4,12 +4,13 @@ import { Container, ButtonContainer, Button } from "./CartpageStyles";
 import { useSelector } from "react-redux";
 import { useGetCart } from "../../hooks/useCart";
 import CartSummary from "../../components/CartSummary/CartSummary";
+import { useNavigate } from "react-router-dom";
 
 export default function Cartpage() {
     const user = useSelector((state) => state.user.user);
     const { data, error, isLoading } = useGetCart();
     const [cartItems, setCartItems] = useState([]);
-
+    const navigate = useNavigate();
     useEffect(() => {
         if (data) {
             setCartItems(data);
@@ -30,6 +31,12 @@ export default function Cartpage() {
                 item.productId._id === id ? { ...item, qty: newQuantity } : item
             )
         );
+    };
+    const goToPaymentpage = () => {
+        navigate("/payment");
+    };
+    const goToHomepage = () => {
+        navigate("/");
     };
 
     const totalAmount = cartItems
@@ -56,8 +63,8 @@ export default function Cartpage() {
                     />{" "}
                     <ButtonContainer>
                         {" "}
-                        <Button>계속 쇼핑하기</Button>
-                        <Button>결제 하기</Button>
+                        <Button onClick={goToHomepage}>계속 쇼핑하기</Button>
+                        <Button onClick={goToPaymentpage}>결제 하기</Button>
                     </ButtonContainer>
                 </>
             ) : (

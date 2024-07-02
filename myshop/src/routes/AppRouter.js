@@ -13,7 +13,7 @@ import PrivateRoute from "./PrivateRoute";
 import Productpage from "../pages/Prouductpage/Productpage";
 import api from "../utils/api";
 import { setUser } from "../action/userAction";
-
+import Paymentpage from "../pages/Paymentpage/Paymentpage";
 const AppRouter = () => {
     const { isLoggedIn, token } = useSelector((state) => state.user);
     const dispatch = useDispatch();
@@ -70,6 +70,14 @@ const AppRouter = () => {
                 element={
                     <PrivateRoute role="user">
                         <Mylikepage />
+                    </PrivateRoute>
+                }
+            />
+            <Route
+                path="/payment"
+                element={
+                    <PrivateRoute role="user">
+                        <Paymentpage />
                     </PrivateRoute>
                 }
             />
