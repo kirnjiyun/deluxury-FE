@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useGetOneProduct } from "../../hooks/useGetProduct";
 import { useAddToCart } from "../../hooks/useCart";
-import { useAddToLike } from "../../hooks/useLike";
+import { useAddToLike, useGetLike } from "../../hooks/useLike";
 import {
     Container,
     ImageContainer,
@@ -12,14 +12,11 @@ import {
     TitleContainer,
     Title,
     HeartButton,
-    Brand,
-    Category,
     BrandName,
     CategoryPath,
     Description,
     Price,
     Color,
-    SKU,
     Label,
     Select,
     ButtonContainer,
@@ -35,11 +32,21 @@ export default function ProductDetailPage() {
     const { id } = useParams();
     const navigate = useNavigate();
     const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
-    const { data, error, isLoading } = useGetOneProduct(id);
+    const { data: product, error, isLoading } = useGetOneProduct(id);
+    const { data: likedProducts } = useGetLike(); // likedProducts로 변경
     const [selectedSize, setSelectedSize] = useState("");
     const [isLiked, setIsLiked] = useState(false);
     const addToCartMutation = useAddToCart();
     const addToLikeMutation = useAddToLike();
+
+    useEffect(() => {
+        if (likedProducts && product) {
+            const liked = likedProducts.some(
+                (item) => item.productId._id === product._id
+            );
+            setIsLiked(liked);
+        }
+    }, [likedProducts, product]);
 
     if (isLoading) {
         return <div>Loading...</div>;
@@ -49,9 +56,9 @@ export default function ProductDetailPage() {
         return <div>Error loading product details</div>;
     }
 
-    const stockArray = Object.keys(data.stock).map((size) => ({
+    const stockArray = Object.keys(product.stock).map((size) => ({
         size: size,
-        quantity: data.stock[size],
+        quantity: product.stock[size],
     }));
 
     const handleSizeChange = (event) => {
@@ -64,10 +71,10 @@ export default function ProductDetailPage() {
             return;
         }
         const cartItem = {
-            productId: data._id,
-            name: data.name,
+            productId: product._id,
+            name: product.name,
             size: selectedSize,
-            price: data.price,
+            price: product.price,
             quantity: 1,
         };
 
@@ -79,7 +86,7 @@ export default function ProductDetailPage() {
             navigate("/login");
             return;
         }
-        notify(`Proceeding to buy ${data.name} (Size: ${selectedSize})!`);
+        notify(`Proceeding to buy ${product.name} (Size: ${selectedSize})!`);
     };
 
     const handleLikeClick = () => {
@@ -88,9 +95,9 @@ export default function ProductDetailPage() {
             return;
         }
         const likeItem = {
-            productId: data._id,
-            name: data.name,
-            price: data.price,
+            productId: product._id,
+            name: product.name,
+            price: product.price,
         };
 
         addToLikeMutation.mutate(likeItem);
@@ -102,18 +109,16 @@ export default function ProductDetailPage() {
             <div style={{ display: "flex" }}>
                 <Toast />
                 <ImageContainer>
-                    <Category>
-                        <BrandName>{data.brand}</BrandName>
-                        <CategoryPath>
-                            {data.bigCategory} > {data.category.main} >{" "}
-                            {data.category.sub}
-                        </CategoryPath>
-                    </Category>
-                    <Image src={data.image} alt={data.name} />
+                    <BrandName>{product.brand}</BrandName>
+                    <CategoryPath>
+                        {product.bigCategory} > {product.category.main} >{" "}
+                        {product.category.sub}
+                    </CategoryPath>
+                    <Image src={product.image} alt={product.name} />
                 </ImageContainer>
                 <DetailsContainer>
                     <TitleContainer>
-                        <Title>{data.name}</Title>
+                        <Title>{product.name}</Title>
                         <HeartButton
                             onClick={handleLikeClick}
                             isLiked={isLiked}
@@ -121,8 +126,8 @@ export default function ProductDetailPage() {
                             ♥
                         </HeartButton>
                     </TitleContainer>
-                    <Price>Price: ${data.price}</Price>
-                    <Color>Color: {data.color}</Color>
+                    <Price>Price: ${product.price}</Price>
+                    <Color>Color: {product.color}</Color>
                     <Label htmlFor="size-select">Size: </Label>
                     <Select
                         id="size-select"
@@ -154,8 +159,8 @@ export default function ProductDetailPage() {
                     </ButtonContainer>
                     <ProductInfo>
                         <InfoTitle>상품정보</InfoTitle>
-                        <InfoText>상품번호: {data.sku}</InfoText>
-                        <Description>{data.description}</Description>
+                        <InfoText>상품번호: {product.sku}</InfoText>
+                        <Description>{product.description}</Description>
                     </ProductInfo>
                 </DetailsContainer>
             </div>
@@ -195,8 +200,9 @@ export default function ProductDetailPage() {
                 <InfoTitle>반품 주소지</InfoTitle>
                 <InfoText>
                     - KK통운 : 도도도 시시시 면면면 로로로100번길 111-1 1동 (
-                    {data.brand}) 물류센터
-                    <br />- JJ택배 : 시시시 구구구 로로로 123 45층 {data.brand}
+                    {product.brand}) 물류센터
+                    <br />- JJ택배 : 시시시 구구구 로로로 123 45층{" "}
+                    {product.brand}
                     <br />
                     *반드시 반품 택배사 그대로 접수 신청 해주시기 바랍니다*
                     <br />
