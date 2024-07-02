@@ -22,7 +22,26 @@ export const useAddToLike = () => {
         },
     });
 };
+const deleteFromLikeApi = async (itemId) => {
+    const response = await api.delete(`/like/${itemId}`);
+    return response.data;
+};
 
+export const useRemoveFromLike = () => {
+    const queryClient = useQueryClient();
+    return useMutation({
+        mutationFn: deleteFromLikeApi,
+        onSuccess: (data) => {
+            notify("아이템이 찜 목록에서 제거되었습니다.", "success");
+            queryClient.invalidateQueries("like");
+        },
+        onError: (error) => {
+            const backendError = error.error || "An error occurred.";
+            notify(backendError);
+            console.log(error);
+        },
+    });
+};
 const fetchLike = async () => {
     const response = await api.get("/like");
     console.log("Fetch like response:", response.data.data);

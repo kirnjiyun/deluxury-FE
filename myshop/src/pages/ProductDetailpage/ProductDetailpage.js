@@ -3,7 +3,11 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useGetOneProduct } from "../../hooks/useGetProduct";
 import { useAddToCart } from "../../hooks/useCart";
-import { useAddToLike, useGetLike } from "../../hooks/useLike";
+import {
+    useAddToLike,
+    useRemoveFromLike,
+    useGetLike,
+} from "../../hooks/useLike";
 import {
     Container,
     ImageContainer,
@@ -38,6 +42,7 @@ export default function ProductDetailPage() {
     const [isLiked, setIsLiked] = useState(false);
     const addToCartMutation = useAddToCart();
     const addToLikeMutation = useAddToLike();
+    const removeFromLikeMutation = useRemoveFromLike();
 
     useEffect(() => {
         if (likedProducts && product) {
@@ -94,14 +99,21 @@ export default function ProductDetailPage() {
             navigate("/login");
             return;
         }
-        const likeItem = {
-            productId: product._id,
-            name: product.name,
-            price: product.price,
-        };
-
-        addToLikeMutation.mutate(likeItem);
-        setIsLiked(true);
+        if (isLiked) {
+            const likedItem = likedProducts.find(
+                (item) => item.productId._id === product._id
+            );
+            removeFromLikeMutation.mutate(likedItem._id);
+            setIsLiked(false);
+        } else {
+            const likeItem = {
+                productId: product._id,
+                name: product.name,
+                price: product.price,
+            };
+            addToLikeMutation.mutate(likeItem);
+            setIsLiked(true);
+        }
     };
 
     return (
