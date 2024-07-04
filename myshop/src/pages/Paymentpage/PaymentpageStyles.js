@@ -54,7 +54,6 @@ export const Button = styled.button`
     color: white;
     background-color: ${(props) => (props.primary ? "#ff5a5f" : "#0071c2")};
     border: none;
-    border-radius: 5px;
     cursor: pointer;
     margin-top: 20px;
 
@@ -65,7 +64,12 @@ export const Button = styled.button`
 
 export const Summary = styled.div`
     width: 100%;
-
+    height: fit-content;
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 20px;
     h2 {
         font-size: 24px;
         margin-bottom: 20px;
