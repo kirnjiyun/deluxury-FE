@@ -15,10 +15,14 @@ import {
     GridContainer,
     ErrorMessage,
 } from "./PaymentpageStyles";
+import PostCode from "../../components/PostCode/PostCode";
+
 const PaymentPage = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { data: cartList, isLoading, error } = useGetCart();
+    const [address, setAddress] = useState("");
+    const [zip, setZip] = useState("");
 
     const [cardValue, setCardValue] = useState({
         cvc: "",
@@ -30,7 +34,7 @@ const PaymentPage = () => {
     const [shipInfo, setShipInfo] = useState({
         Name: "",
         address: "",
-        city: "",
+        detail: "",
         zip: "",
         contact: "",
     });
@@ -49,6 +53,14 @@ const PaymentPage = () => {
     }, [cartList]);
 
     useEffect(() => {
+        setShipInfo((prevInfo) => ({
+            ...prevInfo,
+            address,
+            zip,
+        }));
+    }, [address, zip]);
+
+    useEffect(() => {
         const isShipInfoValid = Object.values(shipInfo).every(
             (field) => field.trim() !== ""
         );
@@ -60,12 +72,12 @@ const PaymentPage = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        const { Name, address, city, zip, contact } = shipInfo;
+        const { Name, address, detail, zip, contact } = shipInfo;
         const newErrors = {};
 
         if (!Name) newErrors.Name = "이름을 입력해주세요.";
         if (!address) newErrors.address = "주소를 입력해주세요.";
-        if (!city) newErrors.city = "도시를 입력해주세요.";
+        if (!detail) newErrors.detail = "상세주소를 입력해주세요.";
         if (!zip) newErrors.zip = "우편번호를 입력해주세요.";
         if (!contact) newErrors.contact = "연락처를 입력해주세요.";
         if (!cardValue.name) newErrors.cardName = "카드 이름을 입력해주세요.";
@@ -80,7 +92,7 @@ const PaymentPage = () => {
         } else {
             const data = {
                 totalPrice,
-                shipTo: { address, city, zip },
+                shipTo: { address, detail, zip },
                 contact: { Name, lastName: "", contact },
                 orderList: cartList.map((item) => ({
                     productId: item.productId._id,
@@ -89,6 +101,7 @@ const PaymentPage = () => {
                     size: item.size,
                 })),
             };
+            // Implement the logic to send the order data to the server
         }
     };
 
@@ -126,10 +139,10 @@ const PaymentPage = () => {
                             required
                             placeholder="김지윤"
                         />
-                        {errors.firstName && (
+                        {errors.Name && (
                             <ErrorMessage>{errors.Name}</ErrorMessage>
                         )}
-                    </InputGroup>{" "}
+                    </InputGroup>
                     <InputGroup>
                         <Label>연락처</Label>
                         <Input
@@ -143,9 +156,13 @@ const PaymentPage = () => {
                         {errors.contact && (
                             <ErrorMessage>{errors.contact}</ErrorMessage>
                         )}
-                    </InputGroup>{" "}
+                    </InputGroup>
                     <InputGroup>
-                        <Label>우편번호</Label>
+                        <Label>
+                            우편번호
+                            <PostCode setAddress={setAddress} setZip={setZip} />
+                        </Label>
+
                         <Input
                             type="text"
                             name="zip"
@@ -153,35 +170,37 @@ const PaymentPage = () => {
                             onChange={handleFormChange}
                             required
                             placeholder="54321"
+                            readOnly
                         />
                         {errors.zip && (
                             <ErrorMessage>{errors.zip}</ErrorMessage>
                         )}
-                    </InputGroup>{" "}
-                    <InputGroup>
-                        <Label>주소</Label>
-                        <Input
-                            type="text"
-                            name="city"
-                            value={shipInfo.city}
-                            onChange={handleFormChange}
-                            required
-                        />
-                        {errors.city && (
-                            <ErrorMessage>{errors.city}</ErrorMessage>
-                        )}
                     </InputGroup>
                     <InputGroup>
-                        <Label>상세주소</Label>
+                        <Label>주소</Label>
                         <Input
                             type="text"
                             name="address"
                             value={shipInfo.address}
                             onChange={handleFormChange}
                             required
+                            readOnly
                         />
                         {errors.address && (
                             <ErrorMessage>{errors.address}</ErrorMessage>
+                        )}
+                    </InputGroup>
+                    <InputGroup>
+                        <Label>상세주소</Label>
+                        <Input
+                            type="text"
+                            name="detail"
+                            value={shipInfo.detail}
+                            onChange={handleFormChange}
+                            required
+                        />
+                        {errors.detail && (
+                            <ErrorMessage>{errors.detail}</ErrorMessage>
                         )}
                     </InputGroup>
                 </Form>
@@ -200,7 +219,7 @@ const PaymentPage = () => {
                     <SummaryItem>
                         <span>총 결제 금액</span>
                         <span>${totalPrice}</span>
-                    </SummaryItem>{" "}
+                    </SummaryItem>
                     <Button type="submit" disabled={!isFormValid}>
                         결제하기
                     </Button>

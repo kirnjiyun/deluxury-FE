@@ -36,6 +36,9 @@ export const InputGroup = styled.div`
 `;
 
 export const Label = styled.label`
+    display: flex;
+    gap: 10px;
+    align-items: center;
     margin-bottom: 5px;
     font-weight: bold;
 `;
