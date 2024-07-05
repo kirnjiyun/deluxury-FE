@@ -40,7 +40,6 @@ const PaymentForm = ({
                             <FormControl
                                 type="text"
                                 name="number"
-                                placeholder="12345678912345678"
                                 onChange={handlePaymentInfoChange}
                                 onFocus={handleInputFocus}
                                 required
@@ -54,7 +53,6 @@ const PaymentForm = ({
                             <FormControl
                                 type="text"
                                 name="name"
-                                placeholder="홍길동"
                                 onChange={handlePaymentInfoChange}
                                 onFocus={handleInputFocus}
                                 required

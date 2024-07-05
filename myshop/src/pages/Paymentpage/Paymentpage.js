@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useGetCart } from "../../hooks/useCart";
+import { useAddToOrder } from "../../hooks/useOrder";
 import PaymentForm from "../../components/PaymentForm/PaymentForm";
 import {
     Container,
@@ -18,9 +18,9 @@ import {
 import PostCode from "../../components/PostCode/PostCode";
 
 const PaymentPage = () => {
-    const dispatch = useDispatch();
     const navigate = useNavigate();
     const { data: cartList, isLoading, error } = useGetCart();
+    const addToOrder = useAddToOrder(navigate);
     const [address, setAddress] = useState("");
     const [zip, setZip] = useState("");
 
@@ -101,7 +101,7 @@ const PaymentPage = () => {
                     size: item.size,
                 })),
             };
-            // Implement the logic to send the order data to the server
+            addToOrder.mutate(data);
         }
     };
 
@@ -137,7 +137,6 @@ const PaymentPage = () => {
                             value={shipInfo.Name}
                             onChange={handleFormChange}
                             required
-                            placeholder="김지윤"
                         />
                         {errors.Name && (
                             <ErrorMessage>{errors.Name}</ErrorMessage>
@@ -151,7 +150,6 @@ const PaymentPage = () => {
                             value={shipInfo.contact}
                             onChange={handleFormChange}
                             required
-                            placeholder="01012341234"
                         />
                         {errors.contact && (
                             <ErrorMessage>{errors.contact}</ErrorMessage>
@@ -169,7 +167,6 @@ const PaymentPage = () => {
                             value={shipInfo.zip}
                             onChange={handleFormChange}
                             required
-                            placeholder="54321"
                             readOnly
                         />
                         {errors.zip && (
@@ -203,6 +200,9 @@ const PaymentPage = () => {
                             <ErrorMessage>{errors.detail}</ErrorMessage>
                         )}
                     </InputGroup>
+                    <Button type="submit" disabled={!isFormValid}>
+                        결제하기
+                    </Button>
                 </Form>
 
                 <Summary>
@@ -218,11 +218,8 @@ const PaymentPage = () => {
                     ))}
                     <SummaryItem>
                         <span>총 결제 금액</span>
-                        <span>${totalPrice}</span>
+                        <span>${totalPrice}</span>{" "}
                     </SummaryItem>
-                    <Button type="submit" disabled={!isFormValid}>
-                        결제하기
-                    </Button>
                 </Summary>
             </GridContainer>
             <PaymentForm

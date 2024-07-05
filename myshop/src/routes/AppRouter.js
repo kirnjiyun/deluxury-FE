@@ -14,6 +14,7 @@ import Productpage from "../pages/Prouductpage/Productpage";
 import api from "../utils/api";
 import { setUser } from "../action/userAction";
 import Paymentpage from "../pages/Paymentpage/Paymentpage";
+import OrderSuccesspage from "../pages/OrderSuccesspage/OrderSuccesspage";
 const AppRouter = () => {
     const { isLoggedIn, token } = useSelector((state) => state.user);
     const dispatch = useDispatch();
@@ -78,6 +79,14 @@ const AppRouter = () => {
                 element={
                     <PrivateRoute role="user">
                         <Paymentpage />
+                    </PrivateRoute>
+                }
+            />{" "}
+            <Route
+                path="/payment/success"
+                element={
+                    <PrivateRoute role="user">
+                        <OrderSuccesspage />
                     </PrivateRoute>
                 }
             />

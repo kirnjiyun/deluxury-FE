@@ -20,7 +20,7 @@ export const GridContainer = styled.div`
     }
 `;
 
-export const Form = styled.div`
+export const Form = styled.form`
     width: 100%;
 
     h2 {
