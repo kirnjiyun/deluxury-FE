@@ -39,7 +39,7 @@ const OrderModal = ({ isOpen, onRequestClose, order }) => {
                     <SectionContent>
                         <OrderDetailItem>
                             <Label>주문 번호:</Label>
-                            <Value>{order?._id}</Value>
+                            <Value>{order?.orderNum}</Value>
                         </OrderDetailItem>
                         <OrderDetailItem>
                             <Label>주문 일자:</Label>

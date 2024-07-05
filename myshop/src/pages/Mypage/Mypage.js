@@ -9,10 +9,14 @@ import {
     OrderDetailItem,
     Label,
     Value,
+    PaginationContainer,
 } from "./MypageStyles";
 import OrderModal from "../../components/OrderModal/OrderModal";
+import ReactPaginate from "react-paginate";
+
 export default function Mypage() {
-    const { data: orders, isLoading, error } = useGetOrder();
+    const [page, setPage] = useState(1);
+    const { data, isLoading, error } = useGetOrder(page);
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [selectedOrder, setSelectedOrder] = useState(null);
 
@@ -26,6 +30,10 @@ export default function Mypage() {
         setModalIsOpen(false);
     };
 
+    const handlePageClick = (event) => {
+        setPage(event.selected + 1);
+    };
+
     if (isLoading) return <div>Loading...</div>;
     if (error) return <div>Error fetching orders</div>;
 
@@ -36,8 +44,8 @@ export default function Mypage() {
         <Container>
             <Title>내 주문내역</Title>
             <OrderList>
-                {orders && orders.length > 0 ? (
-                    orders.map((order) => (
+                {data.data && data.data.length > 0 ? (
+                    data.data.map((order) => (
                         <OrderItem
                             key={order._id}
                             onClick={() => openModal(order)}
@@ -45,7 +53,7 @@ export default function Mypage() {
                             <OrderInfo>
                                 <OrderDetailItem>
                                     <Label>주문 번호:</Label>
-                                    <Value>{order._id}</Value>
+                                    <Value>{order.orderNum}</Value>
                                 </OrderDetailItem>
                                 <OrderDetailItem>
                                     <Label>주문 날짜:</Label>
@@ -70,6 +78,22 @@ export default function Mypage() {
                     <div>No orders found.</div>
                 )}
             </OrderList>
+
+            <PaginationContainer>
+                <ReactPaginate
+                    previousLabel={"Previous"}
+                    nextLabel={"Next"}
+                    breakLabel={"..."}
+                    breakClassName={"break-me"}
+                    pageCount={data.totalPageNum}
+                    marginPagesDisplayed={2}
+                    pageRangeDisplayed={5}
+                    onPageChange={handlePageClick}
+                    containerClassName={"pagination"}
+                    subContainerClassName={"pages pagination"}
+                    activeClassName={"active"}
+                />
+            </PaginationContainer>
 
             {selectedOrder && (
                 <OrderModal

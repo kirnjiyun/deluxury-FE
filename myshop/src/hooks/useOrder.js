@@ -1,6 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
 import api from "../utils/api";
 import { notify } from "../components/Toast/Toast";
 import { useQuery } from "@tanstack/react-query";
@@ -27,16 +26,19 @@ export const useAddToOrder = () => {
         },
     });
 };
-const fetchOrder = async () => {
-    const response = await api.get("/order");
-    console.log("Fetch Order response:", response.data);
-    return response.data.data;
+const fetchOrders = async ({ queryKey }) => {
+    const [_, page] = queryKey;
+    const response = await api.get(`/order`, {
+        params: { page },
+    });
+    return response.data;
 };
 
-export const useGetOrder = () => {
+export const useGetOrder = (page) => {
     return useQuery({
-        queryKey: ["Order"],
-        queryFn: fetchOrder,
+        queryKey: ["Order", page],
+        queryFn: fetchOrders,
+        keepPreviousData: true,
     });
 };
 const fetchOrderById = async (orderNum) => {

@@ -7,7 +7,7 @@ export const Container = styled.div`
 `;
 
 export const Title = styled.h1`
-    font-size: 2rem;
+    font-size: 1.5em;
     margin-bottom: 20px;
 `;
 
@@ -93,4 +93,36 @@ export const SectionTitle = styled.h3`
 export const SectionContent = styled.div`
     display: flex;
     flex-direction: column;
+`;
+export const PaginationContainer = styled.div`
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+
+    .pagination {
+        display: flex;
+        list-style: none;
+        padding: 0;
+
+        li {
+            margin: 0 5px;
+
+            &.active a {
+                font-weight: bold;
+                color: #000;
+            }
+
+            a {
+                padding: 8px 12px;
+                border-radius: 4px;
+                color: #000;
+                cursor: pointer;
+                text-decoration: none;
+
+                &:hover {
+                    background-color: #e0e0e0;
+                }
+            }
+        }
+    }
 `;
