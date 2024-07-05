@@ -18,7 +18,7 @@ export const useAddToOrder = () => {
         mutationFn: addToOrderApi,
         onSuccess: (data) => {
             queryClient.invalidateQueries(["Order"]);
-            navigate("/payment/success");
+            navigate(`/payment/success?orderNum=${data.orderNum}`);
         },
         onError: (error) => {
             const backendError =
@@ -37,5 +37,17 @@ export const useGetOrder = () => {
     return useQuery({
         queryKey: ["Order"],
         queryFn: fetchOrder,
+    });
+};
+const fetchOrderById = async (orderNum) => {
+    const response = await api.get(`/order/${orderNum}`);
+    return response.data.data;
+};
+
+export const useGetOrderById = (orderNum) => {
+    return useQuery({
+        queryKey: ["order", orderNum],
+        queryFn: () => fetchOrderById(orderNum),
+        enabled: !!orderNum,
     });
 };

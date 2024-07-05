@@ -18,7 +18,10 @@ Modal.setAppElement("#root");
 
 const OrderModal = ({ isOpen, onRequestClose, order }) => {
     const calculateTotalPrice = (items) => {
-        return items.reduce((total, item) => total + item.price * item.qty, 0);
+        return items?.reduce(
+            (total, item) => total + item?.price * item?.qty,
+            0
+        );
     };
     return (
         <Modal
@@ -36,12 +39,14 @@ const OrderModal = ({ isOpen, onRequestClose, order }) => {
                     <SectionContent>
                         <OrderDetailItem>
                             <Label>주문 번호:</Label>
-                            <Value>{order._id}</Value>
+                            <Value>{order?._id}</Value>
                         </OrderDetailItem>
                         <OrderDetailItem>
                             <Label>주문 일자:</Label>
                             <Value>
-                                {new Date(order.createdAt).toLocaleDateString()}
+                                {new Date(
+                                    order?.createdAt
+                                ).toLocaleDateString()}
                             </Value>
                         </OrderDetailItem>
                     </SectionContent>
@@ -49,22 +54,22 @@ const OrderModal = ({ isOpen, onRequestClose, order }) => {
                 <ModalSection>
                     <SectionTitle>상품 정보</SectionTitle>
                     <SectionContent>
-                        {order.items.map((item) => (
-                            <OrderDetailItem key={item._id}>
+                        {order?.items.map((item) => (
+                            <OrderDetailItem key={item?._id}>
                                 <ProductImage
-                                    src={item.productId.image}
-                                    alt={item.productId.name}
+                                    src={item?.productId.image}
+                                    alt={item?.productId.name}
                                 />
                                 <Info>
                                     {" "}
                                     <Label>제품 이름:</Label>
-                                    <Value>{item.productId.name}</Value>
+                                    <Value>{item?.productId.name}</Value>
                                     <Label>가격:</Label>
-                                    <Value>${item.price}</Value>
+                                    <Value>${item?.price}</Value>
                                     <Label>수량:</Label>
-                                    <Value>{item.qty}</Value>
+                                    <Value>{item?.qty}</Value>
                                     <Label>사이즈:</Label>
-                                    <Value>{item.size}</Value>
+                                    <Value>{item?.size}</Value>
                                 </Info>
                             </OrderDetailItem>
                         ))}
@@ -75,19 +80,19 @@ const OrderModal = ({ isOpen, onRequestClose, order }) => {
                     <SectionContent>
                         <OrderDetailItem>
                             <Label>수령인:</Label>
-                            <Value>{order.contact.Name}</Value>
+                            <Value>{order?.contact.Name}</Value>
                         </OrderDetailItem>
                         <OrderDetailItem>
                             <Label>휴대폰:</Label>
-                            <Value>{order.contact.contact}</Value>
+                            <Value>{order?.contact.contact}</Value>
                         </OrderDetailItem>
                         <OrderDetailItem>
                             <Label>주소:</Label>
-                            <Value>{order.shipTo.address}</Value>
+                            <Value>{order?.shipTo.address}</Value>
                         </OrderDetailItem>
                         <OrderDetailItem>
                             <Label>배송 메모:</Label>
-                            <Value>{order.shipTo.memo}</Value>
+                            <Value>{order?.shipTo.memo}</Value>
                         </OrderDetailItem>
                     </SectionContent>
                 </ModalSection>
@@ -96,7 +101,7 @@ const OrderModal = ({ isOpen, onRequestClose, order }) => {
                     <SectionContent>
                         <OrderDetailItem>
                             <Label>상품 금액:</Label>
-                            <Value>${calculateTotalPrice(order.items)}</Value>
+                            <Value>${calculateTotalPrice(order?.items)}</Value>
                         </OrderDetailItem>
                     </SectionContent>
                 </ModalSection>
