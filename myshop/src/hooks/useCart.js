@@ -5,7 +5,6 @@ import api from "../utils/api";
 import { notify } from "../components/Toast/Toast";
 import { addToCart } from "../action/cartAction";
 import { useQuery } from "@tanstack/react-query";
-import Toast from "../components/Toast/Toast";
 
 const addToCartApi = async (item) => {
     const response = await api.post("/cart", item);

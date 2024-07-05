@@ -27,11 +27,10 @@ export const FormLabel = styled.label`
 
 export const FormControl = styled.input`
     padding: 0.5rem;
-    border: 1px solid #ced4da;
-    border-radius: 0.25rem;
+    border: none;
+    border-bottom: 1px solid #ccc;
     &:focus {
         outline: none;
-        border-color: #80bdff;
-        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+        border-color: black;
     }
 `;

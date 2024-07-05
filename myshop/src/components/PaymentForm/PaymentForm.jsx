@@ -65,7 +65,7 @@ const PaymentForm = ({
                         <Row>
                             <Col>
                                 <FormGroup>
-                                    <FormLabel>만료</FormLabel>
+                                    <FormLabel>만료일</FormLabel>
                                     <FormControl
                                         type="text"
                                         name="expiry"

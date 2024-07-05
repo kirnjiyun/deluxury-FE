@@ -44,21 +44,25 @@ export const Input = styled.input`
     padding: 10px;
     font-size: 16px;
     margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    &:focus {
+        outline: none;
+        border-color: black;
+    }
 `;
 
 export const Button = styled.button`
     padding: 10px 20px;
     font-size: 18px;
     color: white;
-    background-color: ${(props) => (props.primary ? "#ff5a5f" : "#0071c2")};
     border: none;
     cursor: pointer;
+    background-color: black;
     margin-top: 20px;
-
-    &:hover {
-        background-color: ${(props) => (props.primary ? "#e60023" : "#005f9e")};
+    &:disabled {
+        background-color: #ccc;
+        cursor: not-allowed;
     }
 `;
 
@@ -84,4 +88,9 @@ export const SummaryItem = styled.div`
     span {
         font-size: 18px;
     }
+`;
+export const ErrorMessage = styled.div`
+    color: red;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
 `;
