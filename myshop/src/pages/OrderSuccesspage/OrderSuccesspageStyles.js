@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import styled from "@emotion/styled";
 
 export const Container = styled.div`
@@ -7,15 +6,16 @@ export const Container = styled.div`
     align-items: center;
     justify-content: center;
     height: 100vh;
-    background-color: #f0f8ff;
-    color: #333;
-`;
-
-export const Heading = styled.h1`
-    font-size: 2rem;
-    margin-bottom: 1rem;
+    background-color: #ffffff;
+    padding: 20px;
 `;
 
 export const Message = styled.p`
-    font-size: 1.2rem;
+    font-size: 1em;
+    margin-bottom: 0.5rem;
+    text-align: center;
+    color: black;
+    @media (max-width: 600px) {
+        font-size: 0.8em;
+    }
 `;
