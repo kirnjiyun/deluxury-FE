@@ -13,7 +13,7 @@ import { useInView } from "react-intersection-observer";
 const Homepage = () => {
     const { data, isLoading, error, isError } = useGetProduct();
     const { ref, inView } = useInView({
-        threshold: 0.2,
+        threshold: 0.1,
     });
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
