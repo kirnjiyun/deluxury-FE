@@ -53,3 +53,18 @@ export const useGetOrderById = (orderNum) => {
         enabled: !!orderNum,
     });
 };
+
+const fetchMyOrders = async ({ queryKey }) => {
+    const [, page] = queryKey;
+    const response = await api.get(`/order/me?page=${page}`);
+    console.log("fetchOrder", response.data);
+    return response.data;
+};
+
+export const useGetMyOrder = (page) => {
+    return useQuery({
+        queryKey: ["MyOrder", page],
+        queryFn: fetchMyOrders,
+        keepPreviousData: true,
+    });
+};

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useGetOrder } from "../../hooks/useOrder";
+import { useGetMyOrder } from "../../hooks/useOrder";
 import {
     Container,
     Title,
@@ -16,7 +16,7 @@ import ReactPaginate from "react-paginate";
 
 export default function Mypage() {
     const [page, setPage] = useState(1);
-    const { data, isLoading, error } = useGetOrder(page);
+    const { data, isLoading, error } = useGetMyOrder(page);
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [selectedOrder, setSelectedOrder] = useState(null);
 
@@ -44,7 +44,7 @@ export default function Mypage() {
         <Container>
             <Title>내 주문내역</Title>
             <OrderList>
-                {data.data && data.data.length > 0 ? (
+                {data?.data && data.data.length > 0 ? (
                     data.data.map((order) => (
                         <OrderItem
                             key={order._id}
@@ -68,7 +68,7 @@ export default function Mypage() {
                                     <Value>{order.items.length}</Value>
                                 </OrderDetailItem>
                                 <OrderDetailItem>
-                                    <Label>합계</Label>
+                                    <Label>합계:</Label>
                                     <Value>${getTotalPrice(order.items)}</Value>
                                 </OrderDetailItem>
                             </OrderInfo>
@@ -80,19 +80,27 @@ export default function Mypage() {
             </OrderList>
 
             <PaginationContainer>
-                <ReactPaginate
-                    previousLabel={"Previous"}
-                    nextLabel={"Next"}
-                    breakLabel={"..."}
-                    breakClassName={"break-me"}
-                    pageCount={data.totalPageNum}
-                    marginPagesDisplayed={2}
-                    pageRangeDisplayed={5}
-                    onPageChange={handlePageClick}
-                    containerClassName={"pagination"}
-                    subContainerClassName={"pages pagination"}
-                    activeClassName={"active"}
-                />
+                {data?.totalPageNum > 1 ? (
+                    <ReactPaginate
+                        previousLabel={"Previous"}
+                        nextLabel={"Next"}
+                        breakLabel={"..."}
+                        breakClassName={"break-me"}
+                        pageCount={data.totalPageNum}
+                        marginPagesDisplayed={1}
+                        pageRangeDisplayed={5}
+                        onPageChange={handlePageClick}
+                        containerClassName={"pagination"}
+                        subContainerClassName={"pages pagination"}
+                        activeClassName={"active"}
+                    />
+                ) : (
+                    <div className="pagination single-page">
+                        <span className="previous">Previous</span>
+                        <span className="page-num">1</span>
+                        <span className="next">Next</span>
+                    </div>
+                )}
             </PaginationContainer>
 
             {selectedOrder && (

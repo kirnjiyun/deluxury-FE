@@ -7,7 +7,7 @@ export const Container = styled.div`
 `;
 
 export const Title = styled.h1`
-    font-size: 1.5em;
+    font-size: 2rem;
     margin-bottom: 20px;
 `;
 
@@ -123,6 +123,31 @@ export const PaginationContainer = styled.div`
                     background-color: #e0e0e0;
                 }
             }
+        }
+    }
+
+    .single-page {
+        display: flex;
+        align-items: center;
+
+        .previous,
+        .next,
+        .page-num {
+            margin: 0 5px;
+            padding: 8px 12px;
+            border-radius: 4px;
+            color: #000;
+            cursor: default;
+            text-decoration: none;
+        }
+
+        .previous,
+        .next {
+            background-color: #f9f9f9;
+        }
+
+        .page-num {
+            font-weight: bold;
         }
     }
 `;
