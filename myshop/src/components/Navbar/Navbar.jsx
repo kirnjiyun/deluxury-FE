@@ -23,7 +23,7 @@ import {
     DropdownContent,
 } from "./NavbarStyles";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { logout } from "../../action/userAction";
 import { openSearchModal, closeSearchModal } from "../../action/modalAction";
 import SearchModal from "../searchModal/SearchModal";
@@ -32,6 +32,7 @@ import { setCategories } from "../../action/categoryAction";
 
 const Navbar = () => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const isSearchModalOpen = useSelector(
         (state) => state.modal.isSearchModalOpen
     );
@@ -45,6 +46,7 @@ const Navbar = () => {
 
     const handleLogout = () => {
         dispatch(logout());
+        navigate("/");
     };
 
     const [openDropdown, setOpenDropdown] = useState(null);
@@ -84,47 +86,49 @@ const Navbar = () => {
     return (
         <NavbarContainer>
             <TopBar>
-                <Link to="/">
-                    <Logo>Deluxury</Logo>
-                </Link>
+                <Logo onClick={() => navigate("/")}>Deluxury</Logo>
                 <UserOptions>
                     {isLoggedIn ? (
                         <>
-                            <Link
-                                to={
-                                    user.user.role === "admin"
-                                        ? "/admin"
-                                        : "/me"
+                            {" "}
+                            <Toast />
+                            <div
+                                onClick={() =>
+                                    navigate(
+                                        user.user.role === "admin"
+                                            ? "/admin"
+                                            : "/me"
+                                    )
                                 }
                             >
                                 <FontAwesomeIcon icon={faUser} />{" "}
                                 {user.user.role === "admin"
                                     ? "ADMIN PAGE"
                                     : `${user.user.name}'s MY PAGE`}
-                            </Link>
+                            </div>
                             {user.user.role !== "admin" && (
-                                <Link to="/mylike">
+                                <div onClick={() => navigate("/mylike")}>
                                     <FontAwesomeIcon icon={faHeart} /> MY LIKE
-                                </Link>
+                                </div>
                             )}
                             {user.user.role !== "admin" && (
-                                <Link to="/cart">
+                                <div onClick={() => navigate("/cart")}>
                                     <FontAwesomeIcon icon={faShoppingBag} />{" "}
                                     SHOPPING BAG
-                                </Link>
+                                </div>
                             )}
-                            <Link to="/" onClick={handleLogout}>
+                            <div onClick={handleLogout}>
                                 <FontAwesomeIcon icon={faSignOutAlt} /> LOGOUT
-                            </Link>
+                            </div>
                         </>
                     ) : (
                         <>
-                            <Link to="/login">
+                            <div onClick={() => navigate("/login")}>
                                 <FontAwesomeIcon icon={faSignInAlt} /> LOGIN
-                            </Link>
-                            <Link to="/signup">
+                            </div>
+                            <div onClick={() => navigate("/signup")}>
                                 <FontAwesomeIcon icon={faUserPlus} /> SIGNUP
-                            </Link>
+                            </div>
                         </>
                     )}
                 </UserOptions>
@@ -148,7 +152,7 @@ const Navbar = () => {
                         </MenuItem>
                     ))}
                 </MainMenu>
-                <Toast />
+
                 <SearchIcon onClick={openModal}>
                     <FontAwesomeIcon icon={faSearch} />
                 </SearchIcon>

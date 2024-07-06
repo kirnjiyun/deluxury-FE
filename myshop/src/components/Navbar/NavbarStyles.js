@@ -40,6 +40,7 @@ export const Logo = styled.div`
     font-size: 1.5em;
     font-weight: bold;
     color: black;
+    cursor: pointer;
     @media (max-width: 768px) {
         margin-bottom: 10px;
     }
