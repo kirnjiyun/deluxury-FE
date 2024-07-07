@@ -1,15 +1,20 @@
 import { useQuery } from "@tanstack/react-query";
 import api from "../utils/api";
 
-const fetchProductAll = async () => {
-    const response = await api.get("/product");
-    return response.data.data;
+const fetchProducts = async ({ queryKey }) => {
+    const [_, page] = queryKey;
+    const response = await api.get(`/product`, {
+        params: { page },
+    });
+    console.log("API response:", response.data); // 콘솔 로그 추가
+    return response.data;
 };
 
-export const useGetProduct = () => {
+export const useGetProduct = (page) => {
     return useQuery({
-        queryKey: ["productsAll"],
-        queryFn: fetchProductAll,
+        queryKey: ["productAll", page],
+        queryFn: () => fetchProducts({ queryKey: ["productAll", page] }),
+        keepPreviousData: true,
     });
 };
 

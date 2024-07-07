@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import OrderList from "../../components/OrderList/OrderList";
-// import ProductUpload from "../../components/ProductUpload/ProductUpload";
+import AdminProductList from "../../components/AdminProductList/AdminProductList";
 import {
     Container,
     Sidebar,
@@ -10,7 +10,6 @@ import {
     Button,
     PaginationContainer,
 } from "./AdminpageStyles";
-import OrderModal from "../../components/OrderModal/OrderModal";
 import ReactPaginate from "react-paginate";
 import { useGetOrder } from "../../hooks/useOrder";
 
@@ -115,8 +114,7 @@ export default function Adminpage() {
                 )}
                 {selectedSection === "products" && (
                     <Section>
-                        <h2>Product Upload</h2>
-                        {/* <ProductUpload /> */}
+                        <AdminProductList />
                     </Section>
                 )}
             </Content>
