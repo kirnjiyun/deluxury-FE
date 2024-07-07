@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Modal from "react-modal";
 import {
     ModalContent,
@@ -12,17 +12,32 @@ import {
     SectionTitle,
     SectionContent,
     Info,
+    InlineContainer,
+    StatusDropdown,
 } from "./OrderModalStyles";
+import { useUpdateOrderStatus } from "../../hooks/useOrder";
 
 Modal.setAppElement("#root");
 
-const OrderModal = ({ isOpen, onRequestClose, order }) => {
-    const calculateTotalPrice = (items) => {
-        return items?.reduce(
-            (total, item) => total + item?.price * item?.qty,
-            0
-        );
+const OrderModal = ({ isOpen, onRequestClose, order, isAdmin }) => {
+    const { mutate: updateOrderStatus } = useUpdateOrderStatus();
+    const [selectedStatus, setSelectedStatus] = useState(order?.status);
+
+    useEffect(() => {
+        setSelectedStatus(order?.status);
+    }, [order]);
+
+    const handleStatusChange = (event) => {
+        setSelectedStatus(event.target.value);
+        updateOrderStatus({ id: order._id, status: event.target.value });
     };
+
+    const calculateTotalPrice = (items) => {
+        return items
+            ?.reduce((total, item) => total + item?.price * item?.qty, 0)
+            .toFixed(2);
+    };
+
     return (
         <Modal
             isOpen={isOpen}
@@ -35,7 +50,24 @@ const OrderModal = ({ isOpen, onRequestClose, order }) => {
                     <CloseButton onClick={onRequestClose}>×</CloseButton>
                 </ModalHeader>
                 <ModalSection>
-                    <SectionTitle>주문 정보</SectionTitle>
+                    <InlineContainer>
+                        <SectionTitle>
+                            주문 정보
+                            {isAdmin ? (
+                                <StatusDropdown
+                                    value={selectedStatus}
+                                    onChange={handleStatusChange}
+                                >
+                                    <option value="준비중">준비중</option>
+                                    <option value="배송중">배송중</option>
+                                    <option value="배송완료">배송완료</option>
+                                    <option value="반품완료">반품완료</option>
+                                </StatusDropdown>
+                            ) : (
+                                <Value>{order?.status}</Value>
+                            )}
+                        </SectionTitle>
+                    </InlineContainer>
                     <SectionContent>
                         <OrderDetailItem>
                             <Label>주문 번호:</Label>
@@ -61,7 +93,6 @@ const OrderModal = ({ isOpen, onRequestClose, order }) => {
                                     alt={item?.productId.name}
                                 />
                                 <Info>
-                                    {" "}
                                     <Label>제품 이름:</Label>
                                     <Value>{item?.productId.name}</Value>
                                     <Label>가격:</Label>

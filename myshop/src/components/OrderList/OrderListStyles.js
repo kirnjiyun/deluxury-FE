@@ -3,6 +3,7 @@ import styled from "@emotion/styled";
 export const OrderContainer = styled.div`
     display: flex;
     flex-direction: column;
+    cursor: pointer;
 `;
 
 export const OrderItem = styled.div`

@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 
 export const Container = styled.div`
     display: flex;
-    height: 100vh;
+    height: 100%;
     background-color: #f8f9fa;
 `;
 
@@ -58,7 +58,6 @@ export const Section = styled.div`
     padding: 20px;
     background-color: #ffffff;
     border: 1px solid #dee2e6;
-    border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 
     h2 {

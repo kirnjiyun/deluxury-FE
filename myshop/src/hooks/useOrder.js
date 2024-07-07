@@ -41,6 +41,26 @@ export const useGetOrder = (page) => {
         keepPreviousData: true,
     });
 };
+const updateOrderStatusApi = async ({ id, status }) => {
+    const response = await api.put(`/order/${id}`, { status });
+    return response.data;
+};
+
+export const useUpdateOrderStatus = () => {
+    const queryClient = useQueryClient();
+
+    return useMutation({
+        mutationFn: updateOrderStatusApi,
+        onSuccess: () => {
+            queryClient.invalidateQueries(["Order"]);
+            notify("주문 상태 변경 완료");
+        },
+        onError: (error) => {
+            const backendError = error || "An error occurred.";
+            notify(backendError);
+        },
+    });
+};
 
 const fetchOrderById = async (orderNum) => {
     const response = await api.get(`/order/${orderNum}`);
