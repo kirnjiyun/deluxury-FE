@@ -1,7 +1,9 @@
 import styled from "@emotion/styled";
 
 export const ProductListContainer = styled.div`
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
     justify-content: center;
+    overflow-y: auto;
 `;
