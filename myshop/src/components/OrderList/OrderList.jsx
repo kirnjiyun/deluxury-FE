@@ -12,7 +12,6 @@ import OrderModal from "../OrderModal/OrderModal";
 export default function OrderList({ data, isAdmin }) {
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [selectedOrder, setSelectedOrder] = useState(null);
-    console.log(isAdmin);
     const getTotalPrice = (items) => {
         return items
             .reduce(

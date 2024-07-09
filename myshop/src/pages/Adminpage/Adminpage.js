@@ -12,28 +12,27 @@ import {
 } from "./AdminpageStyles";
 import ReactPaginate from "react-paginate";
 import { useGetOrder } from "../../hooks/useOrder";
+import ProductModal from "../../components/ProductModal/ProductModal";
 
 export default function Adminpage() {
     const [selectedSection, setSelectedSection] = useState("orders");
     const [page, setPage] = useState(1);
     const { data, isLoading, error } = useGetOrder(page);
-    const [modalIsOpen, setModalIsOpen] = useState(false);
     const [selectedOrder, setSelectedOrder] = useState(null);
+    const [productModalIsOpen, setProductModalIsOpen] = useState(false);
 
     useEffect(() => {
         console.log("Fetching data for page:", page);
     }, [page]);
 
-    const openModal = (order) => {
-        console.log("Opening modal for order:", order);
-        setSelectedOrder(order);
-        setModalIsOpen(true);
+    const openProductModal = () => {
+        console.log("Opening product modal");
+        setProductModalIsOpen(true);
     };
 
-    const closeModal = () => {
-        console.log("Closing modal");
-        setSelectedOrder(null);
-        setModalIsOpen(false);
+    const closeProductModal = () => {
+        console.log("Closing product modal");
+        setProductModalIsOpen(false);
     };
 
     const handlePageClick = (event) => {
@@ -51,15 +50,6 @@ export default function Adminpage() {
         return <div>Error fetching orders</div>;
     }
 
-    const getTotalPrice = (items) => {
-        const total = items.reduce(
-            (total, item) => total + (item.price || 0) * (item.qty || 0),
-            0
-        );
-        console.log("Calculating total price:", total);
-        return total.toFixed(2);
-    };
-
     return (
         <Container>
             <Sidebar>
@@ -75,18 +65,17 @@ export default function Adminpage() {
             <Content>
                 <Header>
                     {selectedSection === "products" && (
-                        <Button>상품 등록하기</Button>
+                        <Button onClick={openProductModal}>
+                            상품 등록하기
+                        </Button>
                     )}
                 </Header>
                 {selectedSection === "orders" && (
                     <Section>
-                        <h2>Order List</h2>
-                        <OrderList
-                            data={data}
-                            openModal={openModal}
-                            getTotalPrice={getTotalPrice}
-                            isAdmin={true}
-                        />
+                        <h2>
+                            Order List (관리자는 주문 상태를 바꿀 수 있습니다.)
+                        </h2>
+                        <OrderList data={data} isAdmin={true} />
                         <PaginationContainer>
                             {data?.totalPageNum > 1 ? (
                                 <ReactPaginate
@@ -118,6 +107,11 @@ export default function Adminpage() {
                     </Section>
                 )}
             </Content>
+
+            <ProductModal
+                isOpen={productModalIsOpen}
+                onRequestClose={closeProductModal}
+            />
         </Container>
     );
 }
