@@ -151,7 +151,10 @@ export default function ProductDetailPage() {
                         </option>
                         {stockArray.map((item, index) => (
                             <option key={index} value={item.size}>
-                                {item.size} - {item.quantity} in stock
+                                {item.size} -{" "}
+                                {item.quantity <= 5
+                                    ? `${item.quantity}개 남음`
+                                    : ""}
                             </option>
                         ))}
                     </Select>
