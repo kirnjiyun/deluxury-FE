@@ -3,10 +3,10 @@ import api from "../utils/api";
 
 const fetchProducts = async ({ queryKey }) => {
     const [_, page] = queryKey;
-    const response = await api.get(`/product`, {
+    const response = await api.get(`/product/all`, {
         params: { page },
     });
-    console.log("API response:", response.data); // 콘솔 로그 추가
+    console.log("API response:", response.data);
     return response.data;
 };
 

@@ -9,7 +9,7 @@ import { setCategories } from "../../action/categoryAction";
 
 export default function Productpage() {
     const { bigCategory, mainCategory, subCategory } = useParams();
-    const { data: products, isLoading, error } = useGetProduct();
+    const { data: response, isLoading, error } = useGetProduct();
     const dispatch = useDispatch();
     const categories = useSelector((state) => state.category);
 
@@ -18,20 +18,19 @@ export default function Productpage() {
     }, [bigCategory, mainCategory, subCategory, dispatch]);
 
     function filterProducts(products, bigCategory, mainCategory, subCategory) {
-        if (!products) return [];
+        if (!Array.isArray(products)) return [];
 
         return products.filter((product) => {
             const matchesBigCategory =
-                product?.bigCategory.toLowerCase() ===
+                product?.bigCategory?.toLowerCase() ===
                 bigCategory.toLowerCase();
             const matchesMainCategory =
-                product?.category.main.toLowerCase() ===
+                product?.category?.main?.toLowerCase() ===
                 mainCategory.toLowerCase();
             const matchesSubCategory = subCategory
-                ? product?.category.sub.toLowerCase() ===
+                ? product?.category?.sub?.toLowerCase() ===
                   subCategory.toLowerCase()
                 : true;
-
             return (
                 matchesBigCategory && matchesMainCategory && matchesSubCategory
             );
@@ -42,7 +41,7 @@ export default function Productpage() {
     if (error) return <div>Error loading products: {error}</div>;
 
     const filteredProducts = filterProducts(
-        products,
+        response?.data,
         bigCategory,
         mainCategory,
         subCategory
