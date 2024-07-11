@@ -17,7 +17,7 @@ import CloudinaryUploadWidget from "../../components/CloudinaryUploadWidget/Clou
 
 Modal.setAppElement("#root");
 
-const ProductModal = ({ isOpen, onRequestClose }) => {
+const ProductModal = ({ isOpen, onRequestClose, notify }) => {
     const [productName, setProductName] = useState("");
     const [productPrice, setProductPrice] = useState("");
     const [productDescription, setProductDescription] = useState("");
@@ -121,6 +121,7 @@ const ProductModal = ({ isOpen, onRequestClose }) => {
                     setStatus("active");
                     setStock([]);
                     onRequestClose();
+                    notify("상품이 등록되었습니다.");
                 },
                 onError: (error) => {
                     console.error("Product creation failed:", error);

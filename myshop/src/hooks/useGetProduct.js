@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import api from "../utils/api";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-const fetchProducts = async ({ queryKey }) => {
+const fetchProductsAll = async ({ queryKey }) => {
     const [_, page] = queryKey;
     const response = await api.get(`/product/all`, {
         params: { page },
@@ -11,10 +11,26 @@ const fetchProducts = async ({ queryKey }) => {
     return response.data;
 };
 
-export const useGetProduct = (page) => {
+export const useGetProductAll = (page) => {
     return useQuery({
         queryKey: ["productAll", page],
-        queryFn: () => fetchProducts({ queryKey: ["productAll", page] }),
+        queryFn: () => fetchProductsAll({ queryKey: ["productAll", page] }),
+        keepPreviousData: true,
+    });
+};
+const fetchProducts = async ({ queryKey }) => {
+    const [_, page] = queryKey;
+    const response = await api.get(`/product`, {
+        params: { page },
+    });
+    console.log("API response:", response.data);
+    return response.data;
+};
+
+export const useGetProduct = (page) => {
+    return useQuery({
+        queryKey: ["products", page],
+        queryFn: () => fetchProducts({ queryKey: ["products", page] }),
         keepPreviousData: true,
     });
 };

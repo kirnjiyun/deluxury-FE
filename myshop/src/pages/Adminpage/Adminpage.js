@@ -13,6 +13,7 @@ import {
 import ReactPaginate from "react-paginate";
 import { useGetOrder } from "../../hooks/useOrder";
 import ProductModal from "../../components/ProductModal/ProductModal";
+import Toast, { notify } from "../../components/Toast/Toast";
 
 export default function Adminpage() {
     const [selectedSection, setSelectedSection] = useState("orders");
@@ -52,9 +53,9 @@ export default function Adminpage() {
 
     return (
         <Container>
+            <Toast />
             <Sidebar>
                 <h1>관리자 페이지</h1>
-
                 <ul>
                     <li onClick={() => setSelectedSection("orders")}>
                         주문/배송
@@ -107,10 +108,10 @@ export default function Adminpage() {
                     </Section>
                 )}
             </Content>
-
             <ProductModal
                 isOpen={productModalIsOpen}
                 onRequestClose={closeProductModal}
+                notify={notify}
             />
         </Container>
     );

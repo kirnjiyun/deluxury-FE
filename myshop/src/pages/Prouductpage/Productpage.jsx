@@ -4,12 +4,12 @@ import { useParams } from "react-router-dom";
 import ProductCard from "../../components/ProductCard/ProductCard";
 import { Container, Row, Col } from "./productpageStyles";
 import NewProductCarousel from "../../components/carousel/new/NewProductCarousel";
-import { useGetProduct } from "../../hooks/useGetProduct";
+import { useGetProductAll } from "../../hooks/useGetProduct";
 import { setCategories } from "../../action/categoryAction";
 
 export default function Productpage() {
     const { bigCategory, mainCategory, subCategory } = useParams();
-    const { data: response, isLoading, error } = useGetProduct();
+    const { data: response, isLoading, error } = useGetProductAll();
     const dispatch = useDispatch();
     const categories = useSelector((state) => state.category);
 
