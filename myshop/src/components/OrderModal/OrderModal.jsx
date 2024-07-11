@@ -14,6 +14,7 @@ import {
     Info,
     InlineContainer,
     StatusDropdown,
+    Badge,
 } from "./OrderModalStyles";
 import { useUpdateOrderStatus } from "../../hooks/useOrder";
 
@@ -51,22 +52,24 @@ const OrderModal = ({ isOpen, onRequestClose, order, isAdmin }) => {
                 </ModalHeader>
                 <ModalSection>
                     <InlineContainer>
-                        <SectionTitle>
-                            주문 정보
-                            {isAdmin ? (
-                                <StatusDropdown
-                                    value={selectedStatus}
-                                    onChange={handleStatusChange}
-                                >
-                                    <option value="준비중">준비중</option>
-                                    <option value="배송중">배송중</option>
-                                    <option value="배송완료">배송완료</option>
-                                    <option value="반품완료">반품완료</option>
-                                </StatusDropdown>
-                            ) : (
-                                <Value>{order?.status}</Value>
-                            )}
-                        </SectionTitle>
+                        <SectionTitle>주문 정보</SectionTitle>{" "}
+                        {isAdmin ? (
+                            <StatusDropdown
+                                value={selectedStatus}
+                                onChange={handleStatusChange}
+                            >
+                                {" "}
+                                <option value="결제완료">결제완료</option>
+                                <option value="준비중">준비중</option>
+                                <option value="배송중">배송중</option>
+                                <option value="배송완료">배송완료</option>
+                                <option value="반품완료">반품완료</option>
+                            </StatusDropdown>
+                        ) : (
+                            <Badge className={order?.status}>
+                                {order?.status}
+                            </Badge>
+                        )}
                     </InlineContainer>
                     <SectionContent>
                         <OrderDetailItem>

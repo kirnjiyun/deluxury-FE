@@ -30,9 +30,9 @@ export default function NewProductCarousel({ items = hardcodedItems }) {
             >
                 {items.map((item, index) => (
                     <S.CarouselSlide key={index}>
-                        <S.SlideContent>
+                        {/* <S.SlideContent>
                             <S.SlideTitle>{item.brand}</S.SlideTitle>
-                        </S.SlideContent>
+                        </S.SlideContent> */}
                         <S.SlideImage>
                             <img
                                 src={item.image}

@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import api from "../utils/api";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-
+import { notify } from "../components/Toast/Toast";
 const fetchProductsAll = async ({ queryKey }) => {
     const [_, page] = queryKey;
     const response = await api.get(`/product/all`, {
@@ -58,6 +58,31 @@ export const useAddProduct = () => {
         mutationFn: addProductApi,
         onSuccess: (data) => {
             queryClient.invalidateQueries(["productAll"]);
+        },
+    });
+};
+
+const updateProductStatusApi = async ({ id, product }) => {
+    console.log("Sending update request to backend:", { id, product }); // 콘솔 로그 추가
+    const response = await api.put(`/product/${id}`, product); // product를 직접 전송
+    return response.data.data;
+};
+
+export const useUpdateProduct = () => {
+    const queryClient = useQueryClient();
+
+    return useMutation({
+        mutationFn: updateProductStatusApi,
+        onSuccess: (data) => {
+            console.log("Update successful:", data); // 콘솔 로그 추가
+            queryClient.invalidateQueries(["products"]); // products 키를 사용하여 쿼리 무효화
+            notify("상품 상태 변경 완료");
+        },
+        onError: (error) => {
+            const backendError =
+                error.response?.data?.message || "An error occurred.";
+            console.log("Update failed:", backendError); // 콘솔 로그 추가
+            notify(backendError);
         },
     });
 };

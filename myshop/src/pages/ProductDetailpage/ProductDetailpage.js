@@ -165,12 +165,12 @@ export default function ProductDetailPage() {
                         >
                             장바구니 담기
                         </AddToCartButton>
-                        <BuyNowButton
+                        {/* <BuyNowButton
                             onClick={handleBuyNow}
                             disabled={!selectedSize}
                         >
                             바로 구매하기
-                        </BuyNowButton>
+                        </BuyNowButton> */}
                     </ButtonContainer>
                     <ProductInfo>
                         <InfoTitle>상품정보</InfoTitle>
