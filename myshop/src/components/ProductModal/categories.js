@@ -1,3 +1,16 @@
+export const brandCategories = [
+    "Balenciaga",
+    "Bottega Veneta",
+    "CHANEL",
+    "DIOR",
+    "Dolce & Gabbana",
+    "GUCCI",
+    "Louis Vuitton",
+    "MIU MIU",
+    "PRADA",
+    "Thom Browne",
+];
+
 export const categories = {
     men: {
         clothes: ["outer", "top", "bottom", "homewear", "innerwear"],
@@ -17,14 +30,7 @@ export const categories = {
             "sandals",
             "accessories",
         ],
-        accessories: [
-            "wallets & card cases",
-            "hats",
-            "watches",
-            "eyewear",
-            "ties",
-            "belts",
-        ],
+        accessories: ["wallets", "hats", "watches", "eyewear", "ties", "belts"],
     },
     women: {
         clothes: [
@@ -40,24 +46,17 @@ export const categories = {
             "shoulderbag",
             "crossbag",
             "totebag",
-            "eco & canvas bags",
+            "ecobags",
             "backpack",
             "clutch",
             "pouch",
         ],
-        shoes: [
-            "flats & loafers",
-            "boots",
-            "pumps",
-            "sandals",
-            "slippers & mules",
-            "sneakers",
-        ],
+        shoes: ["flats", "boots", "pumps", "sandals", "slippers", "sneakers"],
         accessories: [
             "jewelry",
             "hats",
             "watches",
-            "wallets & card cases",
+            "wallets",
             "eyewear",
             "belts",
         ],

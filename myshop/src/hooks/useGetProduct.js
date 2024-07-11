@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import api from "../utils/api";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 const fetchProducts = async ({ queryKey }) => {
     const [_, page] = queryKey;
@@ -27,5 +28,20 @@ export const useGetOneProduct = (id) => {
     return useQuery({
         queryKey: ["product", id],
         queryFn: () => fetchProductById(id),
+    });
+};
+const addProductApi = async (product) => {
+    const response = await api.post("/product", product);
+    return response.data;
+};
+
+export const useAddProduct = () => {
+    const queryClient = useQueryClient();
+
+    return useMutation({
+        mutationFn: addProductApi,
+        onSuccess: (data) => {
+            queryClient.invalidateQueries(["productAll"]);
+        },
     });
 };
