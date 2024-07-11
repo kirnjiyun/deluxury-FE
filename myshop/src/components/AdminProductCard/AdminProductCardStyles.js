@@ -1,47 +1,72 @@
 import styled from "@emotion/styled";
 
 export const ProductCard = styled.div`
-    display: flex;
-    border: 1px solid #ccc;
+    border: 1px solid #ddd;
     overflow: hidden;
     margin: 16px;
-    max-width: 300px;
-    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
 `;
 
 export const ProductImage = styled.img`
-    width: 150px;
+    width: 100%;
     height: auto;
-    object-fit: cover;
 `;
 
 export const ProductInfo = styled.div`
     padding: 16px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
 `;
 
-export const ProductName = styled.h2`
+export const ProductBrand = styled.div`
     font-size: 1.2em;
-    margin: 0 0 8px;
-`;
-
-export const ProductBrand = styled.p`
-    font-size: 0.9em;
-    color: #555;
-    margin: 0 0 8px;
-`;
-
-export const ProductCategory = styled.p`
-    font-size: 0.9em;
-    color: #555;
-    margin: 0 0 8px;
-`;
-
-export const ProductPrice = styled.p`
-    font-size: 1em;
-    margin: 0;
-    color: #000;
     font-weight: bold;
+`;
+
+export const ProductName = styled.div`
+    font-size: 1.1em;
+    margin: 8px 0;
+`;
+
+export const ProductCategory = styled.div`
+    margin: 4px 0;
+`;
+
+export const ProductDescription = styled.div`
+    margin: 8px 0;
+`;
+
+export const ProductPrice = styled.div`
+    margin: 8px 0;
+    font-size: 1.2em;
+    color: #333;
+`;
+
+export const ProductStock = styled.div`
+    margin: 8px 0;
+`;
+
+export const ProductColor = styled.div`
+    margin: 4px 0;
+`;
+
+export const ProductStatus = styled.div`
+    margin: 4px 0;
+`;
+
+export const ProductButtons = styled.div`
+    margin: 10px 0;
+    display: flex;
+    justify-content: space-between;
+`;
+
+export const Button = styled.button`
+    background: black;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    cursor: pointer;
+    &:hover {
+        background: #666;
+    }
 `;

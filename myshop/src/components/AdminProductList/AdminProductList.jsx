@@ -45,6 +45,16 @@ export default function AdminProductList() {
         }
     }, [data, page]);
 
+    const handleEdit = (product) => {
+        // Implement edit logic here
+        console.log("Edit product:", product);
+    };
+
+    const handleDelete = (productId) => {
+        // Implement delete logic here
+        console.log("Delete product with ID:", productId);
+    };
+
     if (isLoading) return <div>Loading...</div>;
     if (error) return <div>Error fetching products</div>;
 
@@ -52,7 +62,12 @@ export default function AdminProductList() {
         <ProductListContainer>
             {products.length > 0 ? (
                 products.map((product) => (
-                    <AdminProductCard key={product._id} product={product} />
+                    <AdminProductCard
+                        key={product._id}
+                        product={product}
+                        onEdit={handleEdit}
+                        onDelete={handleDelete}
+                    />
                 ))
             ) : (
                 <div>No products available</div>
