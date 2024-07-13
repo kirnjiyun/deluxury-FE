@@ -140,5 +140,5 @@ export const InfoTitle = styled.h3`
 export const InfoText = styled.p`
     font-size: 14px;
     line-height: 1.5;
-    margin-bottom: 10px;
+    margin: 10px 0;
 `;
