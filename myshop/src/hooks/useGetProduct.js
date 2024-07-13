@@ -81,7 +81,28 @@ export const useUpdateProduct = () => {
         onError: (error) => {
             const backendError =
                 error.response?.data?.message || "An error occurred.";
-            console.log("Update failed:", backendError); // 콘솔 로그 추가
+            console.log("Update failed:", backendError);
+            notify(backendError);
+        },
+    });
+};
+const deleteProduct = async (productId) => {
+    const response = await api.delete(`/product/${productId}`);
+    return response.data;
+};
+
+export const useDeleteProduct = () => {
+    const queryClient = useQueryClient();
+
+    return useMutation({
+        mutationFn: deleteProduct,
+        onSuccess: () => {
+            queryClient.invalidateQueries("productAll");
+            notify("상품 삭제 완료");
+        },
+        onError: (error) => {
+            const backendError = error || "An error occurred.";
+            console.log("Delte failed:", backendError);
             notify(backendError);
         },
     });

@@ -3,11 +3,13 @@ import AdminProductCard from "../AdminProductCard/AdminProductCard";
 import { ProductListContainer } from "./AdminProductListStyles";
 import { useGetProductAll } from "../../hooks/useGetProduct";
 import { useUpdateProduct } from "../../hooks/useGetProduct";
+import { useDeleteProduct } from "../../hooks/useGetProduct";
 
 export default function AdminProductList() {
     const [page, setPage] = useState(1);
     const { data, isLoading, error } = useGetProductAll(page);
     const { mutate: updateProduct } = useUpdateProduct();
+    const { mutate: deleteProduct } = useDeleteProduct();
 
     const [products, setProducts] = useState([]);
 
@@ -20,41 +22,37 @@ export default function AdminProductList() {
         }
     }, [data]);
 
-    // useEffect(() => {
-    //     const handleScroll = () => {
-    //         const scrollTop = window.scrollY;
-    //         const windowHeight = window.innerHeight;
-    //         const documentHeight = document.documentElement.scrollHeight;
-
-    //         if (windowHeight + scrollTop >= documentHeight - 10) {
-    //             loadMoreProducts();
-    //         }
-    //     };
-
-    //     window.addEventListener("scroll", handleScroll);
-    //     return () => window.removeEventListener("scroll", handleScroll);
-    // }, [loadMoreProducts]);
-
     useEffect(() => {
         if (data && data.data) {
             if (page === 1) {
-                setProducts(data.data);
+                setProducts(data.data.filter((product) => !product.isDeleted));
             } else {
                 setProducts((prevProducts) => [
-                    ...new Set([...prevProducts, ...data.data]),
+                    ...new Set([
+                        ...prevProducts,
+                        ...data.data.filter((product) => !product.isDeleted),
+                    ]),
                 ]);
             }
         }
     }, [data, page]);
 
     const handleEdit = (editedProduct) => {
-        console.log("Editing product:", editedProduct); // 콘솔 로그 추가
+        console.log("Editing product:", editedProduct);
         updateProduct({ id: editedProduct._id, product: editedProduct });
     };
 
     const handleDelete = (productId) => {
-        // Implement delete logic here
-        console.log("Delete product with ID:", productId);
+        deleteProduct(productId, {
+            onSuccess: () => {
+                setProducts((prevProducts) =>
+                    prevProducts.filter((product) => product._id !== productId)
+                );
+            },
+            onError: (error) => {
+                console.error("Error deleting product:", error);
+            },
+        });
     };
 
     if (isLoading) return <div>Loading...</div>;

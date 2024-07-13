@@ -29,7 +29,6 @@ const AdminProductCard = ({ product, onEdit, onDelete }) => {
             ...prevProduct,
             [name]: value,
         }));
-        console.log(`handleChange - ${name}: ${value}`);
     };
 
     const handleStockChange = (e, size) => {
@@ -41,16 +40,13 @@ const AdminProductCard = ({ product, onEdit, onDelete }) => {
                 [size]: value,
             },
         }));
-        console.log(`handleStockChange - ${size}: ${value}`);
     };
 
     const handleEditClick = () => {
         setIsEditing(true);
-        console.log("Edit button clicked");
     };
 
     const handleSaveClick = () => {
-        console.log("Save button clicked", editedProduct); // 콘솔 로그 추가
         onEdit(editedProduct);
         setIsEditing(false);
     };
@@ -148,7 +144,7 @@ const AdminProductCard = ({ product, onEdit, onDelete }) => {
                             />
                         </ProductStatus>
                         <ProductStock>
-                            <label>재고:</label>
+                            <label>Stock:</label>
                             {Object.keys(editedProduct.stock).map((size) => (
                                 <div key={size}>
                                     <label>{size}:</label>
@@ -163,9 +159,7 @@ const AdminProductCard = ({ product, onEdit, onDelete }) => {
                             ))}
                         </ProductStock>
                         <ProductButtons>
-                            <Button onClick={handleSaveClick}>
-                                수정 완료하기
-                            </Button>
+                            <Button onClick={handleSaveClick}>Save</Button>
                         </ProductButtons>
                     </>
                 ) : (
@@ -183,7 +177,7 @@ const AdminProductCard = ({ product, onEdit, onDelete }) => {
                         <ProductColor>Color: {product.color}</ProductColor>
                         <ProductStatus>Status: {product.status}</ProductStatus>
                         <ProductStock>
-                            <label>재고:</label>
+                            <label>Stock:</label>
                             {Object.keys(product.stock).map((size) => (
                                 <div key={size}>
                                     <label>{size}:</label>
@@ -192,9 +186,9 @@ const AdminProductCard = ({ product, onEdit, onDelete }) => {
                             ))}
                         </ProductStock>
                         <ProductButtons>
-                            <Button onClick={handleEditClick}>수정하기</Button>
+                            <Button onClick={handleEditClick}>Edit</Button>
                             <Button onClick={() => onDelete(product._id)}>
-                                삭제하기
+                                Delete
                             </Button>
                         </ProductButtons>
                     </>
