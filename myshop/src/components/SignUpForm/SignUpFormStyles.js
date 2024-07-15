@@ -1,28 +1,10 @@
 import styled from "@emotion/styled";
-import { css } from "@emotion/react";
-
 export const Line = styled.p`
     height: 10px;
     border-bottom: 1px solid #ddd;
     margin-bottom: 20px;
 `;
 
-const buttonStyles = (disabled) => css`
-    background: ${disabled ? "#ccc" : "#000"};
-    color: ${disabled ? "#666" : "#fff"};
-    padding: 10px 0%;
-    border: none;
-    width: 80%;
-    display: block;
-    margin: 20px auto;
-    cursor: ${disabled ? "not-allowed" : "pointer"};
-    opacity: ${disabled ? 0.6 : 1};
-    transition: background 0.3s, color 0.3s, opacity 0.3s;
-
-    &:hover {
-        background: ${disabled ? "#ccc" : "#333"};
-    }
-`;
 export const Input = styled.input`
     width: 100%;
     padding: 10px;
@@ -30,13 +12,28 @@ export const Input = styled.input`
     border: 1px solid #ddd;
     font-size: 1em;
     cursor: pointer;
+
     &:focus {
         border-color: #007bff;
         outline: none;
     }
 `;
+
 export const Button = styled.button`
-    ${(props) => buttonStyles(props.disabled)}
+    background: ${(props) => (props.disabled ? "#ccc" : "#000")};
+    color: ${(props) => (props.disabled ? "#666" : "#fff")};
+    padding: 10px 0;
+    border: none;
+    width: 80%;
+    display: block;
+    margin: 20px auto;
+    cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
+    opacity: ${(props) => (props.disabled ? 0.6 : 1)};
+    transition: background 0.3s, color 0.3s, opacity 0.3s;
+
+    &:hover {
+        background: ${(props) => (props.disabled ? "#ccc" : "#333")};
+    }
 `;
 
 export const Title = styled.h2`
@@ -88,7 +85,6 @@ export const LinkButton = styled.a`
     padding: 10px 20px;
     background: #000;
     color: #fff;
-
     text-decoration: none;
     margin-top: 10px;
 
@@ -96,10 +92,12 @@ export const LinkButton = styled.a`
         background: #333;
     }
 `;
+
 export const Error = styled.div`
     font-size: x-small;
     color: red;
 `;
+
 export const RadioGroup = styled.div`
     display: flex;
     align-items: center;
