@@ -5,7 +5,6 @@ export const CarouselContainer = styled.div`
     width: 100%;
     overflow: hidden;
     height: fit-content;
-    cursor: pointer;
 `;
 
 export const CarouselSlider = styled.div`

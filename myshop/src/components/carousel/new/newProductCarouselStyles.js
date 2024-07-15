@@ -5,7 +5,6 @@ export const CarouselContainer = styled.div`
     width: 100%;
     overflow: hidden;
     height: 600px;
-    cursor: pointer;
 `;
 
 export const CarouselSlider = styled.div`
@@ -38,6 +37,7 @@ export const CarouselSlide = styled.div`
         z-index: 1;
     }
 `;
+
 export const SlideContent = styled.div`
     position: absolute;
     top: 30px;
@@ -67,6 +67,19 @@ export const SlideImage = styled.div`
     align-items: center;
     justify-content: center;
     z-index: 0;
+`;
+
+export const AdBadge = styled.div`
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: transparent;
+    color: white;
+    border: 1px solid white;
+    border-radius: 0;
+    padding: 5px 10px;
+    font-size: 12px;
+    z-index: 2;
 `;
 
 export const SlideControls = styled.div`
