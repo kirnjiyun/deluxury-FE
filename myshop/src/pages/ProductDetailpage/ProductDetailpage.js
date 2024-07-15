@@ -68,10 +68,12 @@ export default function ProductDetailPage() {
         return <div>Error loading product details</div>;
     }
 
-    const stockArray = Object.keys(product.stock).map((size) => ({
-        size: size,
-        quantity: product.stock[size],
-    }));
+    const stockArray = Object.keys(product.stock)
+        .map((size) => ({
+            size: size,
+            quantity: product.stock[size],
+        }))
+        .filter((item) => item.quantity > 0);
 
     const handleSizeChange = (event) => {
         setSelectedSize(event.target.value);
