@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+
 export const Line = styled.p`
     height: 10px;
     border-bottom: 1px solid #ddd;
@@ -107,6 +108,10 @@ export const RadioGroup = styled.div`
 
 export const RadioInput = styled.input`
     display: none;
+
+    &:checked + label:after {
+        transform: translateY(-50%) scale(1);
+    }
 `;
 
 export const RadioLabel = styled.label`
@@ -145,11 +150,5 @@ export const RadioLabel = styled.label`
         top: 50%;
         transform: translateY(-50%) scale(0);
         transition: transform 0.2s ease-in-out;
-    }
-`;
-
-export const StyledRadioInput = styled(RadioInput)`
-    &:checked + ${RadioLabel}:after {
-        transform: translateY(-50%) scale(1);
     }
 `;

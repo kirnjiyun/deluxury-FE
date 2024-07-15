@@ -3,15 +3,15 @@ import { useSelector, useDispatch } from "react-redux";
 import { prevStep, nextStep } from "../../action/SignUpAction";
 import { useSignUpMutation } from "../../hooks/useSignUpMutation";
 import {
-    Title,
-    CheckboxLabel,
     Line,
     Input,
     Button,
+    Title,
+    CheckboxLabel,
     LinkButton,
     Error,
     RadioGroup,
-    StyledRadioInput,
+    RadioInput,
     RadioLabel,
 } from "./SignUpFormStyles";
 
@@ -186,7 +186,7 @@ const SignUpForm = () => {
                     />
                     <Title>구매자 또는 판매자 역할을 선택해주세요</Title>
                     <RadioGroup>
-                        <StyledRadioInput
+                        <RadioInput
                             type="radio"
                             id="user"
                             name="role"
@@ -197,7 +197,7 @@ const SignUpForm = () => {
                         <RadioLabel htmlFor="user">구매자</RadioLabel>
                     </RadioGroup>
                     <RadioGroup>
-                        <StyledRadioInput
+                        <RadioInput
                             type="radio"
                             id="admin"
                             name="role"
@@ -208,11 +208,7 @@ const SignUpForm = () => {
                         <RadioLabel htmlFor="admin">판매자</RadioLabel>
                     </RadioGroup>
                     {error && <Error>{error}</Error>}
-                    <Button
-                        type="button"
-                        onClick={handleSubmit}
-                        disabled={!isFormFilled()}
-                    >
+                    <Button type="submit" disabled={!isFormFilled()}>
                         회원가입하기
                     </Button>
                 </>
