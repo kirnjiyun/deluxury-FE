@@ -75,7 +75,7 @@ export default function Mypage() {
                         </OrderItem>
                     ))
                 ) : (
-                    <div>No orders found.</div>
+                    <div>주문 내역이 없습니다.</div>
                 )}
             </OrderList>
 

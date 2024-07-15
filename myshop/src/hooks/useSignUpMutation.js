@@ -15,29 +15,21 @@ export const useSignUpMutation = () => {
     const navigate = useNavigate();
     const [error, setError] = useState("");
 
-    const mutation = useMutation({
-        mutationFn: async (newUser) => {
-            try {
-                const data = await signUpUser(newUser);
-                if (data.status === "success") {
-                    dispatch(nextStep());
-                } else {
-                    throw new Error(data.error || "회원가입 실패");
-                }
-            } catch (error) {
-                const backendError = error.error || "An error occurred.";
-                setError(backendError);
-                throw new Error(backendError);
+    return useMutation({
+        mutationFn: signUpUser,
+        onSuccess: (data) => {
+            if (data.status === "success") {
+                dispatch(nextStep());
+            } else {
+                setError(data.error || "회원가입 실패");
             }
         },
-        // onError: (error) => {
-        //     const backendError =
-        //         error.response?.data?.error ||
-        //         error.message ||
-        //         "An error occurredsdf.";
-        //     setError(backendError);
-        // },
+        onError: (error) => {
+            const backendError =
+                error.response?.data?.error ||
+                error.message ||
+                "An error occurred.";
+            setError(backendError);
+        },
     });
-
-    return { ...mutation, error };
 };

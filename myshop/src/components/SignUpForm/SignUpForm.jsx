@@ -66,7 +66,6 @@ const SignUpForm = () => {
     };
 
     const { mutate, error: mutationError } = useSignUpMutation();
-
     const handleSubmit = (e) => {
         e.preventDefault();
         if (pw !== rePw) {
@@ -79,12 +78,12 @@ const SignUpForm = () => {
 
     useEffect(() => {
         if (mutationError) {
-            setError(mutationError);
+            setError(mutationError.message || JSON.stringify(mutationError));
         }
     }, [mutationError]);
 
     return (
-        <form>
+        <form onSubmit={handleSubmit}>
             {step === 1 && (
                 <>
                     <Title>이용약관에 동의해주세요</Title>
