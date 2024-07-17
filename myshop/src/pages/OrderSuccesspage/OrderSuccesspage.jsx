@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { Container, Message } from "./OrderSuccesspageStyles";
 import OrderModal from "../../components/OrderModal/OrderModal";
@@ -14,6 +14,11 @@ export default function OrderSuccessPage() {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedOrder, setSelectedOrder] = useState(null);
     const { data, isLoading, isError } = useGetOrderById(orderNum);
+    useEffect(() => {
+        if (orderNum) {
+            console.log("Order Number:", orderNum); // 디버깅용 로그 추가
+        }
+    }, [orderNum]);
 
     const openModal = () => {
         if (data) {

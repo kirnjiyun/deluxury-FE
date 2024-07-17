@@ -20,7 +20,7 @@ import PostCode from "../../components/PostCode/PostCode";
 const PaymentPage = () => {
     const navigate = useNavigate();
     const { data: cartList, isLoading, error } = useGetCart();
-    const addToOrder = useAddToOrder(navigate);
+    const addToOrder = useAddToOrder(); // 수정된 부분
     const [address, setAddress] = useState("");
     const [zip, setZip] = useState("");
 
@@ -101,7 +101,17 @@ const PaymentPage = () => {
                     size: item.size,
                 })),
             };
-            addToOrder.mutate(data);
+
+            console.log("Submitting order data:", data); // 디버깅용 로그 추가
+            addToOrder.mutate(data, {
+                onSuccess: (response) => {
+                    console.log("Order submitted successfully", response); // 디버깅용 로그 추가
+                    navigate(`/payment/success?orderNum=${response.orderNum}`);
+                },
+                onError: (error) => {
+                    console.error("Error submitting order:", error); // 디버깅용 로그 추가
+                },
+            });
         }
     };
 
@@ -219,7 +229,7 @@ const PaymentPage = () => {
                     <SummaryItem>
                         <span>총 결제 금액</span>
                         <span>${totalPrice}</span>{" "}
-                    </SummaryItem>
+                    </SummaryItem>{" "}
                 </Summary>
             </GridContainer>
             <PaymentForm
