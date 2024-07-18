@@ -23,7 +23,6 @@ const fetchProducts = async ({ queryKey }) => {
     const response = await api.get(`/product`, {
         params: { page },
     });
-    console.log("API response:", response.data);
     return response.data;
 };
 

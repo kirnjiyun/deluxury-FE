@@ -38,7 +38,6 @@ export default function AdminProductList() {
     }, [data, page]);
 
     const handleEdit = (editedProduct) => {
-        console.log("Editing product:", editedProduct);
         updateProduct({ id: editedProduct._id, product: editedProduct });
     };
 

@@ -1,18 +1,19 @@
 import axios from "axios";
 
-// 상황에 따라 주소 설정
+// 환경 변수 설정
 const LOCAL_BACKEND = process.env.REACT_APP_LOCAL_BACKEND;
 const PROD_BACKEND = process.env.REACT_APP_PROD_BACKEND;
 const BACKEND_PROXY = process.env.REACT_APP_BACKEND_PROXY;
 
 // 현재 환경에 맞는 베이스 URL 설정
 const baseURL = LOCAL_BACKEND;
+console.log("Base URL:", baseURL); // baseURL을 콘솔에 출력하여 확인
 
 const api = axios.create({
     baseURL: `${baseURL}/api`,
     headers: {
         "Content-Type": "application/json",
-        authorization: "Bearer" + sessionStorage.getItem("token"),
+        authorization: "Bearer " + sessionStorage.getItem("token"),
     },
 });
 
