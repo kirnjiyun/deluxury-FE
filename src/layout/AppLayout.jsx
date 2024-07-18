@@ -4,9 +4,14 @@ import { useGetUser } from "../hooks/useGetUser";
 import { useDispatch } from "react-redux";
 import { setUser, logout } from "../action/userAction";
 
+const checkIsLoggedIn = () => {
+    return sessionStorage.getItem("token") !== null;
+};
+
 export default function AppLayout({ children }) {
     const dispatch = useDispatch();
-    const { data: userData, isLoading, isError } = useGetUser();
+    const isLoggedIn = checkIsLoggedIn();
+    const { data: userData, isLoading, isError } = useGetUser(isLoggedIn);
 
     useEffect(() => {
         if (userData) {

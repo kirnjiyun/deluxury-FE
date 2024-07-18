@@ -11,9 +11,10 @@ const fetchUser = async () => {
     return response.data;
 };
 
-export const useGetUser = () => {
+export const useGetUser = (isLoggedIn) => {
     return useQuery({
         queryKey: ["user"],
         queryFn: fetchUser,
+        enabled: isLoggedIn, // 로그인 상태일 때만 쿼리 활성화
     });
 };

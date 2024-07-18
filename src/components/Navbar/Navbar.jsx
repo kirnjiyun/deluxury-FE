@@ -55,7 +55,6 @@ const Navbar = () => {
     const toggleDropdown = (index) => {
         if (index > 1) {
             notify("업데이트 예정입니다.");
-            console.log("ddd");
         } else {
             setOpenDropdown((prevIndex) =>
                 prevIndex === index ? null : index
