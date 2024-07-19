@@ -37,14 +37,21 @@ export default function ProductDetailPage() {
     const navigate = useNavigate();
     const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
     const { data: product, error, isLoading } = useGetOneProduct(id);
-    const { data: likedProducts } = useGetLike();
-    const user = useSelector((state) => state.user.user.user);
-    const isAdmin = user && user.role === "admin";
+    const [likedProducts, setLikedProducts] = useState([]);
+    const user = useSelector((state) => state?.user?.user);
+    const isAdmin = user && user.user.role === "admin";
     const [selectedSize, setSelectedSize] = useState("");
     const [isLiked, setIsLiked] = useState(false);
     const addToCartMutation = useAddToCart();
     const addToLikeMutation = useAddToLike();
     const removeFromLikeMutation = useRemoveFromLike();
+    const { data: likeData } = useGetLike(); // useGetLike를 호출하여 데이터를 가져옵니다.
+
+    useEffect(() => {
+        if (isLoggedIn && likeData) {
+            setLikedProducts(likeData);
+        }
+    }, [isLoggedIn, likeData]);
 
     useEffect(() => {
         if (likedProducts && product) {
@@ -56,8 +63,10 @@ export default function ProductDetailPage() {
     }, [likedProducts, product]);
 
     useEffect(() => {
-        console.log("User role:", user.role); // 사용자 역할 확인
-        console.log("isAdmin:", isAdmin); // isAdmin 값 확인
+        if (user) {
+            console.log("User role:", user.user.role); // 사용자 역할 확인
+            console.log("isAdmin:", isAdmin); // isAdmin 값 확인
+        }
     }, [user, isAdmin]);
 
     if (isLoading) {
