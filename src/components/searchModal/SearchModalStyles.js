@@ -44,3 +44,17 @@ export const SearchInput = styled.input`
         outline: none;
     }
 `;
+
+export const ResultList = styled.ul`
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+`;
+
+export const ResultItem = styled.li`
+    margin-bottom: 10px;
+    &:last-child {
+        margin-bottom: 0;
+    }
+    cursor: pointer;
+`;

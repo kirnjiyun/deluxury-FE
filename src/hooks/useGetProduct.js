@@ -18,6 +18,7 @@ export const useGetProductAll = (page) => {
         keepPreviousData: true,
     });
 };
+
 const fetchProducts = async ({ queryKey }) => {
     const [_, page] = queryKey;
     const response = await api.get(`/product`, {
