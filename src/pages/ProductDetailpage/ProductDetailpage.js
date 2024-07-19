@@ -38,7 +38,7 @@ export default function ProductDetailPage() {
     const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
     const { data: product, error, isLoading } = useGetOneProduct(id);
     const { data: likedProducts } = useGetLike();
-    const user = useSelector((state) => state.user.user);
+    const user = useSelector((state) => state.user.user.user);
     const isAdmin = user && user.role === "admin";
     const [selectedSize, setSelectedSize] = useState("");
     const [isLiked, setIsLiked] = useState(false);
@@ -56,7 +56,7 @@ export default function ProductDetailPage() {
     }, [likedProducts, product]);
 
     useEffect(() => {
-        console.log("User role:", user?.role); // 사용자 역할 확인
+        console.log("User role:", user.role); // 사용자 역할 확인
         console.log("isAdmin:", isAdmin); // isAdmin 값 확인
     }, [user, isAdmin]);
 
@@ -176,7 +176,7 @@ export default function ProductDetailPage() {
                         </AddToCartButton>
                         {isAdmin && (
                             <InfoText>
-                                관리자는 장바구니에 담을 수가 없습니다
+                                관리자는 장바구니에 담을 수 없습니다.
                             </InfoText>
                         )}
                         {/* <BuyNowButton
