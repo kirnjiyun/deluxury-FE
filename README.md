@@ -1,70 +1,185 @@
-# Getting Started with Create React App
+# HighEndShopping
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+</br>
 
-## Available Scripts
+### 배포 링크 및 테스트 계정
 
-In the project directory, you can run:
+👉🏻 [HighEndShopping](https://deluxury.netlify.app/ "바로가기")
 
-### `npm start`
+```구매자 계정
+ID: user1@gmail.com
+PW: 123
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+```판매자 계정
+ID: admin1@gmail.com
+PW: 123
+```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+</br>
 
-### `npm test`
+## 1. 서비스 소개
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+👜 <em>명품 브랜드 의류, 가방, 신발 등을 판매하는 <strong>HighEndShopping</strong>입니다.</em>👜
 
-### `npm run build`
+-   다양한 명품 브랜드 제품을 구경하고, 구매할 수 있습니다!
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+</br>
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## 2. 개발 기간 (2024.06.19 ~ 2024.07.19 )
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+약 4주
+|
 
-### `npm run eject`
+</br>
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## 3. 개발 환경
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### 🛠 기술 스택
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+<div>
+    <img src="https://img.shields.io/badge/React-grey?style=for-the-badge&logo=React&logoColor=61DAFB"/>
+  <img src="https://img.shields.io/badge/Redux-grey?style=for-the-badge&logo=Redux&logoColor=764ABC"/>
+  <img src="https://img.shields.io/badge/javascript-grey?style=for-the-badge&logo=javascript&logoColor=f7df1e" />
+  <img src="https://img.shields.io/badge/styled components-grey?style=for-the-badge&logo=styled-components&logoColor=DB7093"/>
+</br> 
+    <img src="https://img.shields.io/badge/Axios-grey?style=for-the-badge&logo=Axios&logoColor=5A29E4"/>
+  <img src="https://img.shields.io/badge/React Query-grey?style=for-the-badge&logo=React Query&logoColor=FF4154"/>
+  <img src="https://img.shields.io/badge/React Router-grey?style=for-the-badge&logo=React Router&logoColor=CA4245"/>
+  <img src="https://img.shields.io/badge/Prettier-grey?style=for-the-badge&logo=Prettier&logoColor=F7B93E"/>
+  <img src="https://img.shields.io/badge/ESLint-grey?style=for-the-badge&logo=ESLint&logoColor=4B32C3"/>
+</div>
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### 🪜 아키텍처
 
-## Learn More
+<img width="700" alt="architecture" src='./public/architecture.png'>
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+</br>
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## 4. 프로젝트 폴더 구조
 
-### Code Splitting
+### 프론트엔드
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```
+📁 highendshopping-fe
+├──📁 src
+│   ├──📁 action
+│   ├──📁 components
+│   ├──📁 hooks
+│   ├──📁 layout
+│   └──📁 pages
+│       ├──📁 Adminpage
+│       ├──📁 Cartpage
+│       ├──📁 Homepage
+│       ├──📁 Loginpage
+│       ├──📁 Mylikepage
+│       ├──📁 Mypage
+│       ├──📁 Orderpage
+│       ├──📁 OrderSuccesspage
+│       ├──📁 Paymentpage
+│       ├──📁 ProductDetailpage
+│       ├──📁 Productpage
+│       ├──📁 RegistProductpage
+│       └──📁 SignUppage
+│   ├──📁 reducer
+│   ├──📁 routes
+│   ├──📁 store
+│   └──📁 utils
+│
+├──📄 App.js
+├──📄 index.css
+├──📄 index.js
+└──📄 .env
+```
 
-### Analyzing the Bundle Size
+### 백엔드
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+```
+📁 highendshopping-be
+├──📁 controllers
+│   ├──📄 auth.controller.js
+│   ├──📄 cart.controller.js
+│   ├──📄 like.controller.js
+│   ├──📄 order.controller.js
+│   ├──📄 product.controller.js
+│   └──📄 user.controller.js
+├──📁 models
+│   ├──📄 Cart.js
+│   ├──📄 Like.js
+│   ├──📄 Order.js
+│   ├──📄 Product.js
+│   └──📄 User.js
+├──📁 routes
+│   ├──📄 auth.api.js
+│   ├──📄 cart.api.js
+│   ├──📄 indexRouter.js
+│   ├──📄 like.api.js
+│   ├──📄 order.api.js
+│   ├──📄 product.api.js
+│   └──📄 user.api.js
+└──📁 utils
+   └───📄 randomStringGenerator.js
 
-### Making a Progressive Web App
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+```
 
-### Advanced Configuration
+<br />
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## 5. UI
 
-### Deployment
+<p align="center">
+<img width="800" alt="thumbnail" src='./public/ui-light.png'>
+</p>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+#### - 주요 화면
 
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+<div align="center">
+  <table>
+    <tr>
+      <td align="center"><b>메인 화면</b></td>
+      <td align="center"><b>로그인</b></td>
+    </tr>
+    <tr>
+      <td><img src="src/assets/gifs/main/main.gif" width="400" height="224"></td>
+      <td><img src="src/assets/gifs/main/login.gif" width="400" height="224"></td>
+    </tr>
+    <tr>
+      <td align="center"><b>회원가입</b></td>
+      <td align="center"><b>상품 리스트</b></td>
+    </tr>
+    <tr>
+      <td><img src="src/assets/gifs/main/signup.gif" width="400" height="224"></td>
+      <td><img src="src/assets/gifs/main/home.gif" width="400" height="224"></td>
+    </tr>
+    <tr>
+      <td align="center"><b>검색</b></td>
+      <td align="center"><b>상품 상세</b></td>
+    </tr>
+    <tr>
+      <td><img src="src/assets/gifs/main/search.gif" width="400" height="224"></td>
+      <td><img src="src/assets/gifs/main/product-detail.gif" width="400" height="224"></td>
+    </tr>
+    <tr>
+      <td align="center"><b>장바구니</b></td>
+      <td align="center"><b>찜</b></td>
+    </tr>
+    <tr>
+      <td><img src="src/assets/gifs/main/cart.gif" width="400" height="224"></td>
+      <td><img src="src/assets/gifs/main/like.gif" width="400" height="224"></td>
+    </tr>
+    <tr>
+      <td align="center"><b>결제 화면</b></td>
+      <td align="center"><b>관리자 페이지</b></td>
+    </tr>
+    <tr>
+      <td><img src="src/assets/gifs/main/payment.gif" width="400" height="224"></td>
+      <td><img src="src/assets/gifs/main/admin.gif" width="400" height="224"></td>
+    </tr>
+    <tr>
+      <td align="center"><b>관리자가 상품 올리기</b></td>
+    </tr>
+    <tr>
+      <td><img src="src/assets/gifs/main/upload.gif" width="400" height="224"></td>
+    </tr>
+  </table>
+</div>
