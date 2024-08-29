@@ -1,10 +1,10 @@
-# HighEndShopping
+# Deluxury
 
 </br>
 
 ### 배포 링크 및 테스트 계정
 
-👉🏻 [HighEndShopping](https://deluxury.netlify.app/ "바로가기")
+👉🏻 [Deluxury](https://deluxury.netlify.app/ "바로가기")
 
 ```구매자 계정
 ID: user1@gmail.com
@@ -20,9 +20,9 @@ PW: 123
 
 ## 1. 서비스 소개
 
-👜 <em>명품 브랜드 의류, 가방, 신발 등을 판매하는 <strong>HighEndShopping</strong>입니다.</em>👜
-
--   다양한 명품 브랜드 제품을 구경하고, 구매할 수 있습니다!
+👜 <em>명품 브랜드 의류, 가방, 신발 등을 판매하는 <strong>Deluxury</strong>입니다.</em>👜
+-   음악을 들으며 다양한 명품 브랜드 제품을 구경하고, 구매할 수 있습니다
+-   판매자 계정으로 가입이 가능하며 상품을 등록할 수 있습니다.
 
 </br>
 
