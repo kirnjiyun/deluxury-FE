@@ -33,11 +33,13 @@ const AdminProductCard = ({ product, onEdit, onDelete }) => {
 
     const handleStockChange = (e, size) => {
         const { value } = e.target;
+        const newStockValue = Math.max(0, value); // 음수 방지
+
         setEditedProduct((prevProduct) => ({
             ...prevProduct,
             stock: {
                 ...prevProduct.stock,
-                [size]: value,
+                [size]: newStockValue,
             },
         }));
     };
@@ -58,7 +60,7 @@ const AdminProductCard = ({ product, onEdit, onDelete }) => {
                 {isEditing ? (
                     <>
                         <ProductBrand>
-                            Brand:
+                            브랜드:
                             <input
                                 type="text"
                                 name="brand"
@@ -67,7 +69,7 @@ const AdminProductCard = ({ product, onEdit, onDelete }) => {
                             />
                         </ProductBrand>
                         <ProductName>
-                            Name:
+                            상품명:
                             <input
                                 type="text"
                                 name="name"
@@ -76,7 +78,7 @@ const AdminProductCard = ({ product, onEdit, onDelete }) => {
                             />
                         </ProductName>
                         <ProductCategory>
-                            Category:
+                            카테고리:
                             <input
                                 type="text"
                                 name="mainCategory"
@@ -108,7 +110,7 @@ const AdminProductCard = ({ product, onEdit, onDelete }) => {
                             />
                         </ProductCategory>
                         <ProductDescription>
-                            Description:
+                            설명:
                             <input
                                 type="text"
                                 name="description"
@@ -117,7 +119,7 @@ const AdminProductCard = ({ product, onEdit, onDelete }) => {
                             />
                         </ProductDescription>
                         <ProductPrice>
-                            Price: $
+                            가격: $
                             <input
                                 type="number"
                                 name="price"
@@ -126,7 +128,7 @@ const AdminProductCard = ({ product, onEdit, onDelete }) => {
                             />
                         </ProductPrice>
                         <ProductColor>
-                            Color:
+                            색상:
                             <input
                                 type="text"
                                 name="color"
@@ -135,7 +137,7 @@ const AdminProductCard = ({ product, onEdit, onDelete }) => {
                             />
                         </ProductColor>
                         <ProductStatus>
-                            Status:
+                            상태:
                             <input
                                 type="text"
                                 name="status"
@@ -144,7 +146,7 @@ const AdminProductCard = ({ product, onEdit, onDelete }) => {
                             />
                         </ProductStatus>
                         <ProductStock>
-                            <label>Stock:</label>
+                            <label>재고:</label>
                             {Object.keys(editedProduct.stock).map((size) => (
                                 <div key={size}>
                                     <label>{size}:</label>
@@ -159,36 +161,38 @@ const AdminProductCard = ({ product, onEdit, onDelete }) => {
                             ))}
                         </ProductStock>
                         <ProductButtons>
-                            <Button onClick={handleSaveClick}>Save</Button>
+                            <Button onClick={handleSaveClick}>저장</Button>
                         </ProductButtons>
                     </>
                 ) : (
                     <>
-                        <ProductBrand>Brand: {product.brand}</ProductBrand>
-                        <ProductName>Name: {product.name}</ProductName>
+                        <ProductBrand>브랜드: {product.brand}</ProductBrand>
+                        <ProductName>제품명: {product.name}</ProductName>
                         <ProductCategory>
-                            Category: {product.category.main} -{" "}
+                            카테고리: {product.category.main} -{" "}
                             {product.category.sub}
                         </ProductCategory>
                         <ProductDescription>
-                            Description: {product.description}
+                            설명: {product.description}
                         </ProductDescription>
-                        <ProductPrice>Price: ${product.price}</ProductPrice>
-                        <ProductColor>Color: {product.color}</ProductColor>
-                        <ProductStatus>Status: {product.status}</ProductStatus>
+                        <ProductPrice>가격: ${product.price}</ProductPrice>
+                        <ProductColor>색상: {product.color}</ProductColor>
+                        <ProductStatus>상태: {product.status}</ProductStatus>
                         <ProductStock>
-                            <label>Stock:</label>
-                            {Object.keys(product.stock).map((size) => (
-                                <div key={size}>
-                                    <label>{size}:</label>
-                                    <p>{product.stock[size]}</p>
-                                </div>
-                            ))}
+                            <label>재고:</label>
+                            {Object.keys(product.stock)
+                                .filter((size) => product.stock[size] > 0)
+                                .map((size) => (
+                                    <div key={size}>
+                                        <label>{size}:</label>
+                                        <p>{product.stock[size]}</p>
+                                    </div>
+                                ))}
                         </ProductStock>
                         <ProductButtons>
-                            <Button onClick={handleEditClick}>Edit</Button>
+                            <Button onClick={handleEditClick}>수정</Button>
                             <Button onClick={() => onDelete(product._id)}>
-                                Delete
+                                삭제
                             </Button>
                         </ProductButtons>
                     </>
