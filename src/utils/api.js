@@ -7,7 +7,7 @@ const BACKEND_PROXY = process.env.REACT_APP_BACKEND_PROXY;
 
 // 현재 환경에 맞는 베이스 URL 설정
 const baseURL = BACKEND_PROXY;
-console.log("Base URL:", baseURL); // baseURL을 콘솔에 출력하여 확인
+console.log("Base URL:", baseURL);
 
 const api = axios.create({
     baseURL: `${baseURL}/api`,

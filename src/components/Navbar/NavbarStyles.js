@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { css } from "@emotion/react";
+import { css, keyframes } from "@emotion/react";
 
 const NavFontStyles = css`
     @font-face {
@@ -10,7 +10,22 @@ const NavFontStyles = css`
         font-style: normal;
     }
 `;
-
+const slideText = keyframes`
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+`;
+const blinkColor = keyframes`
+  0%, 100% {
+    color: #333; 
+  }
+  50% {
+    color: #cacaca; 
+  }
+`;
 export const NavbarContainer = styled.nav`
     ${NavFontStyles}
     background-color: #fff;
@@ -44,6 +59,22 @@ export const Logo = styled.div`
     @media (max-width: 768px) {
         margin-bottom: 10px;
     }
+`;
+export const SliderContainer = styled.div`
+    width: 100px;
+    overflow: hidden;
+    white-space: nowrap;
+    box-sizing: border-box;
+    margin-right: 10px;
+`;
+
+export const SliderText = styled.div`
+    display: inline-block;
+    animation: ${slideText} 8s linear infinite,
+        ${blinkColor} 1s step-start infinite;
+    font-size: 12px;
+    font-weight: lighter;
+    color: #333;
 `;
 
 export const UserOptions = styled.div`

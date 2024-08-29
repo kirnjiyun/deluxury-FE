@@ -14,7 +14,6 @@ import {
     faStepBackward,
     faStepForward,
 } from "@fortawesome/free-solid-svg-icons";
-
 import {
     NavbarContainer,
     TopBar,
@@ -26,6 +25,8 @@ import {
     MenuItem,
     Column,
     DropdownContent,
+    SliderContainer,
+    SliderText,
 } from "./NavbarStyles";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -88,7 +89,6 @@ const Navbar = () => {
         };
     }, []);
 
-    // 음악 트랙 리스트
     const tracks = [
         {
             title: "Track 1",
@@ -135,35 +135,30 @@ const Navbar = () => {
     };
 
     useEffect(() => {
+        const handleTrackEnd = () => {
+            playNextTrack();
+        };
+
         if (audioRef.current) {
             audioRef.current.src = tracks[currentTrackIndex].src;
             if (isPlaying) {
                 audioRef.current.play();
             }
+
+            audioRef.current.addEventListener("ended", handleTrackEnd);
         }
+
+        return () => {
+            if (audioRef.current) {
+                audioRef.current.removeEventListener("ended", handleTrackEnd);
+            }
+        };
     }, [currentTrackIndex, isPlaying]);
 
     return (
         <NavbarContainer>
             <TopBar>
                 <Logo onClick={() => navigate("/")}>Deluxury</Logo> <Toast />
-                <div style={{ display: "flex", alignItems: "center" }}>
-                    <FontAwesomeIcon
-                        icon={faStepBackward}
-                        onClick={playPreviousTrack}
-                        style={{ cursor: "pointer", marginRight: "10px" }}
-                    />
-                    <FontAwesomeIcon
-                        icon={isPlaying ? faPause : faPlay}
-                        onClick={togglePlay}
-                        style={{ cursor: "pointer", marginRight: "10px" }}
-                    />
-                    <FontAwesomeIcon
-                        icon={faStepForward}
-                        onClick={playNextTrack}
-                        style={{ cursor: "pointer", marginRight: "20px" }}
-                    />
-                </div>
                 <UserOptions>
                     {isLoggedIn ? (
                         <>
@@ -228,7 +223,31 @@ const Navbar = () => {
                         </MenuItem>
                     ))}
                 </MainMenu>
-
+                <div style={{ display: "flex", alignItems: "center" }}>
+                    {" "}
+                    <SliderContainer>
+                        <SliderText>
+                            🎶 즐거운 쇼핑을 위해 BGM을 틀어보세요
+                        </SliderText>
+                    </SliderContainer>
+                    <div style={{ display: "flex", alignItems: "center" }}>
+                        <FontAwesomeIcon
+                            icon={faStepBackward}
+                            onClick={playPreviousTrack}
+                            style={{ cursor: "pointer", marginRight: "10px" }}
+                        />
+                        <FontAwesomeIcon
+                            icon={isPlaying ? faPause : faPlay}
+                            onClick={togglePlay}
+                            style={{ cursor: "pointer", marginRight: "10px" }}
+                        />
+                        <FontAwesomeIcon
+                            icon={faStepForward}
+                            onClick={playNextTrack}
+                            style={{ cursor: "pointer", marginRight: "20px" }}
+                        />
+                    </div>{" "}
+                </div>
                 <SearchIcon onClick={openModal}>
                     <FontAwesomeIcon icon={faSearch} />
                 </SearchIcon>

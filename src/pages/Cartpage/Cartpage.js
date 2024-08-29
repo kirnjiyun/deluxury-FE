@@ -60,11 +60,10 @@ export default function Cartpage() {
                         totalAmount={totalAmount}
                         totalShipping={totalShipping}
                         totalPayment={totalPayment}
-                    />{" "}
+                    />
                     <ButtonContainer>
-                        {" "}
                         <Button onClick={goToHomepage}>계속 쇼핑하기</Button>
-                        <Button onClick={goToPaymentpage}>결제 하기</Button>
+                        <Button onClick={goToPaymentpage}>결제하기</Button>
                     </ButtonContainer>
                 </>
             ) : (
