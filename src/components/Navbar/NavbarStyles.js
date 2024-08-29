@@ -50,7 +50,9 @@ export const UserOptions = styled.div`
     display: flex;
     gap: 15px;
     font-size: xx-small;
-
+    > div {
+        cursor: pointer;
+    }
     a {
         color: #000;
         text-decoration: none;

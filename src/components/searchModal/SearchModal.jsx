@@ -28,15 +28,15 @@ const SearchModal = ({ onClose }) => {
         );
     };
 
-    // 검색어를 기준으로 데이터 필터링 (검색어가 없으면 빈 배열 반환)
     const filteredData = searchQuery
-        ? data?.data.filter((item) =>
-              item.name.toLowerCase().includes(searchQuery.toLowerCase())
-          )
+        ? data?.data.filter((item) => {
+              const name = item.name?.toLowerCase().trim();
+              return name && name.includes(searchQuery.toLowerCase().trim());
+          })
         : [];
 
     if (error) {
-        console.error(`Query error: ${error.message}`); // 오류 로그
+        console.error(`Query error: ${error.message}`);
     }
 
     return (
