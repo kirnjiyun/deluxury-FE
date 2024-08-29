@@ -7,14 +7,14 @@ import {
     ResultList,
     ResultItem,
 } from "./SearchModalStyles";
-import { useGetProduct } from "../../hooks/useGetProduct";
+import { useGetProductsForSearch } from "../../hooks/useGetProduct";
 import { useNavigate } from "react-router-dom";
 
 const SearchModal = ({ onClose }) => {
     const [searchQuery, setSearchQuery] = useState("");
     const navigate = useNavigate();
 
-    const { data, error, isLoading } = useGetProduct();
+    const { data, error, isLoading } = useGetProductsForSearch();
 
     const handleInputChange = (e) => {
         setSearchQuery(e.target.value);

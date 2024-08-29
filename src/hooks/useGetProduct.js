@@ -107,3 +107,16 @@ export const useDeleteProduct = () => {
         },
     });
 };
+const fetchProductsForSearch = async () => {
+    const response = await api.get(`/product/all`);
+    console.log("API response:", response.data);
+    return response.data;
+};
+
+export const useGetProductsForSearch = () => {
+    return useQuery({
+        queryKey: ["productForSearch"],
+        queryFn: fetchProductsForSearch,
+        keepPreviousData: true,
+    });
+};

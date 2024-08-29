@@ -33,7 +33,7 @@ const AdminProductCard = ({ product, onEdit, onDelete }) => {
 
     const handleStockChange = (e, size) => {
         const { value } = e.target;
-        const newStockValue = Math.max(0, value); // 음수 방지
+        const newStockValue = Math.max(0, value);
 
         setEditedProduct((prevProduct) => ({
             ...prevProduct,
