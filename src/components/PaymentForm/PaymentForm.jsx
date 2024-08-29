@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import React from "react";
 import { css } from "@emotion/react";
 import Cards from "react-credit-cards-2";
@@ -18,6 +17,26 @@ const PaymentForm = ({
     cardValue = { cvc: "", expiry: "", focus: "", name: "", number: "" },
     handlePaymentInfoChange,
 }) => {
+    const handleNumberInputChange = (e) => {
+        const { value, name } = e.target;
+
+        const regex = /^[0-9]*$/;
+
+        if (regex.test(value)) {
+            handlePaymentInfoChange(e);
+        }
+    };
+
+    const handleNameInputChange = (e) => {
+        const { value } = e.target;
+
+        const regex = /^[A-Za-z\s]*$/;
+
+        if (regex.test(value)) {
+            handlePaymentInfoChange(e);
+        }
+    };
+
     return (
         <Form>
             <Row>
@@ -41,7 +60,7 @@ const PaymentForm = ({
                             <FormControl
                                 type="text"
                                 name="number"
-                                onChange={handlePaymentInfoChange}
+                                onChange={handleNumberInputChange}
                                 onFocus={handleInputFocus}
                                 required
                                 maxLength={16}
@@ -54,7 +73,7 @@ const PaymentForm = ({
                             <FormControl
                                 type="text"
                                 name="name"
-                                onChange={handlePaymentInfoChange}
+                                onChange={handleNameInputChange}
                                 onFocus={handleInputFocus}
                                 required
                                 value={cardValue.name}
@@ -69,7 +88,7 @@ const PaymentForm = ({
                                         type="text"
                                         name="expiry"
                                         placeholder="MM/YY"
-                                        onChange={handlePaymentInfoChange}
+                                        onChange={handleNumberInputChange}
                                         onFocus={handleInputFocus}
                                         required
                                         value={cardValue.expiry}
@@ -84,7 +103,7 @@ const PaymentForm = ({
                                         type="text"
                                         name="cvc"
                                         placeholder="CVC"
-                                        onChange={handlePaymentInfoChange}
+                                        onChange={handleNumberInputChange}
                                         onFocus={handleInputFocus}
                                         required
                                         maxLength={3}

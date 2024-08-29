@@ -63,8 +63,8 @@ export const useAddProduct = () => {
 };
 
 const updateProductStatusApi = async ({ id, product }) => {
-    console.log("Sending update request to backend:", { id, product }); // 콘솔 로그 추가
-    const response = await api.put(`/product/${id}`, product); // product를 직접 전송
+    console.log("Sending update request to backend:", { id, product });
+    const response = await api.put(`/product/${id}`, product);
     return response.data.data;
 };
 
@@ -74,8 +74,8 @@ export const useUpdateProduct = () => {
     return useMutation({
         mutationFn: updateProductStatusApi,
         onSuccess: (data) => {
-            console.log("Update successful:", data); // 콘솔 로그 추가
-            queryClient.invalidateQueries(["products"]); // products 키를 사용하여 쿼리 무효화
+            console.log("Update successful:", data);
+            queryClient.invalidateQueries(["products"]);
             notify("상품 상태 변경 완료");
         },
         onError: (error) => {
