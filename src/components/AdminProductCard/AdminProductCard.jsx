@@ -167,7 +167,7 @@ const AdminProductCard = ({ product, onEdit, onDelete }) => {
                 ) : (
                     <>
                         <ProductBrand>브랜드: {product.brand}</ProductBrand>
-                        <ProductName>제품명: {product.name}</ProductName>
+                        <ProductName>상품명: {product.name}</ProductName>
                         <ProductCategory>
                             카테고리: {product.category.main} -{" "}
                             {product.category.sub}
