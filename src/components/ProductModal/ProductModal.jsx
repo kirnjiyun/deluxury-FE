@@ -10,6 +10,7 @@ import {
     Textarea,
     Select,
     Button,
+    ErrorText,
 } from "./ProductModalStyles";
 import { brandCategories, categories } from "./categories";
 import { useAddProduct } from "../../hooks/useGetProduct";
@@ -31,6 +32,7 @@ const ProductModal = ({ isOpen, onRequestClose, notify }) => {
     const [color, setColor] = useState("");
     const [status, setStatus] = useState("active");
     const [stock, setStock] = useState([]);
+    const [errors, setErrors] = useState({});
 
     const mutation = useAddProduct();
 
@@ -65,8 +67,17 @@ const ProductModal = ({ isOpen, onRequestClose, notify }) => {
 
     const handleStockChange = (index, quantity) => {
         const newStock = [...stock];
-        newStock[index].quantity = quantity;
+        const newErrors = { ...errors };
+
+        if (quantity < 0) {
+            newErrors[index] = "수량은 0 이상이어야합니다.";
+        } else {
+            delete newErrors[index];
+            newStock[index].quantity = quantity;
+        }
+
         setStock(newStock);
+        setErrors(newErrors);
     };
 
     const handleSubmit = (e) => {
@@ -120,6 +131,7 @@ const ProductModal = ({ isOpen, onRequestClose, notify }) => {
                     setColor("");
                     setStatus("active");
                     setStock([]);
+                    setErrors({});
                     onRequestClose();
                     notify("상품이 등록되었습니다.");
                 },
@@ -269,7 +281,15 @@ const ProductModal = ({ isOpen, onRequestClose, notify }) => {
                                     onChange={(e) =>
                                         handleStockChange(index, e.target.value)
                                     }
+                                    style={{
+                                        borderColor: errors[index]
+                                            ? "red"
+                                            : "initial",
+                                    }}
                                 />
+                                {errors[index] && (
+                                    <ErrorText>{errors[index]}</ErrorText>
+                                )}
                             </FormGroup>
                         ))}
                     </FormGroup>

@@ -1,6 +1,3 @@
-// src/components/ProductModal/ProductModalStyles.js
-/** @jsxImportSource @emotion/react */
-import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 
 export const ModalContainer = styled.div`
@@ -68,4 +65,10 @@ export const Button = styled.button`
     &:hover {
         background: #0056b3;
     }
+`;
+
+export const ErrorText = styled.p`
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
 `;
