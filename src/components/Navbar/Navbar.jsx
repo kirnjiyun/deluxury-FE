@@ -9,7 +9,12 @@ import {
     faSignOutAlt,
     faSearch,
     faUserPlus,
+    faPlay,
+    faPause,
+    faStepBackward,
+    faStepForward,
 } from "@fortawesome/free-solid-svg-icons";
+
 import {
     NavbarContainer,
     TopBar,
@@ -83,10 +88,82 @@ const Navbar = () => {
         };
     }, []);
 
+    // 음악 트랙 리스트
+    const tracks = [
+        {
+            title: "Track 1",
+            src: require("../../music/funky-jazz-big-band-piece-225127.mp3"),
+        },
+        {
+            title: "Track 2",
+            src: require("../../music/the-best-jazz-club-in-new-orleans-164472.mp3"),
+        },
+        {
+            title: "Track 3",
+            src: require("../../music/crosstown-funk-205896.mp3"),
+        },
+        { title: "Track 4", src: require("../../music/pop-groove-226858.mp3") },
+    ];
+
+    const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
+    const [isPlaying, setIsPlaying] = useState(false);
+    const audioRef = useRef(new Audio(tracks[currentTrackIndex].src));
+
+    const togglePlay = () => {
+        if (audioRef.current) {
+            if (isPlaying) {
+                audioRef.current.pause();
+            } else {
+                audioRef.current.play();
+            }
+            setIsPlaying(!isPlaying);
+        }
+    };
+
+    const playPreviousTrack = () => {
+        const newIndex =
+            currentTrackIndex === 0 ? tracks.length - 1 : currentTrackIndex - 1;
+        setCurrentTrackIndex(newIndex);
+        setIsPlaying(true);
+    };
+
+    const playNextTrack = () => {
+        const newIndex =
+            currentTrackIndex === tracks.length - 1 ? 0 : currentTrackIndex + 1;
+        setCurrentTrackIndex(newIndex);
+        setIsPlaying(true);
+    };
+
+    useEffect(() => {
+        if (audioRef.current) {
+            audioRef.current.src = tracks[currentTrackIndex].src;
+            if (isPlaying) {
+                audioRef.current.play();
+            }
+        }
+    }, [currentTrackIndex, isPlaying]);
+
     return (
         <NavbarContainer>
             <TopBar>
                 <Logo onClick={() => navigate("/")}>Deluxury</Logo> <Toast />
+                <div style={{ display: "flex", alignItems: "center" }}>
+                    <FontAwesomeIcon
+                        icon={faStepBackward}
+                        onClick={playPreviousTrack}
+                        style={{ cursor: "pointer", marginRight: "10px" }}
+                    />
+                    <FontAwesomeIcon
+                        icon={isPlaying ? faPause : faPlay}
+                        onClick={togglePlay}
+                        style={{ cursor: "pointer", marginRight: "10px" }}
+                    />
+                    <FontAwesomeIcon
+                        icon={faStepForward}
+                        onClick={playNextTrack}
+                        style={{ cursor: "pointer", marginRight: "20px" }}
+                    />
+                </div>
                 <UserOptions>
                     {isLoggedIn ? (
                         <>
