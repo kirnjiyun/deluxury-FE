@@ -92,17 +92,20 @@ const Navbar = () => {
     const tracks = [
         {
             title: "Track 1",
-            src: require("../../music/funky-jazz-big-band-piece-225127.mp3"),
+            src: require("../../asset/music/funky-jazz-big-band-piece-225127.mp3"),
         },
         {
             title: "Track 2",
-            src: require("../../music/the-best-jazz-club-in-new-orleans-164472.mp3"),
+            src: require("../../asset/music/the-best-jazz-club-in-new-orleans-164472.mp3"),
         },
         {
             title: "Track 3",
-            src: require("../../music/crosstown-funk-205896.mp3"),
+            src: require("../../asset/music/crosstown-funk-205896.mp3"),
         },
-        { title: "Track 4", src: require("../../music/pop-groove-226858.mp3") },
+        {
+            title: "Track 4",
+            src: require("../../asset/music/pop-groove-226858.mp3"),
+        },
     ];
 
     const [currentTrackIndex, setCurrentTrackIndex] = useState(0);

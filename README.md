@@ -1,5 +1,6 @@
 # Deluxury
 
+<img src="src/asset/img/thumbnail/deluxury thumbnail.jpg" >
 </br>
 
 ### 배포 링크 및 테스트 계정
@@ -18,45 +19,20 @@ PW: 123
 
 </br>
 
-## 1. 서비스 소개
+## 서비스 소개
 
 👜 <em>명품 브랜드 의류, 가방, 신발 등을 판매하는 <strong>Deluxury</strong>입니다.</em>👜
+
 -   음악을 들으며 다양한 명품 브랜드 제품을 구경하고, 구매할 수 있습니다
--   판매자 계정으로 가입이 가능하며 상품을 등록할 수 있습니다.
+-   구매자 계정뿐만 아니라, 판매자 계정으로도 가입이 가능하며 상품을 등록할 수 있습니다.
 
 </br>
 
-## 2. 개발 기간 (2024.06.19 ~ 2024.07.19 )
+## 기술 스택 및 개발 환경
 
-약 4주
-|
+<img src="src/asset/img/thumbnail/아키텍쳐.png" >
 
-</br>
-
-## 3. 개발 환경
-
-### 🛠 기술 스택
-
-<div>
-    <img src="https://img.shields.io/badge/React-grey?style=for-the-badge&logo=React&logoColor=61DAFB"/>
-  <img src="https://img.shields.io/badge/Redux-grey?style=for-the-badge&logo=Redux&logoColor=764ABC"/>
-  <img src="https://img.shields.io/badge/javascript-grey?style=for-the-badge&logo=javascript&logoColor=f7df1e" />
-  <img src="https://img.shields.io/badge/styled components-grey?style=for-the-badge&logo=styled-components&logoColor=DB7093"/>
-</br> 
-    <img src="https://img.shields.io/badge/Axios-grey?style=for-the-badge&logo=Axios&logoColor=5A29E4"/>
-  <img src="https://img.shields.io/badge/React Query-grey?style=for-the-badge&logo=React Query&logoColor=FF4154"/>
-  <img src="https://img.shields.io/badge/React Router-grey?style=for-the-badge&logo=React Router&logoColor=CA4245"/>
-  <img src="https://img.shields.io/badge/Prettier-grey?style=for-the-badge&logo=Prettier&logoColor=F7B93E"/>
-  <img src="https://img.shields.io/badge/ESLint-grey?style=for-the-badge&logo=ESLint&logoColor=4B32C3"/>
-</div>
-
-### 🪜 아키텍처
-
-<img width="700" alt="architecture" src='./public/architecture.png'>
-
-</br>
-
-## 4. 프로젝트 폴더 구조
+## 프로젝트 폴더 구조
 
 ### 프론트엔드
 
@@ -125,11 +101,7 @@ PW: 123
 
 <br />
 
-## 5. UI
-
-<p align="center">
-<img width="800" alt="thumbnail" src='./public/ui-light.png'>
-</p>
+## UI
 
 #### - 주요 화면
 

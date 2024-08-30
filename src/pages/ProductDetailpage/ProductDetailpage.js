@@ -45,7 +45,7 @@ export default function ProductDetailPage() {
     const addToCartMutation = useAddToCart();
     const addToLikeMutation = useAddToLike();
     const removeFromLikeMutation = useRemoveFromLike();
-    const { data: likeData } = useGetLike(); // useGetLike를 호출하여 데이터를 가져옵니다.
+    const { data: likeData } = useGetLike();
 
     useEffect(() => {
         if (isLoggedIn && likeData) {
@@ -64,8 +64,8 @@ export default function ProductDetailPage() {
 
     useEffect(() => {
         if (user) {
-            console.log("User role:", user.user.role); // 사용자 역할 확인
-            console.log("isAdmin:", isAdmin); // isAdmin 값 확인
+            console.log("User role:", user.user.role);
+            console.log("isAdmin:", isAdmin);
         }
     }, [user, isAdmin]);
 
@@ -73,16 +73,18 @@ export default function ProductDetailPage() {
         return <div>Loading...</div>;
     }
 
-    if (error) {
+    if (error || !product) {
         return <div>Error loading product details</div>;
     }
 
-    const stockArray = Object.keys(product.stock)
-        .map((size) => ({
-            size: size,
-            quantity: product.stock[size],
-        }))
-        .filter((item) => item.quantity > 0);
+    const stockArray = product.stock
+        ? Object.keys(product.stock)
+              .map((size) => ({
+                  size: size,
+                  quantity: product.stock[size],
+              }))
+              .filter((item) => item.quantity > 0)
+        : [];
 
     const handleSizeChange = (event) => {
         setSelectedSize(event.target.value);
