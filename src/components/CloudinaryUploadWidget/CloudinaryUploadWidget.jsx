@@ -43,7 +43,7 @@ const CloudinaryUploadWidget = ({ uploadImage }) => {
                 if (!error && result && result.event === "success") {
                     console.log("Done! Here is the image info: ", result.info);
                     uploadImage(result.info.secure_url);
-                    myWidget.close(); // 이미지 업로드 후 위젯을 닫음
+                    myWidget.close();
                 }
             }
         );
@@ -59,7 +59,7 @@ const CloudinaryUploadWidget = ({ uploadImage }) => {
 
     return (
         <UploadButton id="upload_widget" className="ml-2" type="button">
-            Upload Image +
+            이미지 +
         </UploadButton>
     );
 };

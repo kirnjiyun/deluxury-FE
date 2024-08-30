@@ -20,7 +20,7 @@ import PostCode from "../../components/PostCode/PostCode";
 const PaymentPage = () => {
     const navigate = useNavigate();
     const { data: cartList, isLoading, error } = useGetCart();
-    const addToOrder = useAddToOrder(); // 수정된 부분
+    const addToOrder = useAddToOrder();
     const [address, setAddress] = useState("");
     const [zip, setZip] = useState("");
 

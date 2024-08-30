@@ -294,7 +294,7 @@ const ProductModal = ({ isOpen, onRequestClose, notify }) => {
                         ))}
                     </FormGroup>
                     <FormGroup>
-                        <Label>이미지 업로드:</Label>
+                        <Label>이미지 업로드 : </Label>
                         <CloudinaryUploadWidget
                             uploadImage={handleImageUpload}
                         />

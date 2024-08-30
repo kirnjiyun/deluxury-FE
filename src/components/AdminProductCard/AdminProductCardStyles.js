@@ -61,12 +61,12 @@ export const ProductButtons = styled.div`
 `;
 
 export const Button = styled.button`
-    background: black;
+    background: #333;
     color: white;
     border: none;
     padding: 8px 16px;
     cursor: pointer;
     &:hover {
-        background: #666;
+        background: black;
     }
 `;

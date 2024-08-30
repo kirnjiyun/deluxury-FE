@@ -57,13 +57,12 @@ export const Select = styled.select`
 
 export const Button = styled.button`
     padding: 10px 20px;
-    background: #007bff;
+    background: #333;
     color: white;
     border: none;
-    border-radius: 5px;
     cursor: pointer;
     &:hover {
-        background: #0056b3;
+        background: black;
     }
 `;
 
