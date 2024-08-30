@@ -3,7 +3,19 @@
 <img src="src/asset/img/thumbnail/deluxury thumbnail.jpg" >
 </br>
 
-### 배포 링크 및 테스트 계정
+## 서비스 소개
+
+👜 <em>명품 브랜드 의류, 가방, 신발 등을 판매하는 <strong>Deluxury</strong>입니다.</em>👜
+
+-   **음악**을 들으며 다양한 명품 브랜드 제품을 구경하고, 구매할 수 있습니다.
+-   메인 페이지의 **스크롤 기반 이미지 갤러리**를 통해, 사용자가 페이지를 스크롤할 때마다 명품 브랜드의 매력적인 이미지를 동적으로 체험할 수 있습니다.
+-   구매자 계정뿐만 아니라, 판매자 계정으로도 가입이 가능하며 상품을 등록할 수 있습니다.
+-   **Cloudinary**를 통해 상품 이미지를 쉽게 업로드하고 관리할 수 있습니다.
+-   **다음 우편번호 API**를 사용하여 손쉽게 배송지를 입력할 수 있습니다.
+
+</br>
+
+## 배포 링크 및 테스트 계정
 
 👉🏻 [Deluxury](https://deluxury.netlify.app/ "바로가기")
 
@@ -16,17 +28,6 @@ PW: 123
 ID: admin1@gmail.com
 PW: 123
 ```
-
-</br>
-
-## 서비스 소개
-
-👜 <em>명품 브랜드 의류, 가방, 신발 등을 판매하는 <strong>Deluxury</strong>입니다.</em>👜
-
--   **음악**을 들으며 다양한 명품 브랜드 제품을 구경하고, 구매할 수 있습니다.
--   구매자 계정뿐만 아니라, 판매자 계정으로도 가입이 가능하며 상품을 등록할 수 있습니다.
--   **Cloudinary**를 통해 상품 이미지를 쉽게 업로드하고 관리할 수 있습니다.
--   **다음 우편번호 API**를 사용하여 손쉽게 배송지를 입력할 수 있습니다.
 
 </br>
 
@@ -68,11 +69,10 @@ PW: 123
     <tr>
       <td align="center"><b>찜목록</b></td>
       <td align="center"><b>장바구니</b></td>
-   
-    </tr>  <tr>
+    </tr>
+    <tr>
       <td><img src="src/asset/img/captures/찜목록.png" width="480"></td>
-      <td><img src="src/asset/img/captures/장바구니.png" width="480"></td>
-      
+      <td><img src="src/asset/img/captures/장바구니.png" width="480"></td>  
     </tr>
     <tr>
         <td align="center"><b>결제 카드 입력</b></td>
@@ -81,21 +81,17 @@ PW: 123
     <tr>
         <td><img src="src/asset/img/captures/카드입력.gif" width="480"></td>
       <td><img src="src/asset/img/captures/결제 주소.png" width="480"></td>
-    
     </tr>
     <tr>
          <td align="center"><b>주문내역 확인</b></td>
       <td align="center"><b>상품 등록</b></td>
-   
     </tr>
     <tr>
       <td><img src="src/asset/img/captures/주문내역.png" width="480"></td>
       <td><img src="src/asset/img/captures/상품등록.png" width="480"></td>
-    
     </tr>
   </table>
 </div>
-
 
 ## 기술 스택 및 개발 환경
 

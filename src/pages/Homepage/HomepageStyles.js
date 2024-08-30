@@ -26,7 +26,6 @@ export const FullscreenSection = styled.div`
     align-items: center;
     justify-content: center;
     scroll-snap-align: start;
-    /* overflow: hidden; */
 `;
 
 export const ContentSection = styled.div`
