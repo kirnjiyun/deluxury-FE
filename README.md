@@ -108,50 +108,56 @@ PW: 123
 <div align="center">
   <table>
     <tr>
-      <td align="center"><b>메인 화면</b></td>
-      <td align="center"><b>로그인</b></td>
+      <td align="center"><b>메인페이지</b></td>
+      <td align="center"><b>회원가입 약관</b></td>
     </tr>
     <tr>
-      <td><img src="src/assets/gifs/main/main.gif" width="400" height="224"></td>
-      <td><img src="src/assets/gifs/main/login.gif" width="400" height="224"></td>
-    </tr>
-    <tr>
-      <td align="center"><b>회원가입</b></td>
+      <td><img src="src/asset/img/captures/메인페이지.gif" width="640" ></td>
+      <td><img src="src/asset/img/captures/회원가입약관.gif" width="640" ></td>
+    </tr><tr>
       <td align="center"><b>상품 리스트</b></td>
-    </tr>
-    <tr>
-      <td><img src="src/assets/gifs/main/signup.gif" width="400" height="224"></td>
-      <td><img src="src/assets/gifs/main/home.gif" width="400" height="224"></td>
-    </tr>
-    <tr>
-      <td align="center"><b>검색</b></td>
       <td align="center"><b>상품 상세</b></td>
     </tr>
     <tr>
-      <td><img src="src/assets/gifs/main/search.gif" width="400" height="224"></td>
-      <td><img src="src/assets/gifs/main/product-detail.gif" width="400" height="224"></td>
+    <td><img src="src/asset/img/captures/상품리스트.gif" width="640"></td>
+      <td><img src="src/asset/img/captures/상품상세.png" width="640"></td>
+    </tr>
+    <tr>
+      <td align="center"><b>구매자 로그인</b></td>
+      <td align="center"><b>판매자 로그인</b></td>
+    </tr>
+    <tr>
+      <td><img src="src/asset/img/captures/guestorder.gif" width="640"></td>
+      <td><img src="src/asset/img/captures/adminpage.gif" width="640"></td>
+    </tr>
+    <tr>
+      <td align="center"><b>검색</b></td>
+    </tr>
+    <tr>
+    <td><img src="src/asset/img/captures/검색.png" width="640"></td>
     </tr>
     <tr>
       <td align="center"><b>장바구니</b></td>
-      <td align="center"><b>찜</b></td>
+      <td align="center"><b>찜목록</b></td>
+    </tr>  <tr>
+      <td><img src="src/asset/img/captures/장바구니.png" width="640"></td>
+      <td><img src="src/asset/img/captures/찜목록.png" width="640"></td>
     </tr>
     <tr>
-      <td><img src="src/assets/gifs/main/cart.gif" width="400" height="224"></td>
-      <td><img src="src/assets/gifs/main/like.gif" width="400" height="224"></td>
+      <td align="center"><b>결제 주소 입력</b></td>
+      <td align="center"><b>결제 카드 입력</b></td>
     </tr>
     <tr>
-      <td align="center"><b>결제 화면</b></td>
-      <td align="center"><b>관리자 페이지</b></td>
+    <td><img src="src/asset/img/captures/결제 주소.png" width="640"></td>
+      <td><img src="src/asset/img/captures/카드입력.gif" width="640"></td>
     </tr>
     <tr>
-      <td><img src="src/assets/gifs/main/payment.gif" width="400" height="224"></td>
-      <td><img src="src/assets/gifs/main/admin.gif" width="400" height="224"></td>
+      <td align="center"><b>상품 등록</b></td>
+        <td align="center"><b>주문내역 확인</b></td>
     </tr>
     <tr>
-      <td align="center"><b>관리자가 상품 올리기</b></td>
-    </tr>
-    <tr>
-      <td><img src="src/assets/gifs/main/upload.gif" width="400" height="224"></td>
+        <td><img src="src/asset/img/captures/상품등록.png" width="640"></td>
+      <td><img src="src/asset/img/captures/주문내역.png" width="640"></td>
     </tr>
   </table>
 </div>
