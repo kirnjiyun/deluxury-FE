@@ -41,55 +41,56 @@ PW: 123
       <td align="center"><b>회원가입 약관</b></td>
     </tr>
     <tr>
-      <td><img src="src/asset/img/captures/메인페이지.gif" width="640" ></td>
-      <td><img src="src/asset/img/captures/회원가입약관.gif" width="640" ></td>
+      <td><img src="src/asset/img/captures/메인페이지.gif" width="480"></td>
+      <td><img src="src/asset/img/captures/회원가입약관.gif" width="480"></td>
     </tr><tr>
       <td align="center"><b>상품 리스트</b></td>
       <td align="center"><b>상품 상세</b></td>
     </tr>
     <tr>
-    <td><img src="src/asset/img/captures/상품리스트.gif" width="640"></td>
-      <td><img src="src/asset/img/captures/상품상세.png" width="640"></td>
+      <td><img src="src/asset/img/captures/상품리스트.gif" width="480"></td>
+      <td><img src="src/asset/img/captures/상품상세.png" width="480"></td>
     </tr>
     <tr>
       <td align="center"><b>구매자 로그인</b></td>
       <td align="center"><b>판매자 로그인</b></td>
     </tr>
     <tr>
-      <td><img src="src/asset/img/captures/guestorder.gif" width="640"></td>
-      <td><img src="src/asset/img/captures/adminpage.gif" width="640"></td>
+      <td><img src="src/asset/img/captures/guestorder.gif" width="480"></td>
+      <td><img src="src/asset/img/captures/adminpage.gif" width="480"></td>
     </tr>
     <tr>
       <td align="center"><b>검색</b></td>
     </tr>
     <tr>
-    <td><img src="src/asset/img/captures/검색.png" width="640"></td>
+      <td><img src="src/asset/img/captures/검색.png" width="480"></td>
     </tr>
     <tr>
       <td align="center"><b>장바구니</b></td>
       <td align="center"><b>찜목록</b></td>
     </tr>  <tr>
-      <td><img src="src/asset/img/captures/장바구니.png" width="640"></td>
-      <td><img src="src/asset/img/captures/찜목록.png" width="640"></td>
+      <td><img src="src/asset/img/captures/장바구니.png" width="480"></td>
+      <td><img src="src/asset/img/captures/찜목록.png" width="480"></td>
     </tr>
     <tr>
       <td align="center"><b>결제 주소 입력</b></td>
       <td align="center"><b>결제 카드 입력</b></td>
     </tr>
     <tr>
-    <td><img src="src/asset/img/captures/결제 주소.png" width="640"></td>
-      <td><img src="src/asset/img/captures/카드입력.gif" width="640"></td>
+      <td><img src="src/asset/img/captures/결제 주소.png" width="480"></td>
+      <td><img src="src/asset/img/captures/카드입력.gif" width="480"></td>
     </tr>
     <tr>
       <td align="center"><b>상품 등록</b></td>
-        <td align="center"><b>주문내역 확인</b></td>
+      <td align="center"><b>주문내역 확인</b></td>
     </tr>
     <tr>
-        <td><img src="src/asset/img/captures/상품등록.png" width="640"></td>
-      <td><img src="src/asset/img/captures/주문내역.png" width="640"></td>
+      <td><img src="src/asset/img/captures/상품등록.png" width="480"></td>
+      <td><img src="src/asset/img/captures/주문내역.png" width="480"></td>
     </tr>
   </table>
 </div>
+
 
 ## 기술 스택 및 개발 환경
 
