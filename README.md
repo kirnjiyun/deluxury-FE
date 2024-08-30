@@ -66,27 +66,32 @@ PW: 123
       <td><img src="src/asset/img/captures/검색.png" width="480"></td>
     </tr>
     <tr>
-      <td align="center"><b>장바구니</b></td>
       <td align="center"><b>찜목록</b></td>
+      <td align="center"><b>장바구니</b></td>
+   
     </tr>  <tr>
-      <td><img src="src/asset/img/captures/장바구니.png" width="480"></td>
       <td><img src="src/asset/img/captures/찜목록.png" width="480"></td>
+      <td><img src="src/asset/img/captures/장바구니.png" width="480"></td>
+      
     </tr>
     <tr>
+        <td align="center"><b>결제 카드 입력</b></td>
       <td align="center"><b>결제 주소 입력</b></td>
-      <td align="center"><b>결제 카드 입력</b></td>
     </tr>
     <tr>
+        <td><img src="src/asset/img/captures/카드입력.gif" width="480"></td>
       <td><img src="src/asset/img/captures/결제 주소.png" width="480"></td>
-      <td><img src="src/asset/img/captures/카드입력.gif" width="480"></td>
+    
     </tr>
     <tr>
+         <td align="center"><b>주문내역 확인</b></td>
       <td align="center"><b>상품 등록</b></td>
-      <td align="center"><b>주문내역 확인</b></td>
+   
     </tr>
     <tr>
-      <td><img src="src/asset/img/captures/상품등록.png" width="480"></td>
       <td><img src="src/asset/img/captures/주문내역.png" width="480"></td>
+      <td><img src="src/asset/img/captures/상품등록.png" width="480"></td>
+    
     </tr>
   </table>
 </div>
