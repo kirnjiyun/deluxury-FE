@@ -19,11 +19,8 @@ export const useLoginMutation = () => {
         mutationFn: async (user) => {
             const data = await loginUser(user);
             if (data.status === "success") {
-                // session storage에 토큰 저장
                 sessionStorage.setItem("token", data.token);
-                // header에 토큰 값 설정
                 api.defaults.headers["authorization"] = "Bearer " + data.token;
-                // Redux 상태 업데이트
                 dispatch(login({ user: data.user, token: data.token }));
                 navigate("/");
             } else {
