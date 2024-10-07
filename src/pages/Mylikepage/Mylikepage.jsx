@@ -1,6 +1,6 @@
 import React from "react";
 import { Container, Row, Col } from "./mylikepageStyles";
-import ProductCard from "../../components/ProductCard/ProductCard";
+import LikeProductCard from "../../components/LikeProductCard/LikeProductCard";
 import { useGetLike } from "../../hooks/useLike";
 
 export default function Mylikepage() {
@@ -8,15 +8,14 @@ export default function Mylikepage() {
 
     if (isLoading) return <div>Loading...</div>;
     if (error) return <div>Error loading products: {error.message}</div>;
-
+    console.log(products);
     return (
         <Container>
             <Row>
                 {products && products.length > 0 ? (
                     products.map((item) => (
                         <Col key={item.productId._id}>
-                            {/* ProductCard에 제품 정보와 카테고리 정보 전달 */}
-                            <ProductCard
+                            <LikeProductCard
                                 product={item.productId}
                                 bigCategory={item.productId.bigCategory}
                                 mainCategory={item.productId.category.main}
