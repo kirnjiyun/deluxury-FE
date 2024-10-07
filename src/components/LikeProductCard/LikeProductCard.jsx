@@ -1,6 +1,5 @@
 import React from "react";
 import { useNavigate } from "react-router";
-import { useSelector } from "react-redux";
 import {
     Card,
     ProductImage,
@@ -10,16 +9,25 @@ import {
     ProductBrand,
 } from "./LikeProductCardStyles";
 
-const ProductCard = ({ product }) => {
+const LikeProductCard = ({
+    product,
+    bigCategory,
+    mainCategory,
+    subCategory,
+}) => {
     const navigate = useNavigate();
-    const { bigCategory, mainCategory, subCategory } = useSelector(
-        (state) => state.category
-    );
+
+    const lowerBigCategory = bigCategory.toLowerCase();
+    const lowerMainCategory = mainCategory.toLowerCase();
+    const lowerSubCategory = subCategory.toLowerCase();
 
     const showProduct = (id) => {
-        navigate(`/${bigCategory}/${mainCategory}/${subCategory}/${id}`);
+        navigate(
+            `/${lowerBigCategory}/${lowerMainCategory}/${lowerSubCategory}/${id}`
+        );
         console.log("Product ID:", id);
     };
+
     return (
         <Card onClick={() => showProduct(product._id)}>
             <ProductImage src={product.image} alt={product.name} />
@@ -29,7 +37,7 @@ const ProductCard = ({ product }) => {
                 </ProductName>
                 <ProductPrice className="productPrice">
                     ${product.price}
-                </ProductPrice>{" "}
+                </ProductPrice>
                 <ProductBrand className="productBrand">
                     {product.brand}
                 </ProductBrand>
@@ -38,4 +46,4 @@ const ProductCard = ({ product }) => {
     );
 };
 
-export default ProductCard;
+export default LikeProductCard;
