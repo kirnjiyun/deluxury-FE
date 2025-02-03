@@ -1,1 +1,2 @@
-/api/*  https://deluxury-be.onrender.com/:splat  200
+
+/api/* https://deluxury-be.onrender.com/api/:splat 200
