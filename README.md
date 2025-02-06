@@ -17,7 +17,7 @@
 
 ## 배포 링크 및 테스트 계정
 
-👉🏻 [Deluxury](https://deluxury.netlify.app/ "바로가기")
+👉🏻 [Deluxury](https://deluxury-jiyun.netlify.app/ "바로가기")
 
 ```구매자 계정
 ID: user1@gmail.com
