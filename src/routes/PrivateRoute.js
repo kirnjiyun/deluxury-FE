@@ -6,13 +6,13 @@ const PrivateRoute = ({ children, role, redirectTo }) => {
     const { isLoggedIn, user } = useSelector((state) => state.user);
 
     if (!isLoggedIn) {
-        return <Navigate to="/login" />;
+        return <Navigate to="/login" replace />;
     }
-    if (redirectTo && isLoggedIn) {
-        return <Navigate to={redirectTo} />;
+    if (redirectTo) {
+        return <Navigate to={redirectTo} replace />;
     }
-    if (role && user.user.role !== role) {
-        return <Navigate to="/" />;
+    if (role && user?.user?.role !== role) {
+        return <Navigate to="/" replace />;
     }
 
     return children;

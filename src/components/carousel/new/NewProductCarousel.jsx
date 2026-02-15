@@ -35,9 +35,7 @@ export default function NewProductCarousel({ items = hardcodedItems }) {
                             <img
                                 src={item.image}
                                 alt={item.brand}
-                                style={{
-                                    height: "600px",
-                                }}
+                                style={{ width: "100%", height: "100%", objectFit: "cover" }}
                             />
                         </S.SlideImage>
                     </S.CarouselSlide>

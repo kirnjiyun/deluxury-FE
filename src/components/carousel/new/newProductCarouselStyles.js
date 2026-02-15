@@ -1,10 +1,16 @@
 import styled from "@emotion/styled";
 
 export const CarouselContainer = styled.div`
-    position: relative;
-    width: 100%;
-    overflow: hidden;
-    height: 600px;
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  height: 600px;
+  @media (max-width: 768px) {
+    height: 400px;
+  }
+  @media (max-width: 480px) {
+    height: 280px;
+  }
 `;
 
 export const CarouselSlider = styled.div`
@@ -58,15 +64,21 @@ export const SlideTitle = styled.h3`
 `;
 
 export const SlideImage = styled.div`
+  width: 100%;
+  height: 100%;
+  min-height: 200px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 0;
+  img {
     width: 100%;
     height: 100%;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 0;
+    object-fit: cover;
+  }
 `;
 
 export const AdBadge = styled.div`
@@ -95,27 +107,36 @@ export const SlideControls = styled.div`
 `;
 
 export const ControlButton = styled.button`
-    background-color: transparent;
-    color: white;
+  background-color: transparent;
+  color: white;
+  display: flex;
+  border: none;
+  min-width: 44px;
+  min-height: 44px;
+  width: 44px;
+  height: 44px;
+  font-size: 24px;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+  & > * {
     display: flex;
-    border: none;
-    width: 40px;
-    height: 40px;
-    font-size: 24px;
     justify-content: center;
     align-items: center;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    &:hover {
-        background-color: rgba(255, 255, 255, 0.1);
-    }
-    & > * {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 100%;
-        height: 100%;
-    }
+    width: 100%;
+    height: 100%;
+  }
+  @media (max-width: 480px) {
+    min-width: 40px;
+    min-height: 40px;
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+  }
 `;
 
 export const SlideIndicators = styled.div`

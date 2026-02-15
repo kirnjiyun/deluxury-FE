@@ -11,10 +11,12 @@ import Mypage from "../pages/Mypage/Mypage";
 import Mylikepage from "../pages/Mylikepage/Mylikepage";
 import PrivateRoute from "./PrivateRoute";
 import Productpage from "../pages/Prouductpage/Productpage";
-import api from "../utils/api";
-import { setUser } from "../action/userAction";
 import Paymentpage from "../pages/Paymentpage/Paymentpage";
 import OrderSuccesspage from "../pages/OrderSuccesspage/OrderSuccesspage";
+import NotFoundPage from "../pages/NotFoundPage/NotFoundPage";
+import api from "../utils/api";
+import { setUser } from "../action/userAction";
+import { ROUTES } from "../constants";
 const AppRouter = () => {
     const { isLoggedIn, token } = useSelector((state) => state.user);
     const dispatch = useDispatch();
@@ -43,77 +45,21 @@ const AppRouter = () => {
 
     return (
         <Routes>
-            <Route path="/" element={<Homepage />} />
+            <Route path={ROUTES.HOME} element={<Homepage />} />
             <Route path="/products" element={<Homepage />} />
             <Route path="/:bigCategory" element={<Productpage />} />
-            <Route
-                path="/:bigCategory/:mainCategory"
-                element={<Productpage />}
-            />
-            <Route
-                path="/:bigCategory/:mainCategory/:subCategory"
-                element={<Productpage />}
-            />
-            <Route
-                path="/:bigCategory/:mainCategory/:subCategory/:id"
-                element={<ProductDetailpage />}
-            />
-            <Route
-                path="/cart"
-                element={
-                    <PrivateRoute role="user">
-                        <Cartpage />
-                    </PrivateRoute>
-                }
-            />
-            <Route
-                path="/mylike"
-                element={
-                    <PrivateRoute role="user">
-                        <Mylikepage />
-                    </PrivateRoute>
-                }
-            />
-            <Route
-                path="/payment"
-                element={
-                    <PrivateRoute role="user">
-                        <Paymentpage />
-                    </PrivateRoute>
-                }
-            />{" "}
-            <Route
-                path="/payment/success"
-                element={
-                    <PrivateRoute role="user">
-                        <OrderSuccesspage />
-                    </PrivateRoute>
-                }
-            />
-            <Route
-                path="/admin"
-                element={
-                    <PrivateRoute role="admin">
-                        <Adminpage />
-                    </PrivateRoute>
-                }
-            />
-            <Route
-                path="/login"
-                element={isLoggedIn ? <Navigate to="/" /> : <Loginpage />}
-            />
-            <Route
-                path="/signup"
-                element={isLoggedIn ? <Navigate to="/" /> : <SignUppage />}
-            />
-            <Route
-                path="/me"
-                element={
-                    <PrivateRoute role="user">
-                        <Mypage />
-                    </PrivateRoute>
-                }
-            />
+            <Route path="/:bigCategory/:mainCategory" element={<Productpage />} />
+            <Route path="/:bigCategory/:mainCategory/:subCategory" element={<Productpage />} />
+            <Route path="/:bigCategory/:mainCategory/:subCategory/:id" element={<ProductDetailpage />} />
+            <Route path={ROUTES.CART} element={<PrivateRoute role="user"><Cartpage /></PrivateRoute>} />
+            <Route path={ROUTES.MY_LIKE} element={<PrivateRoute role="user"><Mylikepage /></PrivateRoute>} />
+            <Route path={ROUTES.PAYMENT} element={<PrivateRoute role="user"><Paymentpage /></PrivateRoute>} />
+            <Route path={ROUTES.PAYMENT_SUCCESS} element={<PrivateRoute role="user"><OrderSuccesspage /></PrivateRoute>} />
+            <Route path={ROUTES.ADMIN} element={<PrivateRoute role="admin"><Adminpage /></PrivateRoute>} />
+            <Route path={ROUTES.LOGIN} element={isLoggedIn ? <Navigate to={ROUTES.HOME} replace /> : <Loginpage />} />
+            <Route path={ROUTES.SIGNUP} element={isLoggedIn ? <Navigate to={ROUTES.HOME} replace /> : <SignUppage />} />
+            <Route path={ROUTES.MY_PAGE} element={<PrivateRoute role="user"><Mypage /></PrivateRoute>} />
+            <Route path="*" element={<NotFoundPage />} />
         </Routes>
     );
 };

@@ -2,23 +2,34 @@
 import styled from "@emotion/styled";
 
 export const FooterContainer = styled.footer`
-    background-color: #f1f1f1;
-    padding: 20px;
-    text-align: center;
-    display: ${(props) => (props.show ? "block" : "none")};
+  background-color: #f1f1f1;
+  padding: 20px;
+  text-align: center;
+  display: ${(props) => (props.show ? "block" : "none")};
+  @media (max-width: 768px) {
+    padding: 16px;
+  }
+  @media (max-width: 480px) {
+    padding: 12px 16px;
+  }
 `;
 
 export const FooterContent = styled.div`
-    max-width: 800px;
-    margin: 0 auto;
-    p {
-        margin: 5px 0;
+  max-width: 800px;
+  margin: 0 auto;
+  p {
+    margin: 5px 0;
+    font-size: 14px;
+    @media (max-width: 480px) {
+      font-size: 13px;
+      margin: 4px 0;
     }
-    a {
-        color: #000;
-        text-decoration: none;
-        &:hover {
-            text-decoration: underline;
-        }
+  }
+  a {
+    color: #000;
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
     }
+  }
 `;

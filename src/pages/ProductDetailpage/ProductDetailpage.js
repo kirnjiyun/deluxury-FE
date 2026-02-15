@@ -10,6 +10,7 @@ import {
 } from "../../hooks/useLike";
 import {
     Container,
+    ProductRow,
     ImageContainer,
     Image,
     DetailsContainer,
@@ -25,7 +26,6 @@ import {
     Select,
     ButtonContainer,
     AddToCartButton,
-    BuyNowButton,
     ProductInfo,
     InfoTitle,
     InfoText,
@@ -138,7 +138,7 @@ export default function ProductDetailPage() {
 
     return (
         <Container>
-            <div style={{ display: "flex" }}>
+            <ProductRow>
                 <Toast />
                 <ImageContainer>
                     <BrandName>{product.brand}</BrandName>
@@ -203,7 +203,7 @@ export default function ProductDetailPage() {
                         <Description>{product.description}</Description>
                     </ProductInfo>
                 </DetailsContainer>
-            </div>
+            </ProductRow>
             <div>
                 <InfoTitle>브랜드알림</InfoTitle>
                 <InfoText>

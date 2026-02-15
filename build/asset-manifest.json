@@ -1,15 +1,19 @@
 {
   "files": {
-    "main.css": "/static/css/main.c5a1fef5.css",
-    "main.js": "/static/js/main.0c3e04ad.js",
+    "main.css": "/static/css/main.b34c368a.css",
+    "main.js": "/static/js/main.7814e632.js",
     "static/js/453.a07a6c40.chunk.js": "/static/js/453.a07a6c40.chunk.js",
+    "static/media/funky-jazz-big-band-piece-225127.mp3": "/static/media/funky-jazz-big-band-piece-225127.37f7c6a12fecbcd9ac14.mp3",
+    "static/media/the-best-jazz-club-in-new-orleans-164472.mp3": "/static/media/the-best-jazz-club-in-new-orleans-164472.b4be07b75bf1c8caeafe.mp3",
+    "static/media/crosstown-funk-205896.mp3": "/static/media/crosstown-funk-205896.546083ab4b0aebff07de.mp3",
+    "static/media/pop-groove-226858.mp3": "/static/media/pop-groove-226858.0eb320885a6413767d12.mp3",
     "index.html": "/index.html",
-    "main.c5a1fef5.css.map": "/static/css/main.c5a1fef5.css.map",
-    "main.0c3e04ad.js.map": "/static/js/main.0c3e04ad.js.map",
+    "main.b34c368a.css.map": "/static/css/main.b34c368a.css.map",
+    "main.7814e632.js.map": "/static/js/main.7814e632.js.map",
     "453.a07a6c40.chunk.js.map": "/static/js/453.a07a6c40.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.c5a1fef5.css",
-    "static/js/main.0c3e04ad.js"
+    "static/css/main.b34c368a.css",
+    "static/js/main.7814e632.js"
   ]
 }

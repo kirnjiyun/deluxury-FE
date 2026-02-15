@@ -1,41 +1,59 @@
 import styled from "@emotion/styled";
 
 export const Card = styled.div`
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-width: 240px;
-    height: 300px;
-    margin: 10px;
-    padding: 10px;
-    background-color: black;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s, box-shadow 0.2s;
-    cursor: pointer;
-    overflow: hidden;
-    flex-wrap: wrap;
-
-    &:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-        background-color: white;
-
-        img {
-            opacity: 0.1;
-        }
-
-        .productName,
-        .productPrice,
-        .productBrand {
-            opacity: 1;
-            color: black;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            max-width: 90%;
-        }
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 0;
+  width: 100%;
+  aspect-ratio: 4/5;
+  max-height: 380px;
+  margin: 0;
+  padding: 10px;
+  background-color: black;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+  overflow: hidden;
+  flex-wrap: wrap;
+  @media (max-width: 768px) {
+    aspect-ratio: 3/4;
+    max-height: 340px;
+    padding: 8px;
+  }
+  @media (max-width: 480px) {
+    aspect-ratio: 3/4;
+    max-height: 320px;
+    padding: 6px;
+  }
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    background-color: white;
+    img {
+      opacity: 0.1;
     }
+    .productName,
+    .productPrice,
+    .productBrand {
+      opacity: 1;
+      color: black;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 90%;
+    }
+  }
+  @media (hover: none) {
+    .productName,
+    .productPrice,
+    .productBrand {
+      opacity: 1;
+      color: white;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+    }
+  }
 `;
 
 export const ProductImage = styled.img`
@@ -59,29 +77,38 @@ export const ProductInfo = styled.div`
 `;
 
 export const ProductName = styled.div`
-    opacity: 0;
-    transition: opacity 0.2s;
-    font-size: 1.2em;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+  opacity: 0;
+  transition: opacity 0.2s;
+  font-size: 1.2em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  @media (max-width: 480px) {
+    font-size: 1em;
+  }
 `;
 
 export const ProductPrice = styled.div`
-    opacity: 0;
-    transition: opacity 0.2s;
-    font-size: 1em;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 80%;
+  opacity: 0;
+  transition: opacity 0.2s;
+  font-size: 1em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 80%;
+  @media (max-width: 480px) {
+    font-size: 0.9em;
+  }
 `;
 export const ProductBrand = styled.div`
-    opacity: 0;
-    transition: opacity 0.2s;
-    font-size: 0.8em;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 80%;
+  opacity: 0;
+  transition: opacity 0.2s;
+  font-size: 0.8em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 80%;
+  @media (max-width: 480px) {
+    font-size: 0.75em;
+  }
 `;

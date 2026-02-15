@@ -1,4 +1,13 @@
-/* index.css */
+/* index.css - reset & global responsive base */
+html {
+  box-sizing: border-box;
+  -webkit-text-size-adjust: 100%;
+}
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
 html,
 body,
 div,
@@ -102,7 +111,24 @@ section {
     display: block;
 }
 body {
-    line-height: 1;
+  line-height: 1.4;
+  min-width: 320px;
+  overflow-x: hidden;
+}
+img {
+  max-width: 100%;
+  height: auto;
+}
+input,
+select,
+textarea,
+button {
+  font-size: 16px; /* iOS zoom 방지 */
+}
+@media (max-width: 768px) {
+  body {
+    padding: 0;
+  }
 }
 ol,
 ul {
@@ -137,12 +163,21 @@ table {
 }
 
 .modal-content {
-    position: relative;
-    background: white;
-    padding: 20px;
-    max-width: 600px;
-    width: 100%;
-    margin: 0 20px;
-    overflow-y: scroll;
-    overflow-x: hidden;
+  position: relative;
+  background: white;
+  padding: 20px;
+  max-width: 600px;
+  width: 100%;
+  margin: 0 20px;
+  max-height: 90vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+@media (max-width: 480px) {
+  .modal-content {
+    margin: 0 12px;
+    padding: 16px;
+    max-height: 85vh;
+  }
 }
